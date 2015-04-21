@@ -49,11 +49,11 @@
     <Compile Include="adresse.cs">
       <DependentUpon>SucradomModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base.cs" />
     <Compile Include="categorie.cs">
       <DependentUpon>SucradomModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ClassesPartielles.cs" />
+    <Compile Include="Classses\Base.cs" />
+    <Compile Include="Classses\ClassesPartielles.cs" />
     <Compile Include="client.cs">
       <DependentUpon>SucradomModel.tt</DependentUpon>
     </Compile>
