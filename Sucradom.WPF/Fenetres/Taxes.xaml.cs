@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Sucradom.LIB;
 
 namespace Sucradom.WPF.Fenetres
 {
@@ -19,9 +20,28 @@ namespace Sucradom.WPF.Fenetres
     /// </summary>
     public partial class Taxes : Window
     {
+        private Taxes_ViewModel _ViewModel;
         public Taxes()
         {
+            DataContext = _ViewModel = new Taxes_ViewModel();
             InitializeComponent();
         }
+
+        #region Button_Clicks
+        private void Button_Insert_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Update_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }        
+        #endregion
     }
 }
