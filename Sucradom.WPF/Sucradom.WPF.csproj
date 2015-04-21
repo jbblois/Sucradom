@@ -60,20 +60,58 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="Fenetres\Accueil_ViewModel.cs" />
+    <Compile Include="Fenetres\Categories_ViewModel.cs" />
+    <Compile Include="Fenetres\Taxes_ViewModel.cs" />
+    <Compile Include="Formulaires\Categorie.xaml.cs">
+      <DependentUpon>Categorie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaires\Categorie_ViewModel.cs" />
+    <Compile Include="Formulaires\Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaires\Client_ViewModel.cs" />
+    <Compile Include="Formulaires\Commande.xaml.cs">
+      <DependentUpon>Commande.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaires\Commande_ViewModel.cs" />
+    <Compile Include="Formulaires\Produit.xaml.cs">
+      <DependentUpon>Produit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaires\Produit_ViewModel.cs" />
+    <Compile Include="Formulaires\Taxe.xaml.cs">
+      <DependentUpon>Taxe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaires\Taxe_ViewModel.cs" />
+    <Compile Include="Onglets\Clients.xaml.cs">
+      <DependentUpon>Clients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Onglets\Clients_ViewModel.cs" />
+    <Compile Include="Onglets\Commandes.xaml.cs">
+      <DependentUpon>Commandes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Onglets\Commandes_ViewModel.cs" />
+    <Compile Include="Onglets\Produits.xaml.cs">
+      <DependentUpon>Produits.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetres\Accueil.xaml.cs">
+      <DependentUpon>Accueil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetres\Categories.xaml.cs">
+      <DependentUpon>Categories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetres\Taxes.xaml.cs">
+      <DependentUpon>Taxes.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Outils.cs" />
+    <Compile Include="Classes\ViewModel.cs" />
+    <Compile Include="Onglets\Produits_ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -109,6 +147,60 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Formulaires\Categorie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formulaires\Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formulaires\Commande.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formulaires\Produit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formulaires\Taxe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ressources\DictionnaireStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Onglets\Clients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Onglets\Commandes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Onglets\Produits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Fenetres\Accueil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Fenetres\Categories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Fenetres\Taxes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

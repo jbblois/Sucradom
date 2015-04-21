@@ -12,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Sucradom.LIB;
 
-namespace Sucradom.WPF
+namespace Sucradom.WPF.Onglets
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour Clients.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Clients : UserControl
     {
-        public MainWindow()
+        public Clients()
         {
             InitializeComponent();
         }

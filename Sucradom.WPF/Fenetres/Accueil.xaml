@@ -1,0 +1,49 @@
+﻿<Window x:Class="Sucradom.WPF.Fenetres.Accueil"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Accueil" Height="300" Width="300">
+    <Window.Resources>
+        <ResourceDictionary Source="../Ressources/DictionnaireStyles.xaml"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="01*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="01*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="01*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="01*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="01*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <!--Menu-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="01*"/>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="01*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="01*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="..\Ressources\Logo.png"/>
+            <Menu Grid.Column="2" VerticalAlignment="Center">
+                <MenuItem Header="Gestion des catégories" Click="MenuItem_Categories_Click"/>
+                <MenuItem Header="Gestion des taxes" Click="MenuItem_Taxes_Click"/>
+            </Menu>
+            <Button Grid.Column="4" Style="{StaticResource ButtonInsert}" Content="Sauvegarder" Click="Button_Sauvegarder_Click"/>
+            <Button Grid.Column="6" Style="{StaticResource ButtonDelete}" Content="Annuler"     Click="Button_Annuler_Click"/>
+        </Grid>
+
+        <TabControl Grid.Column="1" Grid.Row="3">
+            <!--Onglets-->
+            <TabItem Header="Gestion des produits" Content="{Binding OngletProduits}"/>
+            <TabItem Header="Gestion des clients" Content="{Binding OngletClients}"/>
+            <TabItem Header="Gestion des commandes" Content="{Binding OngletCommandes}"/>
+        </TabControl>
+    </Grid>
+</Window>
