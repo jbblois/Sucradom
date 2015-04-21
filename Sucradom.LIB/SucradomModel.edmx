@@ -1,0 +1,746 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="sucradomModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="adresse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero" Type="varchar" MaxLength="50" />
+          <Property Name="Rue" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Cp" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Ville" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Pays" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FID_Client" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="categorie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FID_Image" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MotDePasse" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsActif" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="etatcommande">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Path" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Alt" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lignecommande">
+          <Key>
+            <PropertyRef Name="FID_Commande" />
+            <PropertyRef Name="FID_Produit" />
+          </Key>
+          <Property Name="FID_Commande" Type="int" Nullable="false" />
+          <Property Name="FID_Produit" Type="int" Nullable="false" />
+          <Property Name="Quantite" Type="int" Nullable="false" />
+          <Property Name="PrixTTC" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="produit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Prix" Type="float" Nullable="false" />
+          <Property Name="Quantite" Type="int" Nullable="false" />
+          <Property Name="IsDisponible" Type="varchar" MaxLength="3" />
+          <Property Name="FID_Categorie" Type="int" Nullable="false" />
+          <Property Name="FID_Image" Type="int" Nullable="false" />
+          <Property Name="FID_Taxe" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="provision">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Quantite" Type="int" Nullable="false" />
+          <Property Name="FID_Produit" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="taxe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Valeur" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tetecommande">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="PrixTotal" Type="float" Nullable="false" />
+          <Property Name="FID_Client" Type="int" Nullable="false" />
+          <Property Name="FID_Etat" Type="int" Nullable="false" />
+          <Property Name="FID_Adresse" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="adresse_ibfk_1">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="adresse" Type="Self.adresse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="adresse">
+              <PropertyRef Name="FID_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="categorie_ibfk_1">
+          <End Role="image" Type="Self.image" Multiplicity="1" />
+          <End Role="categorie" Type="Self.categorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="image">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="categorie">
+              <PropertyRef Name="FID_Image" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="lignecommande_ibfk_1">
+          <End Role="tetecommande" Type="Self.tetecommande" Multiplicity="1" />
+          <End Role="lignecommande" Type="Self.lignecommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tetecommande">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="lignecommande">
+              <PropertyRef Name="FID_Commande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="lignecommande_ibfk_2">
+          <End Role="produit" Type="Self.produit" Multiplicity="1" />
+          <End Role="lignecommande" Type="Self.lignecommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="lignecommande">
+              <PropertyRef Name="FID_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="produit_ibfk_1">
+          <End Role="categorie" Type="Self.categorie" Multiplicity="1" />
+          <End Role="produit" Type="Self.produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="produit">
+              <PropertyRef Name="FID_Categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="produit_ibfk_2">
+          <End Role="image" Type="Self.image" Multiplicity="1" />
+          <End Role="produit" Type="Self.produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="image">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="produit">
+              <PropertyRef Name="FID_Image" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="produit_ibfk_3">
+          <End Role="taxe" Type="Self.taxe" Multiplicity="1" />
+          <End Role="produit" Type="Self.produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="produit">
+              <PropertyRef Name="FID_Taxe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="provision_ibfk_1">
+          <End Role="produit" Type="Self.produit" Multiplicity="1" />
+          <End Role="provision" Type="Self.provision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="provision">
+              <PropertyRef Name="FID_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tetecommande_ibfk_1">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="tetecommande" Type="Self.tetecommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tetecommande">
+              <PropertyRef Name="FID_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tetecommande_ibfk_2">
+          <End Role="etatcommande" Type="Self.etatcommande" Multiplicity="1" />
+          <End Role="tetecommande" Type="Self.tetecommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="etatcommande">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tetecommande">
+              <PropertyRef Name="FID_Etat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tetecommande_ibfk_3">
+          <End Role="adresse" Type="Self.adresse" Multiplicity="1" />
+          <End Role="tetecommande" Type="Self.tetecommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adresse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tetecommande">
+              <PropertyRef Name="FID_Adresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sucradomModelStoreContainer">
+          <EntitySet Name="adresse" EntityType="Self.adresse" Schema="sucradom" store:Type="Tables" />
+          <EntitySet Name="categorie" EntityType="Self.categorie" Schema="sucradom" store:Type="Tables" />
+          <EntitySet Name="client" EntityType="Self.client" Schema="sucradom" store:Type="Tables" />
+          <EntitySet Name="etatcommande" EntityType="Self.etatcommande" Schema="sucradom" store:Type="Tables" />
+          <EntitySet Name="image" EntityType="Self.image" Schema="sucradom" store:Type="Tables" />
+          <EntitySet Name="lignecommande" EntityType="Self.lignecommande" Schema="sucradom" store:Type="Tables" />
+          <EntitySet Name="produit" EntityType="Self.produit" Schema="sucradom" store:Type="Tables" />
+          <EntitySet Name="provision" EntityType="Self.provision" Schema="sucradom" store:Type="Tables" />
+          <EntitySet Name="taxe" EntityType="Self.taxe" Schema="sucradom" store:Type="Tables" />
+          <EntitySet Name="tetecommande" EntityType="Self.tetecommande" Schema="sucradom" store:Type="Tables" />
+          <AssociationSet Name="adresse_ibfk_1" Association="Self.adresse_ibfk_1">
+            <End Role="client" EntitySet="client" />
+            <End Role="adresse" EntitySet="adresse" />
+          </AssociationSet>
+          <AssociationSet Name="categorie_ibfk_1" Association="Self.categorie_ibfk_1">
+            <End Role="image" EntitySet="image" />
+            <End Role="categorie" EntitySet="categorie" />
+          </AssociationSet>
+          <AssociationSet Name="lignecommande_ibfk_1" Association="Self.lignecommande_ibfk_1">
+            <End Role="tetecommande" EntitySet="tetecommande" />
+            <End Role="lignecommande" EntitySet="lignecommande" />
+          </AssociationSet>
+          <AssociationSet Name="lignecommande_ibfk_2" Association="Self.lignecommande_ibfk_2">
+            <End Role="produit" EntitySet="produit" />
+            <End Role="lignecommande" EntitySet="lignecommande" />
+          </AssociationSet>
+          <AssociationSet Name="produit_ibfk_1" Association="Self.produit_ibfk_1">
+            <End Role="categorie" EntitySet="categorie" />
+            <End Role="produit" EntitySet="produit" />
+          </AssociationSet>
+          <AssociationSet Name="produit_ibfk_2" Association="Self.produit_ibfk_2">
+            <End Role="image" EntitySet="image" />
+            <End Role="produit" EntitySet="produit" />
+          </AssociationSet>
+          <AssociationSet Name="produit_ibfk_3" Association="Self.produit_ibfk_3">
+            <End Role="taxe" EntitySet="taxe" />
+            <End Role="produit" EntitySet="produit" />
+          </AssociationSet>
+          <AssociationSet Name="provision_ibfk_1" Association="Self.provision_ibfk_1">
+            <End Role="produit" EntitySet="produit" />
+            <End Role="provision" EntitySet="provision" />
+          </AssociationSet>
+          <AssociationSet Name="tetecommande_ibfk_1" Association="Self.tetecommande_ibfk_1">
+            <End Role="client" EntitySet="client" />
+            <End Role="tetecommande" EntitySet="tetecommande" />
+          </AssociationSet>
+          <AssociationSet Name="tetecommande_ibfk_2" Association="Self.tetecommande_ibfk_2">
+            <End Role="etatcommande" EntitySet="etatcommande" />
+            <End Role="tetecommande" EntitySet="tetecommande" />
+          </AssociationSet>
+          <AssociationSet Name="tetecommande_ibfk_3" Association="Self.tetecommande_ibfk_3">
+            <End Role="adresse" EntitySet="adresse" />
+            <End Role="tetecommande" EntitySet="tetecommande" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sucradomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="adresse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ville" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pays" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FID_Client" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="client" Relationship="Self.adresse_ibfk_1" FromRole="adresse" ToRole="client" />
+          <NavigationProperty Name="tetecommandes" Relationship="Self.tetecommande_ibfk_3" FromRole="adresse" ToRole="tetecommande" />
+        </EntityType>
+        <EntityType Name="categorie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FID_Image" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="image" Relationship="Self.categorie_ibfk_1" FromRole="categorie" ToRole="image" />
+          <NavigationProperty Name="produits" Relationship="Self.produit_ibfk_1" FromRole="categorie" ToRole="produit" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MotDePasse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActif" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="adresses" Relationship="Self.adresse_ibfk_1" FromRole="client" ToRole="adresse" />
+          <NavigationProperty Name="tetecommandes" Relationship="Self.tetecommande_ibfk_1" FromRole="client" ToRole="tetecommande" />
+        </EntityType>
+        <EntityType Name="etatcommande">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tetecommandes" Relationship="Self.tetecommande_ibfk_2" FromRole="etatcommande" ToRole="tetecommande" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Alt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="categories" Relationship="Self.categorie_ibfk_1" FromRole="image" ToRole="categorie" />
+          <NavigationProperty Name="produits" Relationship="Self.produit_ibfk_2" FromRole="image" ToRole="produit" />
+        </EntityType>
+        <EntityType Name="lignecommande">
+          <Key>
+            <PropertyRef Name="FID_Commande" />
+            <PropertyRef Name="FID_Produit" />
+          </Key>
+          <Property Name="FID_Commande" Type="Int32" Nullable="false" />
+          <Property Name="FID_Produit" Type="Int32" Nullable="false" />
+          <Property Name="Quantite" Type="Int32" Nullable="false" />
+          <Property Name="PrixTTC" Type="Single" Nullable="false" />
+          <NavigationProperty Name="tetecommande" Relationship="Self.lignecommande_ibfk_1" FromRole="lignecommande" ToRole="tetecommande" />
+          <NavigationProperty Name="produit" Relationship="Self.lignecommande_ibfk_2" FromRole="lignecommande" ToRole="produit" />
+        </EntityType>
+        <EntityType Name="produit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prix" Type="Single" Nullable="false" />
+          <Property Name="Quantite" Type="Int32" Nullable="false" />
+          <Property Name="IsDisponible" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FID_Categorie" Type="Int32" Nullable="false" />
+          <Property Name="FID_Image" Type="Int32" Nullable="false" />
+          <Property Name="FID_Taxe" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="categorie" Relationship="Self.produit_ibfk_1" FromRole="produit" ToRole="categorie" />
+          <NavigationProperty Name="image" Relationship="Self.produit_ibfk_2" FromRole="produit" ToRole="image" />
+          <NavigationProperty Name="lignecommandes" Relationship="Self.lignecommande_ibfk_2" FromRole="produit" ToRole="lignecommande" />
+          <NavigationProperty Name="taxe" Relationship="Self.produit_ibfk_3" FromRole="produit" ToRole="taxe" />
+          <NavigationProperty Name="provisions" Relationship="Self.provision_ibfk_1" FromRole="produit" ToRole="provision" />
+        </EntityType>
+        <EntityType Name="provision">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Quantite" Type="Int32" Nullable="false" />
+          <Property Name="FID_Produit" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="produit" Relationship="Self.provision_ibfk_1" FromRole="provision" ToRole="produit" />
+        </EntityType>
+        <EntityType Name="taxe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Valeur" Type="Single" Nullable="false" />
+          <NavigationProperty Name="produits" Relationship="Self.produit_ibfk_3" FromRole="taxe" ToRole="produit" />
+        </EntityType>
+        <EntityType Name="tetecommande">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="PrixTotal" Type="Single" Nullable="false" />
+          <Property Name="FID_Client" Type="Int32" Nullable="false" />
+          <Property Name="FID_Etat" Type="Int32" Nullable="false" />
+          <Property Name="FID_Adresse" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="adresse" Relationship="Self.tetecommande_ibfk_3" FromRole="tetecommande" ToRole="adresse" />
+          <NavigationProperty Name="client" Relationship="Self.tetecommande_ibfk_1" FromRole="tetecommande" ToRole="client" />
+          <NavigationProperty Name="etatcommande" Relationship="Self.tetecommande_ibfk_2" FromRole="tetecommande" ToRole="etatcommande" />
+          <NavigationProperty Name="lignecommandes" Relationship="Self.lignecommande_ibfk_1" FromRole="tetecommande" ToRole="lignecommande" />
+        </EntityType>
+        <Association Name="adresse_ibfk_1">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="adresse" Type="Self.adresse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="adresse">
+              <PropertyRef Name="FID_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tetecommande_ibfk_3">
+          <End Role="adresse" Type="Self.adresse" Multiplicity="1" />
+          <End Role="tetecommande" Type="Self.tetecommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adresse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tetecommande">
+              <PropertyRef Name="FID_Adresse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="categorie_ibfk_1">
+          <End Role="image" Type="Self.image" Multiplicity="1" />
+          <End Role="categorie" Type="Self.categorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="image">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="categorie">
+              <PropertyRef Name="FID_Image" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="produit_ibfk_1">
+          <End Role="categorie" Type="Self.categorie" Multiplicity="1" />
+          <End Role="produit" Type="Self.produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="produit">
+              <PropertyRef Name="FID_Categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tetecommande_ibfk_1">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="tetecommande" Type="Self.tetecommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tetecommande">
+              <PropertyRef Name="FID_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tetecommande_ibfk_2">
+          <End Role="etatcommande" Type="Self.etatcommande" Multiplicity="1" />
+          <End Role="tetecommande" Type="Self.tetecommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="etatcommande">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tetecommande">
+              <PropertyRef Name="FID_Etat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="produit_ibfk_2">
+          <End Role="image" Type="Self.image" Multiplicity="1" />
+          <End Role="produit" Type="Self.produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="image">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="produit">
+              <PropertyRef Name="FID_Image" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="lignecommande_ibfk_1">
+          <End Role="tetecommande" Type="Self.tetecommande" Multiplicity="1" />
+          <End Role="lignecommande" Type="Self.lignecommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tetecommande">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="lignecommande">
+              <PropertyRef Name="FID_Commande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="lignecommande_ibfk_2">
+          <End Role="produit" Type="Self.produit" Multiplicity="1" />
+          <End Role="lignecommande" Type="Self.lignecommande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="lignecommande">
+              <PropertyRef Name="FID_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="produit_ibfk_3">
+          <End Role="taxe" Type="sucradomModel.taxe" Multiplicity="1" />
+          <End Role="produit" Type="Self.produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taxe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="produit">
+              <PropertyRef Name="FID_Taxe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="provision_ibfk_1">
+          <End Role="produit" Type="Self.produit" Multiplicity="1" />
+          <End Role="provision" Type="Self.provision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="provision">
+              <PropertyRef Name="FID_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sucradomEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="adresses" EntityType="Self.adresse" />
+          <EntitySet Name="categories" EntityType="Self.categorie" />
+          <EntitySet Name="clients" EntityType="Self.client" />
+          <EntitySet Name="etatcommandes" EntityType="Self.etatcommande" />
+          <EntitySet Name="images" EntityType="Self.image" />
+          <EntitySet Name="lignecommandes" EntityType="Self.lignecommande" />
+          <EntitySet Name="produits" EntityType="Self.produit" />
+          <EntitySet Name="provisions" EntityType="Self.provision" />
+          <EntitySet Name="taxes" EntityType="sucradomModel.taxe" />
+          <EntitySet Name="tetecommandes" EntityType="Self.tetecommande" />
+          <AssociationSet Name="adresse_ibfk_1" Association="Self.adresse_ibfk_1">
+            <End Role="client" EntitySet="clients" />
+            <End Role="adresse" EntitySet="adresses" />
+          </AssociationSet>
+          <AssociationSet Name="tetecommande_ibfk_3" Association="Self.tetecommande_ibfk_3">
+            <End Role="adresse" EntitySet="adresses" />
+            <End Role="tetecommande" EntitySet="tetecommandes" />
+          </AssociationSet>
+          <AssociationSet Name="categorie_ibfk_1" Association="Self.categorie_ibfk_1">
+            <End Role="image" EntitySet="images" />
+            <End Role="categorie" EntitySet="categories" />
+          </AssociationSet>
+          <AssociationSet Name="produit_ibfk_1" Association="Self.produit_ibfk_1">
+            <End Role="categorie" EntitySet="categories" />
+            <End Role="produit" EntitySet="produits" />
+          </AssociationSet>
+          <AssociationSet Name="tetecommande_ibfk_1" Association="Self.tetecommande_ibfk_1">
+            <End Role="client" EntitySet="clients" />
+            <End Role="tetecommande" EntitySet="tetecommandes" />
+          </AssociationSet>
+          <AssociationSet Name="tetecommande_ibfk_2" Association="Self.tetecommande_ibfk_2">
+            <End Role="etatcommande" EntitySet="etatcommandes" />
+            <End Role="tetecommande" EntitySet="tetecommandes" />
+          </AssociationSet>
+          <AssociationSet Name="produit_ibfk_2" Association="Self.produit_ibfk_2">
+            <End Role="image" EntitySet="images" />
+            <End Role="produit" EntitySet="produits" />
+          </AssociationSet>
+          <AssociationSet Name="lignecommande_ibfk_1" Association="Self.lignecommande_ibfk_1">
+            <End Role="tetecommande" EntitySet="tetecommandes" />
+            <End Role="lignecommande" EntitySet="lignecommandes" />
+          </AssociationSet>
+          <AssociationSet Name="lignecommande_ibfk_2" Association="Self.lignecommande_ibfk_2">
+            <End Role="produit" EntitySet="produits" />
+            <End Role="lignecommande" EntitySet="lignecommandes" />
+          </AssociationSet>
+          <AssociationSet Name="produit_ibfk_3" Association="Self.produit_ibfk_3">
+            <End Role="taxe" EntitySet="taxes" />
+            <End Role="produit" EntitySet="produits" />
+          </AssociationSet>
+          <AssociationSet Name="provision_ibfk_1" Association="Self.provision_ibfk_1">
+            <End Role="produit" EntitySet="produits" />
+            <End Role="provision" EntitySet="provisions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sucradomModelStoreContainer" CdmEntityContainer="sucradomEntities">
+          <EntitySetMapping Name="adresses">
+            <EntityTypeMapping TypeName="sucradomModel.adresse">
+              <MappingFragment StoreEntitySet="adresse">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Rue" ColumnName="Rue" />
+                <ScalarProperty Name="Cp" ColumnName="Cp" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="Pays" ColumnName="Pays" />
+                <ScalarProperty Name="FID_Client" ColumnName="FID_Client" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="sucradomModel.categorie">
+              <MappingFragment StoreEntitySet="categorie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="FID_Image" ColumnName="FID_Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clients">
+            <EntityTypeMapping TypeName="sucradomModel.client">
+              <MappingFragment StoreEntitySet="client">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+                <ScalarProperty Name="IsActif" ColumnName="IsActif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="etatcommandes">
+            <EntityTypeMapping TypeName="sucradomModel.etatcommande">
+              <MappingFragment StoreEntitySet="etatcommande">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="images">
+            <EntityTypeMapping TypeName="sucradomModel.image">
+              <MappingFragment StoreEntitySet="image">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Alt" ColumnName="Alt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lignecommandes">
+            <EntityTypeMapping TypeName="sucradomModel.lignecommande">
+              <MappingFragment StoreEntitySet="lignecommande">
+                <ScalarProperty Name="FID_Commande" ColumnName="FID_Commande" />
+                <ScalarProperty Name="FID_Produit" ColumnName="FID_Produit" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="PrixTTC" ColumnName="PrixTTC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="produits">
+            <EntityTypeMapping TypeName="sucradomModel.produit">
+              <MappingFragment StoreEntitySet="produit">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="IsDisponible" ColumnName="IsDisponible" />
+                <ScalarProperty Name="FID_Categorie" ColumnName="FID_Categorie" />
+                <ScalarProperty Name="FID_Image" ColumnName="FID_Image" />
+                <ScalarProperty Name="FID_Taxe" ColumnName="FID_Taxe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="provisions">
+            <EntityTypeMapping TypeName="sucradomModel.provision">
+              <MappingFragment StoreEntitySet="provision">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="FID_Produit" ColumnName="FID_Produit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="taxes">
+            <EntityTypeMapping TypeName="sucradomModel.taxe">
+              <MappingFragment StoreEntitySet="taxe">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Valeur" ColumnName="Valeur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tetecommandes">
+            <EntityTypeMapping TypeName="sucradomModel.tetecommande">
+              <MappingFragment StoreEntitySet="tetecommande">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PrixTotal" ColumnName="PrixTotal" />
+                <ScalarProperty Name="FID_Client" ColumnName="FID_Client" />
+                <ScalarProperty Name="FID_Etat" ColumnName="FID_Etat" />
+                <ScalarProperty Name="FID_Adresse" ColumnName="FID_Adresse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
