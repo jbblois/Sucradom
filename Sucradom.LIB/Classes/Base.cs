@@ -8,7 +8,7 @@ namespace Sucradom.LIB
 {
     public static class Base
     {
-        #region Connexion a la BDD
+        #region Connexion à la BDD
         /// <summary>
         /// Le contexte représente la BDD
         /// </summary>

@@ -52,8 +52,8 @@
     <Compile Include="categorie.cs">
       <DependentUpon>SucradomModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Classses\Base.cs" />
-    <Compile Include="Classses\ClassesPartielles.cs" />
+    <Compile Include="Classes\Base.cs" />
+    <Compile Include="Classes\ClassesPartielles.cs" />
     <Compile Include="client.cs">
       <DependentUpon>SucradomModel.tt</DependentUpon>
     </Compile>

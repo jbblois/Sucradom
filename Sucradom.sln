@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sucradom", "Sucradom.csproj", "{31D3855A-D002-496F-AF20-BA035C443DAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sucradom", "Sucradom\Sucradom.csproj", "{31D3855A-D002-496F-AF20-BA035C443DAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sucradom.LIB", "..\Sucradom.LIB\Sucradom.LIB.csproj", "{4D978F4B-1C0C-4876-A0EC-DF9A59F8EF87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sucradom.LIB", "Sucradom.LIB\Sucradom.LIB.csproj", "{4D978F4B-1C0C-4876-A0EC-DF9A59F8EF87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sucradom.WPF", "..\Sucradom.WPF\Sucradom.WPF.csproj", "{250FAA0C-2D3F-40EC-B221-018059AA7900}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sucradom.WPF", "Sucradom.WPF\Sucradom.WPF.csproj", "{250FAA0C-2D3F-40EC-B221-018059AA7900}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
