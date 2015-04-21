@@ -45,28 +45,19 @@
     </Style>
 
     <!--BUTTONS-->
-    <Style TargetType="Button" x:Key="ButtonInsert">
+    <Style TargetType="Button" x:Key="BaseButton">
         <Setter Property="FontFamily" Value="Comic Sans MS"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <Style TargetType="Button" x:Key="ButtonInsert" BasedOn="{StaticResource BaseButton}">
         <Setter Property="Background" Value="DarkGreen"/>
     </Style>
-    <Style TargetType="Button" x:Key="ButtonDelete">
-        <Setter Property="FontFamily" Value="Comic Sans MS"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="White"/>
+    <Style TargetType="Button" x:Key="ButtonDelete" BasedOn="{StaticResource BaseButton}">
         <Setter Property="Background" Value="DarkRed"/>
     </Style>
-    <Style TargetType="Button" x:Key="ButtonUpdate">
-        <Setter Property="FontFamily" Value="Comic Sans MS"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="White"/>
+    <Style TargetType="Button" x:Key="ButtonUpdate" BasedOn="{StaticResource BaseButton}">
         <Setter Property="Background" Value="DarkGoldenrod"/>
-    </Style>
-    <Style TargetType="Button" x:Key="ButtonSave">
-        <Setter Property="FontFamily" Value="Comic Sans MS"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="White"/>
     </Style>
     
     <!--COMBOBOX-->
