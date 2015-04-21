@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Sucradom.LIB;
+using Sucradom.WPF;
 namespace Sucradom.WPF
 {
     /// <summary>
@@ -21,7 +22,7 @@ namespace Sucradom.WPF
             if (Base.Debut()) // == true on vérifie si on a une connexion à la BDD
             {
                 //On affiche la page d'accueil
-                new Windows.Accueil().ShowDialog();
+                new Fenetres.Accueil().ShowDialog();
             }
             else
             {
