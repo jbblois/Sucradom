@@ -24,13 +24,13 @@
                 <RowDefinition Height="20*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource Label}" Text="Nom de la catégorie"/>
-            <TextBox   Grid.Row="0" Grid.Column="3" Style="{StaticResource Standard}" Text="{Binding Libelle}"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource Label}" Text="Nom de la Taxe"/>
+            <TextBox   Grid.Row="0" Grid.Column="3" Style="{StaticResource Standard}" Text="{Binding Nom}"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource Label}" Text="Image de la catégorie"/>
-            <TextBox   Grid.Row="2" Grid.Column="3" Style="{StaticResource Standard}" Text="{Binding Image.Path}"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource Label}" Text="%"/>
+            <TextBox   Grid.Row="2" Grid.Column="3" Style="{StaticResource Standard}" Text="{Binding Valeur}"/>
 
-            <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource Label}" Text="Nombre de produits"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource Label}" Text="Nombre de produits Taxés"/>
             <TextBox   Grid.Row="4" Grid.Column="3" Style="{StaticResource Standard_RO}" Text="{Binding NbProduits, Mode=OneTime}"/>
             
             <Button Grid.Row="6" Grid.Column="3" Style="{StaticResource BaseButton}" Click="Button_Save_Click" />
