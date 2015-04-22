@@ -30,17 +30,17 @@ namespace Sucradom.WPF.Fenetres
         #region Button_Clicks
         private void Button_Insert_Click(object sender, RoutedEventArgs e)
         {
-
+            _ViewModel.AjouterTaxe();
         }
 
         private void Button_Update_Click(object sender, RoutedEventArgs e)
         {
-
+            _ViewModel.ModifierTaxe();
         }
 
         private void Button_Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            _ViewModel.SupprimerTaxe();
         }        
         #endregion
     }

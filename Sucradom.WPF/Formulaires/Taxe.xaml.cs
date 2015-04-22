@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Sucradom.LIB;
 
 namespace Sucradom.WPF.Formulaires
 {
@@ -19,9 +20,22 @@ namespace Sucradom.WPF.Formulaires
     /// </summary>
     public partial class Taxe : Window
     {
+        private Taxe_ViewModel _ViewModel;
         public Taxe()
         {
+            DataContext = _ViewModel = new Taxe_ViewModel();
             InitializeComponent();
+        }
+
+        public Taxe(taxe  SelectedTaxe)
+        {
+            DataContext = _ViewModel = new Taxe_ViewModel(SelectedTaxe);
+            InitializeComponent();
+        }
+
+        private void Button_Save_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.Enregistrer();
         }
     }
 }

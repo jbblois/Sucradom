@@ -27,33 +27,38 @@ namespace Sucradom.WPF.Fenetres
         }
 
         public void AjouterCategorie()
-        {   //********
-            // PENSER A AJOUTER LE CONSTRUCTEUR D'INSERTION
-            //new Formulaires.Categorie().ShowDialog();
+        {   
+            new Formulaires.Categorie().ShowDialog();
         }
 
         public Boolean ModifierCategorie()
         {
             if (SelectedCategorie != null)
             {
-                //********
-                // PENSER A AJOUTER LE CONSTRUCTEUR DE MODIFICATION
-                //new Formulaires.Categorie(SelectedCategorie).ShowDialog();
+                new Formulaires.Categorie(SelectedCategorie).ShowDialog();
                 return true;
+            }
+            else
+            {
+                Outils.Alerte("Veuillez selectionner une catégorie !");
             }
             return false;
         }
 
-        /// <summary>
-        /// ¨PENSER A FAIRE LES ETAPES DE SUPRESSIONS
-        /// </summary>
-        /// <returns></returns>
         public Boolean SupprimerCategorie()
         {
             if (SelectedCategorie != null)
             {
-                
-                return true;
+                if (SelectedCategorie.NbProduits == 0)
+                {
+                    ViewModel.categories.Remove(SelectedCategorie);
+                    Context.categories.Remove(SelectedCategorie);
+                    return true;                    
+                }
+                else
+                {
+                    Outils.Alerte("La catégorie possède des produits !");
+                }
             }
             return false;
         }

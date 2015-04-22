@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sucradom.LIB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,22 @@ namespace Sucradom.WPF.Formulaires
     /// </summary>
     public partial class Categorie : Window
     {
+        private Categorie_ViewModel _ViewModel;
         public Categorie()
         {
+            DataContext = _ViewModel = new Categorie_ViewModel();
             InitializeComponent();
+        }
+
+        public Categorie(categorie SelectedCategorie)
+        {
+            DataContext = _ViewModel = new Categorie_ViewModel(SelectedCategorie);
+            InitializeComponent();
+        }
+
+        private void Button_Save_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.Enregistrer();
         }
     }
 }

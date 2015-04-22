@@ -66,6 +66,9 @@
     </Compile>
     <Compile Include="Fenetres\Accueil_ViewModel.cs" />
     <Compile Include="Fenetres\Categories_ViewModel.cs" />
+    <Compile Include="Fenetres\Commande.xaml.cs">
+      <DependentUpon>Commande.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Fenetres\Taxes_ViewModel.cs" />
     <Compile Include="Formulaires\Categorie.xaml.cs">
       <DependentUpon>Categorie.xaml</DependentUpon>
@@ -75,10 +78,7 @@
       <DependentUpon>Client.xaml</DependentUpon>
     </Compile>
     <Compile Include="Formulaires\Client_ViewModel.cs" />
-    <Compile Include="Formulaires\Commande.xaml.cs">
-      <DependentUpon>Commande.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Formulaires\Commande_ViewModel.cs" />
+    <Compile Include="Fenetres\Commande_ViewModel.cs" />
     <Compile Include="Formulaires\Produit.xaml.cs">
       <DependentUpon>Produit.xaml</DependentUpon>
     </Compile>
@@ -150,15 +150,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Fenetres\Commande.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Formulaires\Categorie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Formulaires\Client.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Formulaires\Commande.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

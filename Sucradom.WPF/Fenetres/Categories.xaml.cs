@@ -20,9 +20,7 @@ namespace Sucradom.WPF.Fenetres
     /// </summary>
     public partial class Categories : Window
     {
-
         private Categories_ViewModel _ViewModel;
-
 
         public Categories()
         {
@@ -34,17 +32,17 @@ namespace Sucradom.WPF.Fenetres
         #region Buttons_Clicks
         private void Button_Insert_Click(object sender, RoutedEventArgs e)
         {
-
+            _ViewModel.AjouterCategorie();
         }
 
         private void Button_Update_Click(object sender, RoutedEventArgs e)
         {
-
+            _ViewModel.ModifierCategorie();
         }
 
         private void Button_Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            _ViewModel.SupprimerCategorie();
         }
         #endregion
     }
