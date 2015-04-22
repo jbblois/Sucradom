@@ -23,5 +23,10 @@ namespace Sucradom.WPF.Formulaires
         {
             InitializeComponent();
         }
+
+        private void Button_Save_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

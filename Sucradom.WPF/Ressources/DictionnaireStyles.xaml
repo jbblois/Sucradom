@@ -68,4 +68,10 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
     
+    <!--CHECKBOX-->
+    <Style TargetType="CheckBox">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>  
+    
 </ResourceDictionary>
