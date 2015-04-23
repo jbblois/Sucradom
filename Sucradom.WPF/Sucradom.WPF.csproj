@@ -65,11 +65,23 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Fenetres\Accueil_ViewModel.cs" />
+    <Compile Include="Fenetres\Adresses.xaml.cs">
+      <DependentUpon>Adresses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetres\Adresses_ViewModel.cs" />
     <Compile Include="Fenetres\Categories_ViewModel.cs" />
     <Compile Include="Fenetres\Commande.xaml.cs">
       <DependentUpon>Commande.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Fenetres\Provisions.xaml.cs">
+      <DependentUpon>Provisions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetres\Provisions_ViewModel.cs" />
     <Compile Include="Fenetres\Taxes_ViewModel.cs" />
+    <Compile Include="Formulaires\Adresse.xaml.cs">
+      <DependentUpon>Adresse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaires\Adresse_ViewModel.cs" />
     <Compile Include="Formulaires\Categorie.xaml.cs">
       <DependentUpon>Categorie.xaml</DependentUpon>
     </Compile>
@@ -83,6 +95,10 @@
       <DependentUpon>Produit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Formulaires\Produit_ViewModel.cs" />
+    <Compile Include="Formulaires\Provision.xaml.cs">
+      <DependentUpon>Provision.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaires\Provision_ViewModel.cs" />
     <Compile Include="Formulaires\Taxe.xaml.cs">
       <DependentUpon>Taxe.xaml</DependentUpon>
     </Compile>
@@ -150,7 +166,19 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Fenetres\Adresses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Fenetres\Commande.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Fenetres\Provisions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formulaires\Adresse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Formulaires\Produit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formulaires\Provision.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

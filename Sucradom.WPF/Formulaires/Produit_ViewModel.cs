@@ -30,7 +30,7 @@ namespace Sucradom.WPF.Formulaires
         public Produit_ViewModel(produit SelectedProduit)
         {
             ProduitOfVM = SelectedProduit;
-            _IsNouveauProduit = true;
+            _IsNouveauProduit = false;
         }
 
         public Boolean Enregistrer()

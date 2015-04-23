@@ -30,7 +30,7 @@ namespace Sucradom.WPF.Formulaires
         public Categorie_ViewModel(categorie SelectedCategorie)
         {
             CategorieOfVM = SelectedCategorie;
-            _IsNouvelleCategorie = true;
+			_IsNouvelleCategorie = false;
         }
 
         public Boolean Enregistrer()

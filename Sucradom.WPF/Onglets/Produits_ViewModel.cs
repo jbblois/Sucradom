@@ -20,7 +20,6 @@ namespace Sucradom.WPF.Onglets
             }
         }
 
-
         public Produits_ViewModel()
         {
 
@@ -45,10 +44,6 @@ namespace Sucradom.WPF.Onglets
             return false;
         }
 
-        /// <summary>
-        /// PENSER A FAIRE LES ETAPES DE SUPRESSION
-        /// </summary>
-        /// <returns></returns>
         public Boolean SupprimerProduit()
         {
             if (SelectedProduit != null)
@@ -63,6 +58,19 @@ namespace Sucradom.WPF.Onglets
             }
             return false;
         }
+
+		public Boolean GestionProvisions()
+		{
+			if(SelectedProduit != null)
+			{
+				new Fenetres.Provisions(SelectedProduit).ShowDialog();
+			}
+			else
+			{
+				Outils.Alerte("Veillez selectionner un produit à approvisionner");
+			}
+			return false;
+		}
     }
 }
 

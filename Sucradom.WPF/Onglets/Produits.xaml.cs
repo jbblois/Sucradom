@@ -42,5 +42,10 @@ namespace Sucradom.WPF.Onglets
         {
             _ViewModel.SupprimerProduit();
         }
+
+		private void Button_Provisions_Click(object sender, RoutedEventArgs e)
+		{
+			_ViewModel.GestionProvisions();
+		}
     }
 }

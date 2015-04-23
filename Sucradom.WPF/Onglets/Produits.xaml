@@ -96,6 +96,8 @@
             <Button Grid.Column="0" Grid.Row="18" Style="{StaticResource ButtonInsert}" Content="Ajouter un produit"  Click="Button_Insert_Click"/>
             <Button Grid.Column="0" Grid.Row="20" Style="{StaticResource ButtonUpdate}" Content="Modifier le produit"  Click="Button_Update_Click"/>
             <Button Grid.Column="0" Grid.Row="22" Style="{StaticResource ButtonDelete}" Content="Supprimer le produit" Click="Button_Delete_Click"/>
+
+            <Button Grid.Column="2" Grid.Row="20" Style="{StaticResource BaseButton}" Background="RoyalBlue" Content="Aprovisionnement"  Click="Button_Provisions_Click"/>
         </Grid>
     </Grid>
     </UserControl>

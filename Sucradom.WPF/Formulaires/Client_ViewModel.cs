@@ -30,7 +30,7 @@ namespace Sucradom.WPF.Formulaires
         public Client_ViewModel(client SelectedClient)
         {
             ClientOfVM = SelectedClient;
-            _IsNouveauClient = true;
+			_IsNouveauClient = false;
         }
 
         public Boolean Enregistrer()

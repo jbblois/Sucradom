@@ -35,26 +35,43 @@ namespace Sucradom.WPF.Onglets
         {
             if (SelectedClient != null)
             {
-                //********
-                // PENSER A AJOUTER LE CONSTRUCTEUR DE MODIFICATION
-                //new Formulaires.Client(SelectedClient).ShowDialog();
+				new Formulaires.Client(SelectedClient).ShowDialog();
                 return true;
             }
+			else
+			{
+				Outils.Alerte("Veuillez selectionner un client à modifier !");
+			}
             return false;
         }
 
-        /// <summary>
-        /// PENSER A FAIRE LES ETAPES DE SUPRESSION
-        /// </summary>
-        /// <returns></returns>
         public Boolean SupprimerClient()
         {
             if (SelectedClient != null)
             {
-                
+				ViewModel.clients.Remove(SelectedClient);
+				Context.clients.Remove(SelectedClient);
                 return true;
             }
+			else
+			{
+				Outils.Alerte("Veuillez selectionner un client à supprimer !");
+			}
             return false;
         }
-    }
+
+		public Boolean CarnetAdresses()
+		{
+			if(SelectedClient != null)
+			{
+				//new Fenetres.Adresses(SelectedClient).ShowDialog();
+				return true;
+			}
+			else
+			{
+				Outils.Alerte("Veuillez selectionner un client dont le carnet d'adresses doit être modifié !");
+			}
+			return false;
+		}
+	}
 }

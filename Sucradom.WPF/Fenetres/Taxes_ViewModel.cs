@@ -20,7 +20,6 @@ namespace Sucradom.WPF.Fenetres
             }
         }
 
-
         public Taxes_ViewModel()
         {
 
@@ -40,7 +39,7 @@ namespace Sucradom.WPF.Fenetres
             }
             else
             {
-                Outils.Alerte("Veuillez selectionner une catégorie !");
+                Outils.Alerte("Veuillez selectionner une taxe !");
             }
             return false;
         }
@@ -57,7 +56,7 @@ namespace Sucradom.WPF.Fenetres
                 }
                 else
                 {
-                    Outils.Alerte("La catégorie possède des produits !");
+                    Outils.Alerte("Des produits utilisent cette taxe !");
                 }
             }
             return false;

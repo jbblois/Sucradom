@@ -82,6 +82,16 @@ namespace Sucradom.LIB
            }
        }
 
+	   public int QuantiteExacte()
+	   {
+		  int sumVentes = lignecommandes.Where(lc => lc.tetecommande.Date.CompareTo(DateTime.Now) <= 0 
+											      && lc.tetecommande.etatcommande.ID != 0 )
+										.Sum(lc => lc.Quantite) ;
+		  int sumAchats = provisions.Where(p => p.Date.CompareTo(DateTime.Now) <= 0)
+									.Sum(p => p.Quantite);
+		  return sumAchats - sumVentes;
+	   }
+
    }
 
    public partial class categorie

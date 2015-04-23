@@ -30,7 +30,7 @@ namespace Sucradom.WPF.Formulaires
         public Taxe_ViewModel(taxe SelectedTaxe)
         {
             TaxeOfVM = SelectedTaxe;
-            _IsNouvelleTaxe = true;
+            _IsNouvelleTaxe = false;
         }
 
         public Boolean Enregistrer()
