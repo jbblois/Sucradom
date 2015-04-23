@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Sucradom.WPF.Fenetres.Accueil"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Accueil" Height="300" Width="300">
+        Title="Accueil" Height="600" Width="900">
     <Window.Resources>
         <ResourceDictionary Source="../Ressources/DictionnaireStyles.xaml"/>
     </Window.Resources>
@@ -41,9 +41,9 @@
 
         <TabControl Grid.Column="1" Grid.Row="3">
             <!--Onglets-->
-            <TabItem Header="Gestion des produits" Content="{Binding OngletProduits}"/>
-            <TabItem Header="Gestion des clients" Content="{Binding OngletClients}"/>
-            <TabItem Header="Gestion des commandes" Content="{Binding OngletCommandes}"/>
+            <TabItem Header="Gestion des produits" Content="{Binding GestionProduits}"/>
+            <TabItem Header="Gestion des clients" Content="{Binding GestionClients}"/>
+            <TabItem Header="Gestion des commandes" Content="{Binding GestionCommandes}"/>
         </TabControl>
     </Grid>
 </Window>

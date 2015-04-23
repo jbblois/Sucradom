@@ -9,13 +9,13 @@ namespace Sucradom.WPF.Formulaires
 {
     public class Taxe_ViewModel : ViewModel
     {
-        private taxe  _Taxe;
-        public taxe Taxe
+        private taxe  _TaxeOfVM;
+        public taxe TaxeOfVM
         {
-            get { return _Taxe; }
+            get { return _TaxeOfVM; }
             set 
             {
-                _Taxe = value; 
+                _TaxeOfVM = value; 
                 NotifyPropertyChanged();
             }
         }
@@ -24,25 +24,25 @@ namespace Sucradom.WPF.Formulaires
 
         public Taxe_ViewModel()
         {
-            Taxe = new taxe();
+            TaxeOfVM = new taxe();
             _IsNouvelleTaxe = true;
         }
         public Taxe_ViewModel(taxe SelectedTaxe)
         {
-            Taxe = SelectedTaxe;
+            TaxeOfVM = SelectedTaxe;
             _IsNouvelleTaxe = true;
         }
 
         public Boolean Enregistrer()
         {
-            if (Taxe.Nom != null && Taxe.Nom != "")
+            if (TaxeOfVM.Nom != null && TaxeOfVM.Nom != "")
             {
                 if (_IsNouvelleTaxe)
                 {
-                    if (ViewModel.taxes.FirstOrDefault(T => T.Nom.Equals(Taxe.Nom)) == null)
+                    if (ViewModel.taxes.FirstOrDefault(T => T.Nom.Equals(TaxeOfVM.Nom)) == null)
                     {
-                        Context.taxes.Add(Taxe);
-                        ViewModel.taxes.Add(Taxe);
+                        Context.taxes.Add(TaxeOfVM);
+                        ViewModel.taxes.Add(TaxeOfVM);
                         return true;
                     }
                     else
@@ -52,7 +52,7 @@ namespace Sucradom.WPF.Formulaires
                 }
                 else
                 {
-                    if (ViewModel.taxes.Count(T => T.Nom.Equals(Taxe.Nom)) <= 1)
+                    if (ViewModel.taxes.Count(T => T.Nom.Equals(TaxeOfVM.Nom)) <= 1)
                     {
                         return true;
                     }

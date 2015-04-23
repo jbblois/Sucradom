@@ -25,17 +25,24 @@ namespace Sucradom.WPF.Formulaires
         {
             DataContext = _ViewModel = new Categorie_ViewModel();
             InitializeComponent();
+            Button_Sauvegarder.Content = "Enregister la nouvelle catégorie";
+            Button_Sauvegarder.Background = Brushes.DarkGreen;
         }
 
         public Categorie(categorie SelectedCategorie)
         {
             DataContext = _ViewModel = new Categorie_ViewModel(SelectedCategorie);
             InitializeComponent();
+            Button_Sauvegarder.Content = "Enregistrer les modifications";
+            Button_Sauvegarder.Background = Brushes.DarkGoldenrod;
         }
 
         private void Button_Save_Click(object sender, RoutedEventArgs e)
         {
-            _ViewModel.Enregistrer();
+            if (_ViewModel.Enregistrer())
+            {
+                this.Close();
+            }
         }
     }
 }

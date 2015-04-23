@@ -35,10 +35,12 @@ namespace Sucradom.WPF.Onglets
         {
             if (SelectedProduit != null)
             {
-                //********
-                // PENSER A AJOUTER LE CONSTRUCTEUR DE MODIFICATION
-                //new Formulaires.Produit(SelectedProduit).ShowDialog();
+                new Formulaires.Produit(SelectedProduit).ShowDialog();
                 return true;
+            }
+            else
+            {
+                Outils.Alerte("Veillez selectionner un produit à modifier");
             }
             return false;
         }
@@ -51,8 +53,13 @@ namespace Sucradom.WPF.Onglets
         {
             if (SelectedProduit != null)
             {
-                
+                ViewModel.produits.Remove(SelectedProduit);
+                Context.produits.Remove(SelectedProduit);
                 return true;
+            }
+            else
+            {
+                Outils.Alerte("Veillez selectionner un produit à supprimer");
             }
             return false;
         }

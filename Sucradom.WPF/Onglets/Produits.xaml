@@ -5,7 +5,97 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Ressources/DictionnaireStyles.xaml"/>
+    </UserControl.Resources>
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="90*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Style="{StaticResource Label}" Text="Liste des produits"/>
+            <ListBox x:Name="ListBox_Produits" Grid.Row="2" ItemsSource="{Binding produits}" SelectedItem="{Binding SelectedProduit}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Nom}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <Grid Grid.Column="3" Grid.Row="1" DataContext="{Binding SelectedProduit}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="60*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Label}" Text="Nom du produit"/>
+            <TextBox   Grid.Row="0" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding Libelle}"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Label}" Text="Description du produit"/>
+            <TextBox   Grid.Row="2" Grid.Column="2" Style="{StaticResource Haute_RO}" Text="{Binding Description}"/>
+
+            <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource Label}" Text="Prix HT unitaire"/>
+            <TextBox   Grid.Row="6" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding Prix}"/>
+
+            <TextBlock Grid.Row="8" Grid.Column="0" Style="{StaticResource Label}" Text="Taxe"/>
+            <TextBox   Grid.Row="6" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding taxe.Nom}"/>
+
+            <TextBlock Grid.Row="10" Grid.Column="0" Style="{StaticResource Label}" Text="Quantité en Stock"/>
+            <TextBox   Grid.Row="10" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding Quantite}"/>
+
+            <TextBlock Grid.Row="12" Grid.Column="0" Style="{StaticResource Label}" Text="Produit disponible"/>
+            <CheckBox  Grid.Row="12" Grid.Column="2" IsChecked="{Binding EstDisponible, Mode=OneWay}" IsEnabled="False"/>
+
+            <TextBlock Grid.Row="14" Grid.Column="0" Style="{StaticResource Label}" Text="Catégorie"/>
+            <TextBox   Grid.Row="14" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding categorie.Libelle}"/>
+
+            <TextBlock Grid.Row="16" Grid.Column="0" Style="{StaticResource Label}" Text="Image du produit"/>
+            <TextBox   Grid.Row="16" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding image.Path}"/>
+
+            <Button Grid.Column="0" Grid.Row="18" Style="{StaticResource ButtonInsert}" Content="Ajouter un produit"  Click="Button_Insert_Click"/>
+            <Button Grid.Column="0" Grid.Row="20" Style="{StaticResource ButtonUpdate}" Content="Modifier le produit"  Click="Button_Update_Click"/>
+            <Button Grid.Column="0" Grid.Row="22" Style="{StaticResource ButtonDelete}" Content="Supprimer le produit" Click="Button_Delete_Click"/>
+        </Grid>
     </Grid>
-</UserControl>
+    </UserControl>

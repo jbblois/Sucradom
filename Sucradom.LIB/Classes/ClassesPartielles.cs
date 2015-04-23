@@ -23,6 +23,7 @@ namespace Sucradom.LIB
                }
                else
                {
+                   IsActif = "NON";
                    return false;
                }
            }
@@ -56,21 +57,15 @@ namespace Sucradom.LIB
        {
            get
            {
-               if (IsDisponible != null)
+               if (Quantite > 0)
                {
-
-                   if (Quantite > 0)
-                   {
-                       // si IsDisponible == OUI alors .equals() retourne true
-                       // sinon IsDisponible == NON alors .equals() retourne false
-                       return IsDisponible.Equals("OUI");
-                   }
-                   else
-                   {
-                       IsDisponible = "NON";
-                   }
+                   return  (IsDisponible.Equals("OUI"));
                }
-                       return false;
+               else
+               {
+                   IsDisponible = "NON";
+                   return false;
+               }
            }
            set
            {

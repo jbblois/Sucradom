@@ -9,13 +9,13 @@ namespace Sucradom.WPF.Formulaires
 {
     public class Produit_ViewModel : ViewModel
     {
-        private produit  _Produit;
-        public produit Produit
+        private produit _ProduitOfVM;
+        public produit ProduitOfVM
         {
-            get { return _Produit; }
+            get { return _ProduitOfVM; }
             set 
             {
-                _Produit = value; 
+                _ProduitOfVM = value; 
                 NotifyPropertyChanged();
             }
         }
@@ -24,36 +24,36 @@ namespace Sucradom.WPF.Formulaires
 
         public Produit_ViewModel()
         {
-            Produit = new produit();
+            ProduitOfVM = new produit();
             _IsNouveauProduit = true;
         }
         public Produit_ViewModel(produit SelectedProduit)
         {
-            Produit = SelectedProduit;
+            ProduitOfVM = SelectedProduit;
             _IsNouveauProduit = true;
         }
 
         public Boolean Enregistrer()
         {
-            if (Produit.Libelle != null && Produit.Libelle != "")
+            if (ProduitOfVM.Libelle != null && ProduitOfVM.Libelle != "")
             {
-                if (Produit.categorie != null)
+                if (ProduitOfVM.categorie != null)
                 {
 
                     if (_IsNouveauProduit)
                     {
-                        if (ViewModel.produits.FirstOrDefault(P => P.Libelle.Equals(Produit.Libelle)) == null)
+                        if (ViewModel.produits.FirstOrDefault(P => P.Libelle.Equals(ProduitOfVM.Libelle)) == null)
                         {
-                            image image = ViewModel.images.FirstOrDefault(I => I.Path.Equals(Produit.Libelle));
+                            image image = ViewModel.images.FirstOrDefault(I => I.Path.Equals(ProduitOfVM.Libelle));
                             if (image == null)
                             {
                                 image = new image();
-                                image.Path = Produit.Libelle;
-                                image.Alt = Produit.Libelle;
+                                image.Path = ProduitOfVM.Libelle;
+                                image.Alt = ProduitOfVM.Libelle;
                             }
-                            Produit.image = image;
-                            Context.produits.Add(Produit);
-                            ViewModel.produits.Add(Produit);
+                            ProduitOfVM.image = image;
+                            Context.produits.Add(ProduitOfVM);
+                            ViewModel.produits.Add(ProduitOfVM);
                             return true;
                         }
                         else
@@ -63,16 +63,16 @@ namespace Sucradom.WPF.Formulaires
                     }
                     else
                     {
-                        if (ViewModel.produits.Count(P => P.Libelle.Equals(Produit.Libelle)) <= 1)
+                        if (ViewModel.produits.Count(P => P.Libelle.Equals(ProduitOfVM.Libelle)) <= 1)
                         {
-                            image image = Context.images.FirstOrDefault(I => I.Path.Equals(Produit.Libelle));
+                            image image = Context.images.FirstOrDefault(I => I.Path.Equals(ProduitOfVM.Libelle));
                             if (image == null)
                             {
                                 image = new image();
-                                image.Path = Produit.Libelle;
-                                image.Alt = Produit.Libelle;
+                                image.Path = ProduitOfVM.Libelle;
+                                image.Alt = ProduitOfVM.Libelle;
                             }
-                            Produit.image = image;
+                            ProduitOfVM.image = image;
                             return true;
                         }
                         else

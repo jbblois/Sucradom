@@ -9,13 +9,13 @@ namespace Sucradom.WPF.Formulaires
 {
     public class Categorie_ViewModel : ViewModel
     {
-        private categorie  _Categorie;
-        public categorie Categorie
+        private categorie  _CategorieOfVM;
+        public categorie CategorieOfVM
         {
-            get { return _Categorie; }
+            get { return _CategorieOfVM; }
             set 
             {
-                _Categorie = value; 
+                _CategorieOfVM = value; 
                 NotifyPropertyChanged();
             }
         }
@@ -24,33 +24,33 @@ namespace Sucradom.WPF.Formulaires
 
         public Categorie_ViewModel()
         {
-            Categorie = new categorie();
+            CategorieOfVM = new categorie();
             _IsNouvelleCategorie = true;
         }
         public Categorie_ViewModel(categorie SelectedCategorie)
         {
-            Categorie = SelectedCategorie;
+            CategorieOfVM = SelectedCategorie;
             _IsNouvelleCategorie = true;
         }
 
         public Boolean Enregistrer()
         {
-            if (Categorie.Libelle != null && Categorie.Libelle != "")
+            if (CategorieOfVM.Libelle != null && CategorieOfVM.Libelle != "")
             {
                 if (_IsNouvelleCategorie)
                 {
-                    if (ViewModel.categories.FirstOrDefault(T => T.Libelle.Equals(Categorie.Libelle)) == null)
+                    if (ViewModel.categories.FirstOrDefault(T => T.Libelle.Equals(CategorieOfVM.Libelle)) == null)
                     {
-                        image image = ViewModel.images.FirstOrDefault(I => I.Path.Equals(Categorie.Libelle));
+                        image image = ViewModel.images.FirstOrDefault(I => I.Path.Equals(CategorieOfVM.Libelle));
                         if (image == null)
                         {
                             image = new image();
-                            image.Path = Categorie.Libelle;
-                            image.Alt = Categorie.Libelle;
+                            image.Path = CategorieOfVM.Libelle;
+                            image.Alt = CategorieOfVM.Libelle;
                         }
-                        Categorie.image = image;
-                        Context.categories.Add(Categorie);
-                        ViewModel.categories.Add(Categorie);
+                        CategorieOfVM.image = image;
+                        Context.categories.Add(CategorieOfVM);
+                        ViewModel.categories.Add(CategorieOfVM);
                         return true;
                     }
                     else
@@ -60,16 +60,16 @@ namespace Sucradom.WPF.Formulaires
                 }
                 else
                 {
-                    if (ViewModel.categories.Count(T => T.Libelle.Equals(Categorie.Libelle)) <= 1)
+                    if (ViewModel.categories.Count(T => T.Libelle.Equals(CategorieOfVM.Libelle)) <= 1)
                     {
-                        image image = Context.images.FirstOrDefault(I => I.Path.Equals(Categorie.Libelle));
+                        image image = Context.images.FirstOrDefault(I => I.Path.Equals(CategorieOfVM.Libelle));
                         if (image == null)
                         {
                             image = new image();
-                            image.Path = Categorie.Libelle;
-                            image.Alt = Categorie.Libelle;
+                            image.Path = CategorieOfVM.Libelle;
+                            image.Alt = CategorieOfVM.Libelle;
                         }
-                        Categorie.image = image;
+                        CategorieOfVM.image = image;
                         return true;
                     }
                     else

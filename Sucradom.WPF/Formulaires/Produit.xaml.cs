@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Sucradom.LIB;
 
 namespace Sucradom.WPF.Formulaires
 {
@@ -19,9 +20,28 @@ namespace Sucradom.WPF.Formulaires
     /// </summary>
     public partial class Produit : Window
     {
+        private Produit_ViewModel _ViewModel;
         public Produit()
         {
+            DataContext = _ViewModel = new Produit_ViewModel();
             InitializeComponent();
+            Button_Sauvegarder.Content = "Enregister le nouveau produit";
+            Button_Sauvegarder.Background = Brushes.DarkGreen;
+        }
+        public Produit(produit SelectedProduit)
+        {
+            DataContext = _ViewModel = new Produit_ViewModel(SelectedProduit);
+            InitializeComponent();
+            Button_Sauvegarder.Content = "Enregistrer les modifications";
+            Button_Sauvegarder.Background = Brushes.DarkGoldenrod;
+        }
+
+        private void Button_Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (_ViewModel.Enregistrer())
+            {
+                this.Close();
+            }
         }
     }
 }

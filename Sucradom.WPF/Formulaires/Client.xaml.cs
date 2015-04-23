@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Sucradom.LIB;
 
 namespace Sucradom.WPF.Formulaires
 {
@@ -19,9 +20,28 @@ namespace Sucradom.WPF.Formulaires
     /// </summary>
     public partial class Client : Window
     {
+        private Client_ViewModel _ViewModel;
         public Client()
         {
+            DataContext = _ViewModel = new Client_ViewModel();
             InitializeComponent();
+            Button_Sauvegarder.Content = "Enregister le nouveau client";
+            Button_Sauvegarder.Background = Brushes.DarkGreen;
+        }
+        public Client(client SelectedClient)
+        {
+            DataContext = _ViewModel = new Client_ViewModel(SelectedClient);
+            InitializeComponent();
+            Button_Sauvegarder.Content = "Enregistrer les modifications";
+            Button_Sauvegarder.Background = Brushes.DarkGoldenrod;
+        }
+
+        private void Button_Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (_ViewModel.Enregistrer())
+            {
+                this.Close();
+            }
         }
     }
 }

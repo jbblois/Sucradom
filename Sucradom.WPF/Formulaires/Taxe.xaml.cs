@@ -25,17 +25,24 @@ namespace Sucradom.WPF.Formulaires
         {
             DataContext = _ViewModel = new Taxe_ViewModel();
             InitializeComponent();
+            Button_Sauvegarder.Content = "Enregister la nouvelle taxe";
+            Button_Sauvegarder.Background = Brushes.DarkGreen;
         }
 
         public Taxe(taxe  SelectedTaxe)
         {
             DataContext = _ViewModel = new Taxe_ViewModel(SelectedTaxe);
             InitializeComponent();
+            Button_Sauvegarder.Content = "Enregistrer les modifications";
+            Button_Sauvegarder.Background = Brushes.DarkGoldenrod;
         }
 
         private void Button_Save_Click(object sender, RoutedEventArgs e)
         {
-            _ViewModel.Enregistrer();
+            if (_ViewModel.Enregistrer())
+            {
+                this.Close();
+            }
         }
     }
 }

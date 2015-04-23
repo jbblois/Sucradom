@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Sucradom.LIB;
 
 namespace Sucradom.WPF.Onglets
 {
@@ -20,9 +21,26 @@ namespace Sucradom.WPF.Onglets
     /// </summary>
     public partial class Produits : UserControl
     {
+        private Produits_ViewModel _ViewModel;
         public Produits()
         {
+            DataContext = _ViewModel = new Produits_ViewModel();
             InitializeComponent();
+        }
+
+        private void Button_Insert_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.AjouterProduit();
+        }
+
+        private void Button_Update_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.ModifierProduit();
+        }
+
+        private void Button_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.SupprimerProduit();
         }
     }
 }

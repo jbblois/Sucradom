@@ -9,13 +9,13 @@ namespace Sucradom.WPF.Formulaires
 {
     public class Client_ViewModel : ViewModel
     {
-        private client  _Client;
-        public client Client
+        private client  _ClientOfVM;
+        public client ClientOfVM
         {
-            get { return _Client; }
+            get { return _ClientOfVM; }
             set 
             {
-                _Client = value; 
+                _ClientOfVM = value; 
                 NotifyPropertyChanged();
             }
         }
@@ -24,31 +24,31 @@ namespace Sucradom.WPF.Formulaires
 
         public Client_ViewModel()
         {
-            Client = new client();
+            ClientOfVM = new client();
             _IsNouveauClient = true;
         }
         public Client_ViewModel(client SelectedClient)
         {
-            Client = SelectedClient;
+            ClientOfVM = SelectedClient;
             _IsNouveauClient = true;
         }
 
         public Boolean Enregistrer()
         {
-            if (Client.Nom != null && Client.Nom != "")
+            if (ClientOfVM.Nom != null && ClientOfVM.Nom != "")
             {
-                if (Client.Prenom != null && Client.Prenom != "")
+                if (ClientOfVM.Prenom != null && ClientOfVM.Prenom != "")
                 {
-                    if (Outils.IsEmail(Client.Email))
+                    if (Outils.IsEmail(ClientOfVM.Email))
                     {
-                        if (Outils.IsNumeroTelephone(Client.Telephone))
+                        if (Outils.IsNumeroTelephone(ClientOfVM.Telephone))
                         {
                             if (_IsNouveauClient)
                             {
-                                if (ViewModel.clients.FirstOrDefault(C => C.Nom.Equals(Client.Nom) && C.Prenom.Equals(Client.Prenom)) == null)
+                                if (ViewModel.clients.FirstOrDefault(C => C.Nom.Equals(ClientOfVM.Nom) && C.Prenom.Equals(ClientOfVM.Prenom)) == null)
                                 {
-                                    Context.clients.Add(Client);
-                                    ViewModel.clients.Add(Client);
+                                    Context.clients.Add(ClientOfVM);
+                                    ViewModel.clients.Add(ClientOfVM);
                                     return true;
                                 }
                                 else
@@ -58,7 +58,7 @@ namespace Sucradom.WPF.Formulaires
                             }
                             else
                             {
-                                if (ViewModel.clients.Count(C => C.Nom.Equals(Client.Nom) && C.Prenom.Equals(Client.Prenom)) <= 1)
+                                if (ViewModel.clients.Count(C => C.Nom.Equals(ClientOfVM.Nom) && C.Prenom.Equals(ClientOfVM.Prenom)) <= 1)
                                 {
                                     return true;
                                 }
