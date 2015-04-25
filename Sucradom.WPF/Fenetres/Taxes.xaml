@@ -26,7 +26,7 @@
                 <RowDefinition Height="90*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Style="{StaticResource Label}" Text="Liste des taxes"/>
-            <ListBox x:Name="ListBox_Taxes" Grid.Row="2" ItemsSource="{Binding taxes}">
+            <ListBox x:Name="ListBox_Taxes" Grid.Row="2" ItemsSource="{Binding taxes}" SelectedItem="{Binding SelectedTaxe}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Nom}"/>
