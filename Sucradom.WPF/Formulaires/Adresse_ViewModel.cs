@@ -51,7 +51,7 @@ namespace Sucradom.WPF.Formulaires
                                     Context.adresses.Add(AdresseOfVM);
                                     ViewModel.adresses.Add(AdresseOfVM);
                                 }
-                                    return true;
+                                return true;
                             }
                             else
                             {
