@@ -36,22 +36,46 @@ namespace Sucradom.WPF.Formulaires
 
         public Boolean Enregistrer()
         {
-			if(true)
+			if(AdresseOfVM.Pays != "")
 			{
-				if(_IsNouvelleAdresse)
-				{
-					Context.adresses.Add(AdresseOfVM);
-					ViewModel.adresses.Add(AdresseOfVM);
-					return true;
-				}
-				else
-				{
-					return true;
-				}
+                if (AdresseOfVM.Ville != "")
+                {
+                    if (AdresseOfVM.Cp != "")
+                    {
+                        if (AdresseOfVM.Rue != "")
+                        {
+                            if (AdresseOfVM.Numero != "")
+                            {
+                                if (_IsNouvelleAdresse)
+                                {
+                                    Context.adresses.Add(AdresseOfVM);
+                                    ViewModel.adresses.Add(AdresseOfVM);
+                                }
+                                    return true;
+                            }
+                            else
+                            {
+                                Outils.Alerte("Veuillez saisir un numero !");
+                            }
+                        }
+                        else
+                        {
+                            Outils.Alerte("Veuillez saisir une rue !");
+                        }
+                    }
+                    else
+                    {
+                        Outils.Alerte("Veuillez saisir un code postal !");
+                    }
+                }
+                else
+                {
+                    Outils.Alerte("Veuillez saisir une ville !");
+                }
 			}
 			else
 			{
-				Outils.Alerte("");
+				Outils.Alerte("Veuillez saisir un pays !");
 			}
             return false;
         }

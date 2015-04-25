@@ -40,7 +40,7 @@ namespace Sucradom.WPF.Onglets
             }
 			else
 			{
-				Outils.Alerte("Veuillez selectionner un client à modifier !");
+				Outils.Alerte("Veuillez selectionner un client !");
 			}
             return false;
         }
@@ -55,7 +55,7 @@ namespace Sucradom.WPF.Onglets
             }
 			else
 			{
-				Outils.Alerte("Veuillez selectionner un client à supprimer !");
+				Outils.Alerte("Veuillez selectionner un client !");
 			}
             return false;
         }

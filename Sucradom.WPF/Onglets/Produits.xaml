@@ -32,7 +32,7 @@
             <ListBox x:Name="ListBox_Produits" Grid.Row="2" ItemsSource="{Binding produits}" SelectedItem="{Binding SelectedProduit}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Nom}"/>
+                        <TextBlock Text="{Binding Libelle}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -79,7 +79,7 @@
             <TextBox   Grid.Row="6" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding Prix}"/>
 
             <TextBlock Grid.Row="8" Grid.Column="0" Style="{StaticResource Label}" Text="Taxe"/>
-            <TextBox   Grid.Row="6" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding taxe.Nom}"/>
+            <TextBox   Grid.Row="8" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding taxe.Nom}"/>
 
             <TextBlock Grid.Row="10" Grid.Column="0" Style="{StaticResource Label}" Text="Quantité en Stock"/>
             <TextBox   Grid.Row="10" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding Quantite}"/>

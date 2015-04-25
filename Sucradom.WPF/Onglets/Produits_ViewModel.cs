@@ -39,7 +39,7 @@ namespace Sucradom.WPF.Onglets
             }
             else
             {
-                Outils.Alerte("Veillez selectionner un produit à modifier");
+                Outils.Alerte("Veillez selectionner un produit");
             }
             return false;
         }
@@ -54,7 +54,7 @@ namespace Sucradom.WPF.Onglets
             }
             else
             {
-                Outils.Alerte("Veillez selectionner un produit à supprimer");
+                Outils.Alerte("Veillez selectionner un produit");
             }
             return false;
         }

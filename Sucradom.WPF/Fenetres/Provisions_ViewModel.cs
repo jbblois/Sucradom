@@ -41,7 +41,7 @@ namespace Sucradom.WPF.Fenetres
 			}
 			else
 			{
-				Outils.Alerte("Veuillez selectionner un approvisionnement à modifier!");
+				Outils.Alerte("Veuillez selectionner un approvisionnement!");
 			}
 			return false;
 		}
@@ -56,7 +56,7 @@ namespace Sucradom.WPF.Fenetres
 			}
 			else
 			{
-				Outils.Alerte("Veuillez selectionner un approvisionnement à supprimer !");
+				Outils.Alerte("Veuillez selectionner un approvisionnement !");
 			}
 			return false;
 		}

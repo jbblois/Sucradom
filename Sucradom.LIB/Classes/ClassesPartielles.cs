@@ -47,6 +47,17 @@ namespace Sucradom.LIB
        { 
            MotDePasse =  Prenom.First() + "" + Nom.ToLower() + "" + DateTime.Now.DayOfYear; 
        }
+       /// <summary>
+       /// Compte le nombre de commandes de ce client
+       /// </summary>
+       public int NbCommandes 
+       { 
+           get
+           {
+               return tetecommandes.Count();
+           }
+       
+       }
    }
    public partial class produit
    {

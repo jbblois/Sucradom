@@ -41,7 +41,7 @@ namespace Sucradom.WPF.Fenetres
 			}
 			else
 			{
-				Outils.Alerte("Veuillez selectionner une catégorie !");
+                Outils.Alerte("Veuillez selectionner une adresse !");
 			}
 			return false;
 		}
@@ -50,17 +50,13 @@ namespace Sucradom.WPF.Fenetres
 		{
 			if(SelectedAdresse != null)
 			{
-				if(SelectedAdresse.NbProduits == 0)
-				{
-					ViewModel.taxes.Remove(SelectedAdresse);
-					Context.taxes.Remove(SelectedAdresse);
-					return true;
-				}
-				else
-				{
-					Outils.Alerte("La catégorie possède des produits !");
-				}
+					ViewModel.adresses.Remove(SelectedAdresse);
+					Context.adresses.Remove(SelectedAdresse);
 			}
+            else
+            {
+                Outils.Alerte("Veuillez selectionner une adresse !");
+            }
 			return false;
 		}
 	}

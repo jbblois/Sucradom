@@ -59,6 +59,10 @@ namespace Sucradom.WPF.Fenetres
                     Outils.Alerte("Des produits utilisent cette taxe !");
                 }
             }
+            else
+            {
+                Outils.Alerte("Veuillez selectionner une taxe !");
+            }
             return false;
         }
     }
