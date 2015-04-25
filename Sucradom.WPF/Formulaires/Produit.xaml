@@ -49,9 +49,6 @@
             <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource Label}" Text="Description du produit"/>
             <TextBox   Grid.Row="2" Grid.Column="3" Style="{StaticResource Haute}" Text="{Binding Description}"/>
 
-           
-
-
             <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource Label}" Text="Prix HT unitaire"/>
             <TextBox   Grid.Row="6" Grid.Column="3" Style="{StaticResource Standard}" Text="{Binding Prix}"/>
 
@@ -79,7 +76,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBlock Grid.Row="16" Grid.Column="1" Style="{StaticResource Label}" Text="Image du produit"/>
-            <TextBox   Grid.Row="16" Grid.Column="3" Style="{StaticResource Standard_RO}" Text="{Binding Image.Path}"/>
+            <TextBox   Grid.Row="16" Grid.Column="3" Style="{StaticResource Standard_RO}" Text="{Binding image.Path}"/>
 
             <Button x:Name="Button_Sauvegarder" Grid.Row="20" Grid.Column="3" Style="{StaticResource BaseButton}" Click="Button_Save_Click" />
         </Grid>
