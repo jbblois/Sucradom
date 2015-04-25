@@ -57,7 +57,7 @@
             <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding Libelle}"/>
             
             <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Label}" Text="Nombre de produits"/>
-            <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding NbProduits}"/>
+            <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding NbProduits, Mode=OneTime}"/>
             
             <Button Grid.Row="4" Grid.Column="0" Style="{StaticResource ButtonInsert}" Content="Ajouter une catégorie" Click="Button_Insert_Click" />
             <Button Grid.Row="6" Grid.Column="0" Style="{StaticResource ButtonUpdate}" Content="Modifier la catégorie" Click="Button_Update_Click" />

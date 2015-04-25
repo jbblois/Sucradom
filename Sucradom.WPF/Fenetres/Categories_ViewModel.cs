@@ -51,8 +51,9 @@ namespace Sucradom.WPF.Fenetres
             {
                 if (SelectedCategorie.NbProduits == 0)
                 {
-                    ViewModel.categories.Remove(SelectedCategorie);
                     Context.categories.Remove(SelectedCategorie);
+                    ViewModel.categories.Remove(SelectedCategorie);
+                    
                     return true;                    
                 }
                 else

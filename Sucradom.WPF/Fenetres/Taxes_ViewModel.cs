@@ -50,8 +50,9 @@ namespace Sucradom.WPF.Fenetres
             {
                 if (SelectedTaxe.NbProduits == 0)
                 {
-                    ViewModel.taxes.Remove(SelectedTaxe);
                     Context.taxes.Remove(SelectedTaxe);
+                    ViewModel.taxes.Remove(SelectedTaxe);
+                    
                     return true;                    
                 }
                 else

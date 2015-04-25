@@ -51,7 +51,7 @@ namespace Sucradom.WPF.Fenetres
 			if(SelectedAdresse != null)
 			{
 					ViewModel.adresses.Remove(SelectedAdresse);
-					Context.adresses.Remove(SelectedAdresse);
+                    Context.adresses.Remove(SelectedAdresse);
 			}
             else
             {

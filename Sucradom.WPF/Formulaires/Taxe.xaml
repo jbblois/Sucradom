@@ -37,7 +37,7 @@
             <TextBox   Grid.Row="2" Grid.Column="3" Style="{StaticResource Standard}" Text="{Binding Valeur}"/>
 
             <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource Label}" Text="Produits utilisant cette taxe"/>
-            <TextBox   Grid.Row="4" Grid.Column="3" Style="{StaticResource Standard}" Text="{Binding NbProduits, Mode=OneTime}"/>
+            <TextBox   Grid.Row="4" Grid.Column="3" Style="{StaticResource Standard_RO}" Text="{Binding NbProduits, Mode=OneTime}"/>
 
             <Button x:Name="Button_Sauvegarder" Grid.Row="6" Grid.Column="3" Style="{StaticResource BaseButton}" Click="Button_Save_Click" />
         </Grid>
