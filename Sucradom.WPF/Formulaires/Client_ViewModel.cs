@@ -47,8 +47,10 @@ namespace Sucradom.WPF.Formulaires
                             {
                                 if (ViewModel.clients.FirstOrDefault(C => C.Nom.Equals(ClientOfVM.Nom) && C.Prenom.Equals(ClientOfVM.Prenom)) == null)
                                 {
+                                    ClientOfVM.GenererMDP();
                                     Context.clients.Add(ClientOfVM);
                                     ViewModel.clients.Add(ClientOfVM);
+                                    Outils.Alerte("Le mot de passe pour " + ClientOfVM.NomComplet + "est " + ClientOfVM.MotDePasse);
                                     return true;
                                 }
                                 else

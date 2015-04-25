@@ -84,7 +84,7 @@ namespace Sucradom.LIB
                {
                    //Condition ternaire
                    //Variable = ( Condition ? 'ResultatTRUE' : 'ResultatFALSE' )
-                   IsDisponible = (value ? "OUI" : "NON");
+                   IsDisponible = (value == true ? "OUI" : "NON");
                }
                else
                {

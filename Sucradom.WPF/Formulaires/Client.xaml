@@ -39,10 +39,10 @@
             <TextBox   Grid.Row="2" Grid.Column="3" Style="{StaticResource Standard}" Text="{Binding Prenom}"/>
 
             <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource Label}" Text="Telephone du Client"/>
-            <TextBox   Grid.Row="4" Grid.Column="3" Style="{StaticResource Standard_RO}" Text="{Binding Telephone}"/>
+            <TextBox   Grid.Row="4" Grid.Column="3" Style="{StaticResource Standard}" Text="{Binding Telephone}"/>
 
             <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource Label}" Text="Email du client"/>
-            <TextBox   Grid.Row="6" Grid.Column="3" Style="{StaticResource Standard_RO}" Text="{Binding Email}"/>
+            <TextBox   Grid.Row="6" Grid.Column="3" Style="{StaticResource Standard}" Text="{Binding Email}"/>
             
             <TextBlock Grid.Row="8" Grid.Column="1" Style="{StaticResource Label}" Text="Activer le client"/>
             <CheckBox  Grid.Row="8" Grid.Column="3" IsChecked="{Binding EstActif}"/>
