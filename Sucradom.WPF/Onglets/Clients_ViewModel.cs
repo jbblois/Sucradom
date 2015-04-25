@@ -49,8 +49,8 @@ namespace Sucradom.WPF.Onglets
         {
             if (SelectedClient != null)
             {
-				ViewModel.clients.Remove(SelectedClient);
 				Context.clients.Remove(SelectedClient);
+				ViewModel.clients.Remove(SelectedClient);
                 return true;
             }
 			else

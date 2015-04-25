@@ -53,6 +53,12 @@ namespace Sucradom.WPF.Fenetres
                 {
                     Outils.Erreur(@"La sauvegarde n'a pas pu s'effectuée !");
                 }
+                else
+                {
+                    Accueil accueil = new Accueil();
+                    this.Close();
+                    accueil.ShowDialog();
+                }
             }
             ViewModel.Sauvegarder();
         }
@@ -64,6 +70,12 @@ namespace Sucradom.WPF.Fenetres
                 if (!ViewModel.Annuler())
                 {
                     Outils.Erreur(@"L'annulation n'a pas pu s'effectuée !");
+                }
+                else
+                {
+                    Accueil accueil = new Accueil();
+                    this.Close();
+                    accueil.ShowDialog();
                 }
             }
         }

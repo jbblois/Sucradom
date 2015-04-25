@@ -43,8 +43,12 @@ namespace Sucradom.WPF
         /// <returns>retourne true si la sauvegarde c'est bien déroulée</returns>
         public static Boolean Sauvegarder()
         {
-            RegenererListes();
-            return Base.Sauvegarder();
+            if (Base.Sauvegarder())
+            {
+                RegenererListes();
+                return true;
+            }
+            return false;
         }
        
         /// <summary>
@@ -53,8 +57,12 @@ namespace Sucradom.WPF
         /// <returns>retourne true si l'annulation c'est bien déroulée</returns>
         public static Boolean Annuler()
         {
-            RegenererListes();
-            return Base.Annuler();
+            if (Base.Annuler())
+            {
+                RegenererListes();
+                return true;
+            }
+            return false;
         }
 
         #region ObservableCollections
