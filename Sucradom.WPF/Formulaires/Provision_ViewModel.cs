@@ -44,12 +44,8 @@ namespace Sucradom.WPF.Formulaires
 					{
 						Context.provisions.Add(ProvisionOfVM);
 						ViewModel.provisions.Add(ProvisionOfVM);
-						return true;
 					}
-					else
-					{
-						return true;
-					}
+			        return true;
 				}
 				else
 				{

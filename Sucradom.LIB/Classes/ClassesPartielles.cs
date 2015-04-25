@@ -163,5 +163,14 @@ namespace Sucradom.LIB
            }
 
        }
+
+
+       public String DateToString
+       {
+           get
+           {
+               return Date.Day + " / " + Date.Month + " / " + Date.Year;
+           }
+       }
    }
 }

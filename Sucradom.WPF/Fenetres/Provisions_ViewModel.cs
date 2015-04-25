@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,58 +8,69 @@ using Sucradom.LIB;
 
 namespace Sucradom.WPF.Fenetres
 {
-	public class Provisions_ViewModel : ViewModel
-	{
-		public produit ProduitOfVM { get; set; }
+    public class Provisions_ViewModel : ViewModel
+    {
+        public produit ProduitOfVM { get; set; }
 
-		private provision _SelectedProvision;
-		public provision SelectedProvision
-		{
-			get { return _SelectedProvision; }
-			set
-			{
-				_SelectedProvision = value;
-				NotifyPropertyChanged();
-			}
-		}
+        private provision _SelectedProvision;
+        public provision SelectedProvision
+        {
+            get { return _SelectedProvision; }
+            set
+            {
+                _SelectedProvision = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-		public Provisions_ViewModel(produit SelectedProduit)
-		{
-			this.ProduitOfVM = SelectedProduit;
-		}
+        public void RefreshProvisions()
+        {
+            ProvisionsOfProduit = new ObservableCollection<provision>(ViewModel.provisions.Where(p => p.FID_Produit == ProduitOfVM.ID));
+        }
 
-		public void AjouterProvision()
-		{
-			new Formulaires.Provision(ProduitOfVM).ShowDialog();
-		}
+        public ObservableCollection<provision> ProvisionsOfProduit { get; set; }
 
-		public Boolean ModifierProvision()
-		{
-			if(SelectedProvision != null)
-			{
-				new Formulaires.Provision(SelectedProvision).ShowDialog();
-				return true;
-			}
-			else
-			{
-				Outils.Alerte("Veuillez selectionner un approvisionnement!");
-			}
-			return false;
-		}
+        public Provisions_ViewModel(produit SelectedProduit)
+        {
+            this.ProduitOfVM = SelectedProduit;
+            RefreshProvisions();
+        }
 
-		public Boolean SupprimerProvision()
-		{
-			if(SelectedProvision != null)
-			{
-				ViewModel.provisions.Remove(SelectedProvision);
-				Context.provisions.Remove(SelectedProvision);
-				return true;
-			}
-			else
-			{
-				Outils.Alerte("Veuillez selectionner un approvisionnement !");
-			}
-			return false;
-		}
-	}
+        public void AjouterProvision()
+        {
+            new Formulaires.Provision(ProduitOfVM).ShowDialog();
+            RefreshProvisions();
+        }
+
+        public Boolean ModifierProvision()
+        {
+            if (SelectedProvision != null)
+            {
+                new Formulaires.Provision(SelectedProvision).ShowDialog();
+                RefreshProvisions();
+                return true;
+            }
+            else
+            {
+                Outils.Alerte("Veuillez selectionner un approvisionnement!");
+            }
+            return false;
+        }
+
+        public Boolean SupprimerProvision()
+        {
+            if (SelectedProvision != null)
+            {
+                Context.provisions.Remove(SelectedProvision);
+                ViewModel.provisions.Remove(SelectedProvision);
+                RefreshProvisions();
+                return true;
+            }
+            else
+            {
+                Outils.Alerte("Veuillez selectionner un approvisionnement !");
+            }
+            return false;
+        }
+    }
 }

@@ -26,16 +26,21 @@ namespace Sucradom.WPF.Formulaires
 		{
 			DataContext = _ViewModel = new Adresse_ViewModel(SelectedClient);
 			InitializeComponent();
-			//Button_Sauvegarder.Content = "Enregister l'adresse";
-			//Button_Sauvegarder.Background = Brushes.DarkGreen;
+			Button_Sauvegarder.Content = "Enregister l'adresse";
+			Button_Sauvegarder.Background = Brushes.DarkGreen;
 		}
 
 		public Adresse(adresse SelectedAdresse)
 		{
 			DataContext = _ViewModel = new Adresse_ViewModel(SelectedAdresse);
 			InitializeComponent();
-			//Button_Sauvegarder.Content = "Enregister les modifications";
-			//Button_Sauvegarder.Background = Brushes.DarkGoldenRod;
+			Button_Sauvegarder.Content = "Enregister les modifications";
+			Button_Sauvegarder.Background = Brushes.DarkGoldenrod;
 		}
+
+        private void Button_Save_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.Enregistrer();
+        }
 	}
 }
