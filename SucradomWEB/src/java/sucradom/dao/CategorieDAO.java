@@ -16,7 +16,7 @@ import sucradom.utile.Base;
  *
  * @author user
  */
-public class CategorieDAO 
+public abstract class CategorieDAO 
 {
     private static String _Properties = "Categorie.ID,Categorie.Libelle,Categorie.FID_Image";
     
