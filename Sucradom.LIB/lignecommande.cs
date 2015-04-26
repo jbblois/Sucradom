@@ -17,7 +17,8 @@ namespace Sucradom.LIB
         public int FID_Commande { get; set; }
         public int FID_Produit { get; set; }
         public int Quantite { get; set; }
-        public float PrixTTC { get; set; }
+        public float PrixUnitaire { get; set; }
+        public float ValeurTaxe { get; set; }
     
         public virtual tetecommande tetecommande { get; set; }
         public virtual produit produit { get; set; }

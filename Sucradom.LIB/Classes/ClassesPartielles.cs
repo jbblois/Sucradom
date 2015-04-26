@@ -93,16 +93,20 @@ namespace Sucradom.LIB
            }
        }
 
-	   public int QuantiteExacte()
-	   {
-		  int sumVentes = lignecommandes.Where(lc => lc.tetecommande.Date.CompareTo(DateTime.Now) <= 0 
-											      && lc.tetecommande.etatcommande.ID != 0 )
-										.Sum(lc => lc.Quantite) ;
-		  int sumAchats = provisions.Where(p => p.Date.CompareTo(DateTime.Now) <= 0)
-									.Sum(p => p.Quantite);
-		  return sumAchats - sumVentes;
-	   }
-
+       public int Quantite 
+       { 
+           get 
+           {
+                // sommes des ventes jusqu'a aujourdh'hui (lignesCommandes)
+                int sumVentes = lignecommandes.Where(lc => lc.tetecommande.Date.CompareTo(DateTime.Now) <= 0 
+											            && lc.tetecommande.etatcommande.ID != 0 )
+										      .Sum(lc => lc.Quantite) ;
+               // sommes des achats jusqu'a aujourd'hui (provisions)
+		        int sumAchats = provisions.Where(p => p.Date.CompareTo(DateTime.Now) <= 0)
+									      .Sum(p => p.Quantite);
+		        return sumAchats - sumVentes;
+           } 
+       }
    }
 
    public partial class categorie
@@ -179,6 +183,27 @@ namespace Sucradom.LIB
            {
                return Date.Day + " / " + Date.Month + " / " + Date.Year;
            }
+       }
+   }
+   public partial class lignecommande
+   {
+       public float PrixHT 
+       {
+           get
+           {
+               return (float)(Quantite * PrixUnitaire);
+
+           }
+       
+       }
+       public float PrixTTC
+       {
+           get
+           {
+               return (float)(Quantite * PrixUnitaire * ValeurTaxe);
+
+           }
+
        }
    }
 }

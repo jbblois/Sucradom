@@ -21,7 +21,6 @@ namespace Sucradom.LIB
     
         public int ID { get; set; }
         public System.DateTime Date { get; set; }
-        public float PrixTotal { get; set; }
         public int FID_Client { get; set; }
         public int FID_Etat { get; set; }
         public int FID_Adresse { get; set; }

@@ -24,7 +24,6 @@ namespace Sucradom.LIB
         public string Libelle { get; set; }
         public string Description { get; set; }
         public float Prix { get; set; }
-        public int Quantite { get; set; }
         public string IsDisponible { get; set; }
         public int FID_Categorie { get; set; }
         public int FID_Image { get; set; }
