@@ -23,12 +23,20 @@ namespace Sucradom.WPF.Fenetres
             }
         }
 
+        private ObservableCollection<adresse> _AdressesOfClient;
+        public ObservableCollection<adresse> AdressesOfClient
+        {
+            get { return _AdressesOfClient; }
+            set
+            {
+                _AdressesOfClient = value;
+                NotifyPropertyChanged();
+            }
+        }
         public void RefreshAdresses()
         {
-            AdressesOfClient = new ObservableCollection<adresse>(ViewModel.adresses.Where(p => p.FID_Client == ClientOfVM.ID));
+            AdressesOfClient = new ObservableCollection<adresse>(ViewModel.adresses.Where(a => a.FID_Client == ClientOfVM.ID));
         }
-
-        public ObservableCollection<adresse> AdressesOfClient { get; set; }
 
         public Adresses_ViewModel(client SelectedClient)
         {
@@ -63,7 +71,7 @@ namespace Sucradom.WPF.Fenetres
             {
                 Context.adresses.Remove(SelectedAdresse);
                 ViewModel.adresses.Remove(SelectedAdresse);
-                RefreshAdresses();
+                AdressesOfClient.Remove(SelectedAdresse);
                 return true;
             }
             else

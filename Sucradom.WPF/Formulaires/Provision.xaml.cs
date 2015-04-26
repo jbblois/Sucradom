@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Sucradom.LIB;
+using System.Collections.ObjectModel;
 
 namespace Sucradom.WPF.Formulaires
 {
@@ -21,20 +22,29 @@ namespace Sucradom.WPF.Formulaires
 	public partial class Provision : Window
 	{
 		private Provision_ViewModel _ViewModel;
+
 		public Provision(produit SelectedProduit)
 		{
 			DataContext = _ViewModel = new Provision_ViewModel(SelectedProduit);
 			InitializeComponent();
-			//Button_Sauvegarder.Content = "Enregister l'approvisionnement";
-			//Button_Sauvegarder.Background = Brushes.DarkGreen;
+			Button_Sauvegarder.Content = "Enregister l'approvisionnement";
+			Button_Sauvegarder.Background = Brushes.DarkGreen;
 		}
 
 		public Provision(provision SelectedProvision)
 		{
 			DataContext = _ViewModel = new Provision_ViewModel(SelectedProvision);
 			InitializeComponent();
-			//Button_Sauvegarder.Content = "Enregister les modifications";
-			//Button_Sauvegarder.Background = Brushes.DarkGoldenRod;
+			Button_Sauvegarder.Content = "Enregister les modifications";
+			Button_Sauvegarder.Background = Brushes.DarkGoldenrod;
 		}
+
+        private void Button_Sauvegarder_Click(object sender, RoutedEventArgs e)
+        {
+            if (_ViewModel.Enregistrer())
+            {
+                this.Close();
+            }
+        }
 	}
 }

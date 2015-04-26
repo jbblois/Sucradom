@@ -50,7 +50,7 @@ namespace Sucradom.WPF.Formulaires
                                     ClientOfVM.GenererMDP();
                                     Context.clients.Add(ClientOfVM);
                                     ViewModel.clients.Add(ClientOfVM);
-                                    Outils.Alerte("Le mot de passe pour " + ClientOfVM.NomComplet + "est " + ClientOfVM.MotDePasse);
+                                    Outils.Alerte("Le mot de passe pour " + ClientOfVM.NomComplet + " est " + ClientOfVM.MotDePasse);
                                     return true;
                                 }
                                 else

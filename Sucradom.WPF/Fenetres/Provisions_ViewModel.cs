@@ -23,12 +23,21 @@ namespace Sucradom.WPF.Fenetres
             }
         }
 
+        private ObservableCollection<provision> _ProvisionsOfProduit ;
+        public ObservableCollection<provision> ProvisionsOfProduit
+        {
+            get { return _ProvisionsOfProduit; }
+            set 
+            { 
+                _ProvisionsOfProduit = value; 
+                NotifyPropertyChanged();
+            }
+        }
+
         public void RefreshProvisions()
         {
             ProvisionsOfProduit = new ObservableCollection<provision>(ViewModel.provisions.Where(p => p.FID_Produit == ProduitOfVM.ID));
         }
-
-        public ObservableCollection<provision> ProvisionsOfProduit { get; set; }
 
         public Provisions_ViewModel(produit SelectedProduit)
         {
@@ -63,7 +72,7 @@ namespace Sucradom.WPF.Fenetres
             {
                 Context.provisions.Remove(SelectedProvision);
                 ViewModel.provisions.Remove(SelectedProvision);
-                RefreshProvisions();
+                ProvisionsOfProduit.Remove(SelectedProvision);
                 return true;
             }
             else

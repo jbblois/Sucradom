@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sucradom.LIB;
+using System.Collections.ObjectModel;
 
 namespace Sucradom.WPF.Formulaires
 {
@@ -26,6 +27,7 @@ namespace Sucradom.WPF.Formulaires
         {
             ProvisionOfVM = new provision();
 			ProvisionOfVM.produit = Produit;
+            ProvisionOfVM.Date = DateTime.Now;
             _IsNouvelleProvision = true;
         }
         public Provision_ViewModel(provision SelectedProvision)

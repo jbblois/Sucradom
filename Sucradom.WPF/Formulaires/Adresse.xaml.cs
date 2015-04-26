@@ -38,9 +38,12 @@ namespace Sucradom.WPF.Formulaires
 			Button_Sauvegarder.Background = Brushes.DarkGoldenrod;
 		}
 
-        private void Button_Save_Click(object sender, RoutedEventArgs e)
+        private void Button_Sauvegarder_Click(object sender, RoutedEventArgs e)
         {
-            _ViewModel.Enregistrer();
+            if (_ViewModel.Enregistrer())
+            {
+                this.Close();
+            }
         }
 	}
 }

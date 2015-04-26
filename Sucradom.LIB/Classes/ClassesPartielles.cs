@@ -136,6 +136,14 @@ namespace Sucradom.LIB
 
    public partial class adresse
    {
+       public String Nom
+       {
+           get
+           {
+               return NomP1 + " " + NomP2;
+           }
+
+       }
        public String NomP1
        {
            get
@@ -148,7 +156,7 @@ namespace Sucradom.LIB
        {
            get
            {
-               return Ville + ", " + Cp.ToUpper();
+               return Ville + " ( " + Cp + " )";
            }
 
        }
