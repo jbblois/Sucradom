@@ -9,16 +9,16 @@ package sucradom.metier;
  *
  * @author user
  */
-public class Image 
+public class Categorie 
 {
     public int ID;
-    public String Path;
-    public String Alt;
+    public String Libelle;
+    public Image Image;
 
-    public Image(int ID, String Path, String Alt) 
+    public Categorie(int ID, String Libelle, Image Image) 
     {
         this.ID = ID;
-        this.Path = Path;
-        this.Alt = Alt;
+        this.Libelle = Libelle;
+        this.Image = Image;
     }
 }

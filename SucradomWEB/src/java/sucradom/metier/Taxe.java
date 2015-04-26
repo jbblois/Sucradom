@@ -9,6 +9,16 @@ package sucradom.metier;
  *
  * @author user
  */
-public class Taxe {
-    
+public class Taxe 
+{
+    public int ID;
+    public String Nom;
+    public float Valeur;
+
+    public Taxe(int ID, String Nom, float Valeur) 
+    {
+        this.ID = ID;
+        this.Nom = Nom;
+        this.Valeur = Valeur;
+    }
 }

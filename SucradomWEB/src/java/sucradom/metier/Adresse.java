@@ -9,6 +9,26 @@ package sucradom.metier;
  *
  * @author user
  */
-public class Adresse {
+public class Adresse 
+{
+    public int ID;
+    public String Numero;
+    public String Rue;
+    public String Cp;
+    public String Ville;
+    public String Pays;
+    public Client Client;
+
+    public Adresse(int ID, String Numero, String Rue, String Cp, String Ville, String Pays, Client Client) 
+    {
+        this.ID = ID;
+        this.Numero = Numero;
+        this.Rue = Rue;
+        this.Cp = Cp;
+        this.Ville = Ville;
+        this.Pays = Pays;
+        this.Client = Client;
+    }
+    
     
 }

@@ -9,6 +9,16 @@ package sucradom.metier;
  *
  * @author user
  */
-public class EtatCommande {
+public class EtatCommande 
+{
+    public int ID;
+    public String Nom;
+
+    public EtatCommande(int ID, String Nom) 
+    {
+        this.ID = ID;
+        this.Nom = Nom;
+    }
+    
     
 }

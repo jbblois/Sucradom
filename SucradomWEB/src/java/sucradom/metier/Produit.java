@@ -9,6 +9,29 @@ package sucradom.metier;
  *
  * @author user
  */
-public class Produit {
-    
+public class Produit 
+{
+    public int ID;
+    public String Libelle;
+    public String Description;
+    public float Prix;
+    public int Quantite;
+    public String IsDisponible;
+    public Categorie Categorie;
+    public Image Image;
+    public Taxe Taxe;
+
+    public Produit(int ID, String Libelle, String Description, float Prix, int Quantite, String IsDisponible, Categorie Categorie, Image Image, Taxe Taxe) 
+    {
+        this.ID = ID;
+        this.Libelle = Libelle;
+        this.Description = Description;
+        this.Prix = Prix;
+        this.Quantite = Quantite;
+        this.IsDisponible = IsDisponible;
+        this.Categorie = Categorie;
+        this.Image = Image;
+        this.Taxe = Taxe;
+    }
+
 }
