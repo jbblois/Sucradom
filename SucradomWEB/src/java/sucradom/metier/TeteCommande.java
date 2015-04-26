@@ -15,16 +15,14 @@ public class TeteCommande
 {
     public int ID;
     public Date Date;
-    public float PrixTotal;
     public Client Client;
     public EtatCommande EtatCommande;
     public Adresse Adresse;
 
-    public TeteCommande(int ID, Date Date, float PrixTotal, Client Client, EtatCommande EtatCommande, Adresse Adresse) 
+    public TeteCommande(int ID, Date Date, Client Client, EtatCommande EtatCommande, Adresse Adresse) 
     {
         this.ID = ID;
         this.Date = Date;
-        this.PrixTotal = PrixTotal;
         this.Client = Client;
         this.EtatCommande = EtatCommande;
         this.Adresse = Adresse;

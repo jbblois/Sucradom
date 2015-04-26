@@ -14,13 +14,15 @@ public class LigneCommande
     public TeteCommande Commande;
     public Produit Produit;
     public int Quantite;
-    public float PrixTTC;
+    public float PrixUnitaire;
+    public float ValeurTaxe;
 
-    public LigneCommande(TeteCommande Commande, Produit Produit, int Quantite, float PrixTTC)
+    public LigneCommande(TeteCommande Commande, Produit Produit, int Quantite, float PrixTTC, float ValeurTaxe)
     {
         this.Commande = Commande;
         this.Produit = Produit;
         this.Quantite = Quantite;
-        this.PrixTTC = PrixTTC;
+        this.PrixUnitaire = PrixUnitaire;
+        this.ValeurTaxe = ValeurTaxe;
     }
 }

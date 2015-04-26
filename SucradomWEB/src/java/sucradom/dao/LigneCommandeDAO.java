@@ -18,7 +18,7 @@ import sucradom.utile.Base;
  */
 public abstract class LigneCommandeDAO 
 {
-    private static String _Properties = "LigneCommande.FID_Commande,LigneCommande.FID_Produit,LigneCommande.Quantite,LigneCommande.PrixTTC";
+    private static String _Properties = "LigneCommande.FID_Commande,LigneCommande.FID_Produit,LigneCommande.Quantite,LigneCommande.PrixUnitaire,LigneCommande.ValeurTaxe";
     
     public static LigneCommande Select(int FID_Commande, int FID_Produit)
     {
@@ -137,7 +137,8 @@ public abstract class LigneCommandeDAO
                     TeteCommandeDAO.Select(RS.getInt("FID_Commande")),
                     ProduitDAO.Select(RS.getInt("FID_Produit")),
                     RS.getInt("Quantite"),
-                    RS.getFloat("PrixTTC")
+                    RS.getFloat("PrixUnitaire"),
+                    RS.getFloat("ValeurTaxe")
                 );
             return ligneCommande;
         } 

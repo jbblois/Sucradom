@@ -18,7 +18,7 @@ import sucradom.utile.Base;
  */
 public abstract class ProduitDAO 
 {
-    private static String _Properties = "Produit.ID,Produit.Libelle,Produit.Description,Produit.Prix,Produit.Quantite,Produit.IsDisponible,Produit.FID_Categorie,Produit.FID_Image";
+    private static String _Properties = "Produit.ID,Produit.Libelle,Produit.Description,Produit.Prix,Produit.IsDisponible,Produit.FID_Categorie,Produit.FID_Image";
     
     public static Produit Select(int ID)
     {
@@ -102,7 +102,6 @@ public abstract class ProduitDAO
                     RS.getString("Libelle"),
                     RS.getString("Description"),
                     RS.getFloat("Prix"),
-                    RS.getInt("Quantite"),
                     RS.getString("IsDisponible"),
                     CategorieDAO.Select(RS.getInt("FID_Categorie")),
                     ImageDAO.Select(RS.getInt("FID_Image")),

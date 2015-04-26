@@ -18,7 +18,7 @@ import sucradom.utile.Base;
  */
 public abstract class TeteCommandeDAO 
 {
-    private static String _Properties = "TeteCommande.ID,TeteCommande.Date,TeteCommande.PrixTotal,TeteCommande.FID_Client,TeteCommande.FID_Etat,TeteCommande.FID_Adresse";
+    private static String _Properties = "TeteCommande.ID,TeteCommande.Date,TeteCommande.FID_Client,TeteCommande.FID_Etat,TeteCommande.FID_Adresse";
     
     public static TeteCommande Select(int ID)
     {
@@ -100,7 +100,6 @@ public abstract class TeteCommandeDAO
                 (
                     RS.getInt("ID"),
                     RS.getDate("Date"),
-                    RS.getFloat("PrixTotal"),
                     ClientDAO.Select(RS.getInt("FID_Client")),
                     EtatCommandeDAO.Select(RS.getInt("FID_Etat")),
                     AdresseDAO.Select(RS.getInt("FID_Adresse"))
