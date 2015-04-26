@@ -8,14 +8,13 @@ package sucradom.dao;
 import java.util.ArrayList;
 import sucradom.metier.Taxe;
 
-
 /**
  *
  * @author user
  */
 public abstract class TaxeDAO 
 {
-    private static String _Properties = "ID,";
+    private static String _Properties = "Taxe.ID,Taxe.Nom,Taxe.Valeur";
     
     public static Taxe Select(int ID)
     {

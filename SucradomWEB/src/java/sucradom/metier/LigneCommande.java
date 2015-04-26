@@ -16,7 +16,7 @@ public class LigneCommande
     public int Quantite;
     public float PrixTTC;
 
-    public LigneCommande(TeteCommande Commande, Produit Produit, int Quantite, int PrixTTC)
+    public LigneCommande(TeteCommande Commande, Produit Produit, int Quantite, float PrixTTC)
     {
         this.Commande = Commande;
         this.Produit = Produit;
