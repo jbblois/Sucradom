@@ -39,47 +39,54 @@ namespace Sucradom.WPF.Formulaires
             {
                 if (ProduitOfVM.categorie != null)
                 {
-
-                    if (_IsNouveauProduit)
+                    if (ProduitOfVM.taxe != null)
                     {
-                        if (ViewModel.produits.FirstOrDefault(P => P.Libelle.Equals(ProduitOfVM.Libelle)) == null)
+                        if (_IsNouveauProduit)
                         {
-                            image image = ViewModel.images.FirstOrDefault(I => I.Path.Equals(ProduitOfVM.Libelle));
-                            if (image == null)
+                            if (ViewModel.produits.FirstOrDefault(P => P.Libelle.Equals(ProduitOfVM.Libelle)) == null)
                             {
-                                image = new image();
-                                image.Path = ProduitOfVM.Libelle;
-                                image.Alt = ProduitOfVM.Libelle;
+                                image image = ViewModel.images.FirstOrDefault(I => I.Path.Equals(ProduitOfVM.Libelle));
+                                if (image == null)
+                                {
+                                    image = new image();
+                                    image.Path = ProduitOfVM.Libelle;
+                                    image.Alt = ProduitOfVM.Libelle;
+                                }
+                                ProduitOfVM.image = image;
+                                Context.produits.Add(ProduitOfVM);
+                                ViewModel.produits.Add(ProduitOfVM);
+                                return true;
                             }
-                            ProduitOfVM.image = image;
-                            Context.produits.Add(ProduitOfVM);
-                            ViewModel.produits.Add(ProduitOfVM);
-                            return true;
+                            else
+                            {
+                                Outils.Alerte("Un produit avec ce libellé existe déjà !");
+                            }
                         }
                         else
                         {
-                            Outils.Alerte("Un produit avec ce libellé existe déjà !");
-                        }
+                            if (ViewModel.produits.Count(P => P.Libelle.Equals(ProduitOfVM.Libelle)) <= 1)
+                            {
+                                image image = Context.images.FirstOrDefault(I => I.Path.Equals(ProduitOfVM.Libelle));
+                                if (image == null)
+                                {
+                                    image = new image();
+                                    image.Path = ProduitOfVM.Libelle;
+                                    image.Alt = ProduitOfVM.Libelle;
+                                }
+                                ProduitOfVM.image = image;
+                                return true;
+                            }
+                            else
+                            {
+                                Outils.Alerte("Un produit avec ce libellé existe déjà !");
+                            }
+                        } 
                     }
                     else
                     {
-                        if (ViewModel.produits.Count(P => P.Libelle.Equals(ProduitOfVM.Libelle)) <= 1)
-                        {
-                            image image = Context.images.FirstOrDefault(I => I.Path.Equals(ProduitOfVM.Libelle));
-                            if (image == null)
-                            {
-                                image = new image();
-                                image.Path = ProduitOfVM.Libelle;
-                                image.Alt = ProduitOfVM.Libelle;
-                            }
-                            ProduitOfVM.image = image;
-                            return true;
-                        }
-                        else
-                        {
-                            Outils.Alerte("Un produit avec ce libellé existe déjà !");
-                        }
-                    } 
+                        Outils.Alerte("Veuillez sélectionner une taxe");
+                    }
+                   
                 }
                 else
                 {
