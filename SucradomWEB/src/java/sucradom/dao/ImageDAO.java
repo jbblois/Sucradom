@@ -68,8 +68,8 @@ public abstract class ImageDAO
         
         try {
             ps = Base.GetConnection().prepareStatement(query);
-            
             ResultSet rs = ps.executeQuery();
+            listImages = new ArrayList<Image>();
             while(rs.next()) {
                 Image image = GetImage(rs);
                 if (image != null) 

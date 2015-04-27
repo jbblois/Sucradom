@@ -68,8 +68,8 @@ public abstract class ClientDAO
         
         try {
             ps = Base.GetConnection().prepareStatement(query);
-            
             ResultSet rs = ps.executeQuery();
+            listClients = new ArrayList<Client>();
             while(rs.next()) {
                 Client client = GetClient(rs);
                 if (client != null) 

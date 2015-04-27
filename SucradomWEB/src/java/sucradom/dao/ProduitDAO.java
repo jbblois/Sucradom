@@ -18,7 +18,7 @@ import sucradom.utile.Base;
  */
 public abstract class ProduitDAO 
 {
-    private static String _Properties = "Produit.ID,Produit.Libelle,Produit.Description,Produit.Prix,Produit.IsDisponible,Produit.FID_Categorie,Produit.FID_Image";
+    private static String _Properties = "Produit.ID,Produit.Libelle,Produit.Description,Produit.Prix,Produit.IsDisponible,Produit.FID_Produit,Produit.FID_Image";
     
     public static Produit Select(int ID)
     {
@@ -68,6 +68,7 @@ public abstract class ProduitDAO
             ps = Base.GetConnection().prepareStatement(query);
             
             ResultSet rs = ps.executeQuery();
+            listProduits = new ArrayList<Produit>();
             while(rs.next()) {
                 Produit produit = GetProduit(rs);
                 if (produit != null) 
@@ -91,7 +92,44 @@ public abstract class ProduitDAO
         
         return listProduits;
     }
-    
+    public static ArrayList<Produit> ProduitsOfCategorie(int FID_Categorie)
+    {
+        ArrayList<Produit> listProduits = null;
+        
+        String query = " SELECT " + _Properties
+                     + " FROM Produit "
+                     + " WHERE Produit.FID_Cateogorie = ?;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setInt(1, FID_Categorie);
+            ResultSet rs = ps.executeQuery();
+            listProduits = new ArrayList<Produit>();
+            while(rs.next()) {
+                Produit produit = GetProduit(rs);
+                if (produit != null) 
+                {
+                    listProduits.add(produit);
+                }
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return listProduits;
+    }
     public static Produit GetProduit(ResultSet RS)
     {
         try 

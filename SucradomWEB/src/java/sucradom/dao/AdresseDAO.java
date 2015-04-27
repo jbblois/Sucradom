@@ -68,8 +68,8 @@ public abstract class AdresseDAO
         
         try {
             ps = Base.GetConnection().prepareStatement(query);
-            
             ResultSet rs = ps.executeQuery();
+            listAdresses = new ArrayList<Adresse>();
             while(rs.next()) {
                 Adresse adresse = GetAdresse(rs);
                 if (adresse != null) 
@@ -108,6 +108,7 @@ public abstract class AdresseDAO
             ps = Base.GetConnection().prepareStatement(query);
             ps.setInt(1, FID_Client);
             ResultSet rs = ps.executeQuery();
+            listAdresses = new ArrayList<Adresse>();
             while(rs.next()) 
             {
                 Adresse adresse = GetAdresse(rs);

@@ -68,6 +68,7 @@ public abstract class CategorieDAO
             ps = Base.GetConnection().prepareStatement(query);
             
             ResultSet rs = ps.executeQuery();
+            listCategories = new ArrayList<Categorie>();
             while(rs.next()) {
                 Categorie categorie = GetCategorie(rs);
                 if (categorie != null) 

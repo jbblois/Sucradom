@@ -67,8 +67,8 @@ public abstract class EtatCommandeDAO
         
         try {
             ps = Base.GetConnection().prepareStatement(query);
-            
             ResultSet rs = ps.executeQuery();
+            listEtatCommandes = new ArrayList<EtatCommande>();
             while(rs.next()) {
                 EtatCommande etatCommande = GetEtatCommande(rs);
                 if (etatCommande != null) 

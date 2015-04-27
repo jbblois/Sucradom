@@ -68,6 +68,7 @@ public abstract class TeteCommandeDAO
             ps = Base.GetConnection().prepareStatement(query);
             
             ResultSet rs = ps.executeQuery();
+            listTeteCommandes = new ArrayList<TeteCommande>();
             while(rs.next()) {
                 TeteCommande teteCommande = GetTeteCommande(rs);
                 if (teteCommande != null) 

@@ -22,12 +22,12 @@ public abstract class Base
     
     private static final String DATABASE_IP = "localhost";
     private static final String DATABASE_PORT = "3306";
-    private static final String DATABASE_URL = "jdbc:"+DATABASE_TYPE+"://"+DATABASE_IP+":"+DATABASE_PORT+"/Sucradom/";
-    private static final String DATABASE_LOGIN = "SUcradomUSER";
+    private static final String DATABASE_URL = "jdbc:"+DATABASE_TYPE+"://"+DATABASE_IP+":"+DATABASE_PORT+"/Sucradom";
+    private static final String DATABASE_LOGIN = "SucradomUSER";
     private static final String DATABASE_PASSWORD = "Candy53";
     
     public static final String IMAGES_PATH = "./Ressources";
-    
+    public static final String CONTEXT_PATH = "http://localhost:8084/Sucradom";
     public static Connection GetConnection() {
         
         if (connection == null) 
