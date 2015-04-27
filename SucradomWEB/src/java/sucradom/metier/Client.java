@@ -5,6 +5,9 @@
  */
 package sucradom.metier;
 
+import java.util.ArrayList;
+import sucradom.dao.TeteCommandeDAO;
+
 /**
  *
  * @author user
@@ -29,6 +32,15 @@ public class Client
         this.MotDePasse = MotDePasse;
         this.IsActif = IsActif;
     }
-
+    
+    private ArrayList<TeteCommande> _Commandes;
+    public ArrayList<TeteCommande> GetCommandes()
+    {
+        if (_Commandes == null) 
+        {
+            _Commandes = TeteCommandeDAO.CommandesOfClient(ID);
+        }
+        return _Commandes;
+    }
     
 }

@@ -18,7 +18,7 @@ import sucradom.utile.Base;
  */
 public abstract class ProduitDAO 
 {
-    private static String _Properties = "Produit.ID,Produit.Libelle,Produit.Description,Produit.Prix,Produit.IsDisponible,Produit.FID_Produit,Produit.FID_Image";
+    private static String _Properties = "Produit.ID,Produit.Libelle,Produit.Description,Produit.Prix,Produit.IsDisponible,Produit.FID_Categorie,Produit.FID_Taxe,Produit.FID_Image";
     
     public static Produit Select(int ID)
     {
@@ -98,7 +98,7 @@ public abstract class ProduitDAO
         
         String query = " SELECT " + _Properties
                      + " FROM Produit "
-                     + " WHERE Produit.FID_Cateogorie = ?;";
+                     + " WHERE Produit.FID_Categorie = ?;";
         
         PreparedStatement ps = null;
         

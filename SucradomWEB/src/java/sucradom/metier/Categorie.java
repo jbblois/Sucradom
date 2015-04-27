@@ -5,6 +5,9 @@
  */
 package sucradom.metier;
 
+import java.util.ArrayList;
+import sucradom.dao.ProduitDAO;
+
 /**
  *
  * @author user
@@ -20,5 +23,15 @@ public class Categorie
         this.ID = ID;
         this.Libelle = Libelle;
         this.Image = Image;
+    }
+    
+    private ArrayList<Produit> _Produits;
+    public ArrayList<Produit> GetProduits()
+    {
+        if (_Produits == null) 
+        {
+            _Produits = ProduitDAO.ProduitsOfCategorie(ID);
+        }
+        return _Produits;
     }
 }

@@ -92,7 +92,44 @@ public abstract class TeteCommandeDAO
         
         return listTeteCommandes;
     }
-    
+    public static ArrayList<TeteCommande> CommandesOfClient(int FID_Client)
+    {
+        ArrayList<TeteCommande> listTeteCommandes = null;
+        
+        String query = " SELECT " + _Properties
+                     + " FROM TeteCommande "
+                     + " WHERE TeteCommande.FID_Client=?;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setInt(1, FID_Client);
+            ResultSet rs = ps.executeQuery();
+            listTeteCommandes = new ArrayList<TeteCommande>();
+            while(rs.next()) {
+                TeteCommande teteCommande = GetTeteCommande(rs);
+                if (teteCommande != null) 
+                {
+                    listTeteCommandes.add(teteCommande);
+                }
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return listTeteCommandes;
+    }
     public static TeteCommande GetTeteCommande(ResultSet RS)
     {
         try 

@@ -19,6 +19,4 @@ public class EtatCommande
         this.ID = ID;
         this.Nom = Nom;
     }
-    
-    
 }

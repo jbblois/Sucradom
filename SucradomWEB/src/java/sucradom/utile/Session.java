@@ -10,5 +10,6 @@ package sucradom.utile;
  */
 public abstract class Session
 {
-    
+    public static String Page = "";
+    public static Object Object = null;
 }

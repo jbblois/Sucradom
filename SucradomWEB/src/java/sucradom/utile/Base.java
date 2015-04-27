@@ -8,7 +8,10 @@ package sucradom.utile;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import sucradom.dao.CategorieDAO;
+import sucradom.metier.Categorie;
 
 /**
  *
@@ -27,8 +30,10 @@ public abstract class Base
     private static final String DATABASE_PASSWORD = "Candy53";
     
     public static final String IMAGES_PATH = "./Ressources";
-    public static final String CONTEXT_PATH = "http://localhost:8084/Sucradom";
-    public static Connection GetConnection() {
+    public static final String CONTEXT_PATH = "http://localhost:8084/SucradomWEB";
+    
+    public static Connection GetConnection() 
+    {
         
         if (connection == null) 
         {
@@ -59,10 +64,8 @@ public abstract class Base
         return connection;
     }
     
-    /**
-     * Close the connection to the database
-     */
-    public static void CloseConnection() {
+    public static void CloseConnection() 
+    {
         
         if(connection != null) {
             try {
@@ -74,8 +77,7 @@ public abstract class Base
             }
         }
     }
-    
-    
+
     public static Date StringToDate(String DateTime)
     {
         Date date = new Date();
@@ -84,5 +86,15 @@ public abstract class Base
         date.setMonth(Integer.parseInt(split[1]));
         date.setYear(Integer.parseInt(split[0]));
         return date;
+    }
+    
+    private static ArrayList<Categorie> _Categories;
+    public static ArrayList<Categorie> GetCategories()
+    {
+        if (_Categories == null) 
+        {
+            _Categories = CategorieDAO.List();
+        }
+        return _Categories;
     }
 }
