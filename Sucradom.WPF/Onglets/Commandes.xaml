@@ -5,7 +5,150 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Ressources/DictionnaireStyles.xaml"/>
+    </UserControl.Resources>
+    
+    
     <Grid>
+        <!-- Définition grille principale-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="75*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Définition du pannel gauche Liste des Commandes-->
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="90*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Style="{StaticResource Label}" Text="Liste des commandes"/>
+            <ListBox x:Name="ListBox_Clients" Grid.Row="2" ItemsSource="{Binding commandes}" SelectedItem="{Binding SelectedCommandes}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Commande}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
             
+        </Grid>
+        <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource ButtonInsert}" Content="Ajouter une commande" />
+        
+        
+        <!-- Début de la grille pannel droite-->
+        <Grid Grid.Column="4" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="25*"/>
+            </Grid.RowDefinitions>
+          
+            <!--Pannel de droite Fraction Entete-->
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="20*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Label}" Text="Numéro de Commande"/>
+                    <TextBox   Grid.Row="0" Grid.Column="1" Style="{StaticResource Standard_RO}" Text="{Binding tetecommande.ID}"/>
+                    
+                    <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Label}" Text="Nom"/>
+                    <TextBox   Grid.Row="1" Grid.Column="1" Style="{StaticResource Standard_RO}" Text="{Binding Nom}"/>
+                    
+                    <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Label}" Text="Prénom"/>
+                    <TextBox   Grid.Row="2" Grid.Column="1" Style="{StaticResource Standard_RO}" Text="{Binding Prenom}"/>
+                    
+                    <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource Label}" Text="Email"/>
+                    <TextBox   Grid.Row="3" Grid.Column="1" Style="{StaticResource Standard_RO}" Text="{Binding Email}"/>
+                    
+                    <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource Label}" Text="Telephone"/>
+                    <TextBox   Grid.Row="4" Grid.Column="1" Style="{StaticResource Standard_RO}" Text="{Binding Telephone}"/>
+                    
+                    <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource Label}" Text="Adresse de livraison"/>
+                    <TextBox   Grid.Row="5" Grid.Column="1" Style="{StaticResource Standard_RO}" Text="{Binding adresse.Nom}"/>
+
+
+                    <TextBlock Grid.Row="0" Grid.Column="3" Style="{StaticResource Label}" Text="Etat commande"/>
+                    <TextBox   Grid.Row="0" Grid.Column="4" Style="{StaticResource Standard_RO}" Text="{Binding etatcommande.Nom}"/>
+
+
+                    <TextBlock Grid.Row="2" Grid.Column="3" Style="{StaticResource Label}" Text="Date commande"/>
+                    <TextBox   Grid.Row="2" Grid.Column="4" Style="{StaticResource Standard_RO}" Text="{Binding Date}"/>
+
+
+
+
+
+                </Grid>
+            </Grid>
+
+
+
+            <!--Pannel de droite Fraction Centrale-->
+            <Grid Grid.Column="0" Grid.Row="1">
+                
+            </Grid>
+
+
+            <!--Pannel de droite Fraction PiedPage-->
+            <Grid Grid.Column="0" Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource ButtonUpdate}" Content="Modifier la commande" />
+                    <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource ButtonDelete}" Content="Supprimer la commande" />
+
+                    <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource Label}" Text="Prix total"/>
+                    <TextBox   Grid.Row="0" Grid.Column="3" Style="{StaticResource Standard_RO}" Text="{Binding PrixTotal}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource Label}" Text="Prix TTC"/>
+                    <TextBox   Grid.Row="2" Grid.Column="3" Style="{StaticResource Standard_RO}" Text="{Binding PrixTTC}"/>
+                    
+
+                </Grid>
+            </Grid>
+
+
+
+        </Grid>
+        <!--Fin grille Pannel Droite-->
     </Grid>
+    
 </UserControl>

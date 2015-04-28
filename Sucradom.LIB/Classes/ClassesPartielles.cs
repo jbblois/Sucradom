@@ -206,4 +206,16 @@ namespace Sucradom.LIB
 
        }
    }
+   public partial class tetecommande
+   {
+       public string Nom
+       {
+           get
+           {
+               return ("" + ID + "-" + client.ID + "-" + Date.DayOfYear );
+
+           }
+
+       }
+   }
 }
