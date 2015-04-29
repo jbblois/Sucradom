@@ -5,8 +5,13 @@
  */
 package sucradom.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import static sucradom.dao.TaxeDAO.GetTaxe;
 import sucradom.metier.Taxe;
+import sucradom.utile.Base;
 
 /**
  *
@@ -18,10 +23,92 @@ public abstract class TaxeDAO
     
     public static Taxe Select(int ID)
     {
-        return null;
+        Taxe taxe = null;
+        
+        String query = " SELECT " + _Properties
+                     + " FROM Taxe "
+                     + " WHERE Taxe.ID = ? ;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setInt(1, ID);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) 
+            {
+                taxe = GetTaxe(rs);
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return taxe;
     }
     public static ArrayList<Taxe> List()
     {
-        return null;
+        ArrayList<Taxe> listTaxes = null;
+        
+        String query = " SELECT " + _Properties
+                     + " FROM Taxe ;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            
+            ResultSet rs = ps.executeQuery();
+            listTaxes = new ArrayList<Taxe>();
+            while(rs.next()) {
+                Taxe taxe = GetTaxe(rs);
+                if (taxe != null) 
+                {
+                    listTaxes.add(taxe);
+                }
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return listTaxes;
+    }
+    
+        public static Taxe GetTaxe(ResultSet RS)
+    {
+        try 
+        {
+            Taxe taxe = new Taxe
+                (
+                    RS.getInt("ID"),
+                    RS.getString("Nom"),
+                    RS.getFloat("Valeur")
+                );
+            return taxe;
+        } 
+        catch (Exception exc) 
+        {
+            return null;
+        }
     }
 }

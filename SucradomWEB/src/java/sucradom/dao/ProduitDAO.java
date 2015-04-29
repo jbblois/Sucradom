@@ -144,6 +144,7 @@ public abstract class ProduitDAO
                     CategorieDAO.Select(RS.getInt("FID_Categorie")),
                     ImageDAO.Select(RS.getInt("FID_Image")),
                     TaxeDAO.Select(RS.getInt("FID_Taxe"))
+                    
                 );
             return produit;
         } 
