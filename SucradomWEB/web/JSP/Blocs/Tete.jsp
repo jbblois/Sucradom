@@ -9,7 +9,19 @@
     </head>
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                HEADER
-            </div>  
+            <button class="col-lg-2 btn" onclick="location.href='http://localhost:8084/SucradomWEB/Index?JSPfolder=Accueil'">
+                Accueil
+            </button>
+            <button class="col-lg-3 btn" onclick="location.href='http://localhost:8084/SucradomWEB/Index?JSPfolder=Catalogue'">
+                Catalogue
+            </button>
+            <button class="col-lg-2 btn" onclick="location.href='http://localhost:8084/SucradomWEB/Index?JSPfolder=Panier'">
+                Panier
+            </button>
+            <button class="col-lg-3 btn" onclick="location.href='http://localhost:8084/SucradomWEB/Index?JSPfolder=Compte'">
+                Compte
+            </button>
+            <button class="col-lg-2 btn" onclick="location.href='http://localhost:8084/SucradomWEB/Index?JSPfolder=Connexion'">
+                Connexion
+            </button>
         </div>

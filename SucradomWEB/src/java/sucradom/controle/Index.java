@@ -40,6 +40,9 @@ public class Index extends HttpServlet {
         {
             switch(JSPfolder)
             {
+                case "Accueil":
+                    GoAccueil(request, response);
+                    break;
                 case "Catalogue":
                     GoCatalogue(request, response);
                     break;
@@ -48,6 +51,9 @@ public class Index extends HttpServlet {
                     break;
                 case "Connexion":
                     GoConnexion(request, response);
+                    break;
+                case "Panier":
+                    GoPanier(request, response);
                     break;
                 case "Produit":
                     GoProduit(request, response);
@@ -83,6 +89,11 @@ public class Index extends HttpServlet {
             
         }
         this.getServletContext().getRequestDispatcher("/JSP/Index.jsp?JSPfolder=Catalogue" ).forward( request, response );
+    }
+    protected void GoPanier(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Panier" ).forward( request, response );
     }
     protected void GoProduit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 

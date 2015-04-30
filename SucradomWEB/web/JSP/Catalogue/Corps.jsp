@@ -3,7 +3,6 @@
 <%@page import="sucradom.metier.Produit"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="sucradom.dao.ProduitDAO"%>
-BODY
 <%  
     Categorie SelectedCategorie = (Categorie) request.getAttribute("SelectedCategorie");
     if ( SelectedCategorie != null) 
@@ -13,11 +12,20 @@ BODY
         {
             for (Produit produit : listeProduits) 
             {
-                String Nav_lien_href = Base.CONTEXT_PATH+"/Index?JSPfolder=Produit&IDproduit="+ produit.ID;
-                String Nav_lien_nom = produit.Libelle;
+                if (produit.IsDisponible.equals("OUI")) 
+                {
+                    String produitLien_Href = Base.CONTEXT_PATH+"/Index?JSPfolder=Produit&IDproduit="+ produit.ID;
+                    String produitLien_Nom = produit.Libelle;
+                    String pathNoSpaces = produit.Image.Path.replace(' ', '_');
+                    String produitImage_Path = Base.CONTEXT_PATH+"/RESSOURCES/"+pathNoSpaces+".png";
+                    String produitImage_Alt = produit.Image.Alt;
 %>
-                <a class="row" href="<%= Nav_lien_href %>">  <%= Nav_lien_nom %> </a>
-<%     
+                    <div class="col-lg-4">
+                        <img src="<%= produitImage_Path %>" alt="<%= produitImage_Alt %>" height="100" width="100">
+                        <a href="<%= produitLien_Href %>">  <%= produitLien_Nom %> </a>
+                    </div>
+<%  
+                }
             }
         }
         else
