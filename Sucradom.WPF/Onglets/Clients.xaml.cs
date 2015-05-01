@@ -47,5 +47,10 @@ namespace Sucradom.WPF.Onglets
 		{
 			_ViewModel.CarnetAdresses();
 		}
+
+        private void Button_Commandes_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.CarnetCommandes();
+        }
     }
 }

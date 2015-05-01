@@ -26,21 +26,18 @@ namespace Sucradom.WPF.Onglets
 
         }
 
-        public void AjouterCommande()
-        {   
-            new Fenetres.Commande().ShowDialog();
-        }
-
         public Boolean ModifierCommande()
         {
             if (SelectedCommande != null)
             {
-                //********
-                // PENSER A AJOUTER LE CONSTRUCTEUR DE MODIFICATION
-                //new Fenetres.Commande(SelectedCommande).ShowDialog();
+                new Fenetres.Commande(SelectedCommande).ShowDialog();
                 return true;
             }
-            return false;
+            else
+            {
+                Outils.Alerte("Veuillez sélectionner une commande !");
+                return false;
+            }
         }
 
         /// <summary>
@@ -51,8 +48,21 @@ namespace Sucradom.WPF.Onglets
         {
             if (SelectedCommande != null)
             {
-                
-                return true;
+                if (Outils.Choix("Voulez-vous supprimer la commande selectionnée","Suppression"))
+                {
+                    foreach (lignecommande ligne in SelectedCommande.lignecommandes)
+                    {
+                        Context.lignecommandes.Remove(ligne);
+                        ViewModel.lignecommandes.Remove(ligne);
+                    }
+                    Context.tetecommandes.Remove(SelectedCommande);
+                    ViewModel.tetecommandes.Remove(SelectedCommande);
+                    return true;
+                }
+            }
+            else
+            {
+                Outils.Alerte("Veuillez sélectionner une commande !");
             }
             return false;
         }

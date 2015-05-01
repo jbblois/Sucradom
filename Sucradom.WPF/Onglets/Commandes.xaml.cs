@@ -20,9 +20,22 @@ namespace Sucradom.WPF.Onglets
     /// </summary>
     public partial class Commandes : UserControl
     {
+        private Commandes_ViewModel _ViewModel;
         public Commandes()
         {
+            DataContext = _ViewModel = new Commandes_ViewModel();
             InitializeComponent();
         }
+
+        private void Button_Update_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.ModifierCommande();
+        }
+
+        private void Button_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.SupprimerCommande();
+        }
+
     }
 }

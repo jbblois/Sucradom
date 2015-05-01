@@ -85,7 +85,8 @@
             <Button Grid.Row="14" Grid.Column="0" Style="{StaticResource ButtonUpdate}" Content="Modifier le client"  Click="Button_Update_Click"/>
             <Button Grid.Row="16" Grid.Column="0" Style="{StaticResource ButtonDelete}" Content="Supprimer le client" Click="Button_Delete_Click"/>
 
-            <Button Grid.Row="14" Grid.Column="2" Style="{StaticResource BaseButton}" Background="RoyalBlue" Content="Adresses"  Click="Button_Adresses_Click"/>
+            <Button Grid.Row="12" Grid.Column="2" Style="{StaticResource BaseButton}" Background="RoyalBlue" Content="Adresses"  Click="Button_Adresses_Click"/>
+            <Button Grid.Row="14" Grid.Column="2" Style="{StaticResource BaseButton}" Background="RoyalBlue" Content="Commandes"  Click="Button_Commandes_Click"/>
         </Grid>
     </Grid>
 </UserControl>

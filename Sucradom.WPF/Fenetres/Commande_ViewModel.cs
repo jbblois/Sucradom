@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Sucradom.LIB;
 
-namespace Sucradom.WPF.Formulaires
+namespace Sucradom.WPF.Fenetres
 {
     public class Commande_ViewModel : ViewModel
     {
@@ -17,5 +17,14 @@ namespace Sucradom.WPF.Formulaires
             set { _TeteCommande = value; }
         }
 
+        public Commande_ViewModel(tetecommande SelectedCommande)
+        {
+            TeteCommande = SelectedCommande;
+        }
+
+        public Boolean Enregistrer()
+        {
+            return true;
+        }
     }
 }

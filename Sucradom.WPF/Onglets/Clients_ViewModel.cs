@@ -73,5 +73,18 @@ namespace Sucradom.WPF.Onglets
 			}
 			return false;
 		}
+        public Boolean CarnetCommandes()
+		{
+			if(SelectedClient != null)
+			{
+				//new Fenetres.Commandes(SelectedClient).ShowDialog();
+				return true;
+			}
+			else
+			{
+				Outils.Alerte("Veuillez selectionner un client dont vous voulez voir le carnet de commandes !");
+			}
+			return false;
+		}
 	}
 }
