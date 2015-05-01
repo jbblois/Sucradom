@@ -48,10 +48,17 @@ namespace Sucradom.WPF.Onglets
         {
             if (SelectedProduit != null)
             {
-                Context.produits.Remove(SelectedProduit);
-                ViewModel.produits.Remove(SelectedProduit);
-                
-                return true;
+                if (Outils.Choix("Voulez-vous supprimer le produit selectionné", "Suppression"))
+                {
+                    foreach (provision provision in SelectedProduit.provisions)
+                    {
+                        Context.provisions.Remove(provision);
+                        ViewModel.provisions.Remove(provision);
+                    }
+                    Context.produits.Remove(SelectedProduit);
+                    ViewModel.produits.Remove(SelectedProduit);
+                    return true;
+                }
             }
             else
             {

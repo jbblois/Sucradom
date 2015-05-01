@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Sucradom.LIB;
 
 namespace Sucradom.WPF.Formulaires
 {
@@ -19,9 +20,21 @@ namespace Sucradom.WPF.Formulaires
     /// </summary>
     public partial class Commande : Window
     {
-        public Commande()
+        private Commande_ViewModel _ViewModel;
+
+		public Commande(tetecommande SelectedCommande)
+		{
+            DataContext = _ViewModel = new Commande_ViewModel(SelectedCommande);
+			InitializeComponent();
+		}
+
+
+        private void Button_Sauvegarder_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
+            if (_ViewModel.Enregistrer())
+            {
+                this.Close();
+            }
         }
     }
 }

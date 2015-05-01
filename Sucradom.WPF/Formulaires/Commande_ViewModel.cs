@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Sucradom.LIB;
 
-namespace Sucradom.WPF.Fenetres
+namespace Sucradom.WPF.Formulaires
 {
     public class Commande_ViewModel : ViewModel
     {
