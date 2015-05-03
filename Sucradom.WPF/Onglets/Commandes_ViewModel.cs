@@ -26,11 +26,17 @@ namespace Sucradom.WPF.Onglets
 
         }
 
+        public Boolean AjouterCommande()
+        {
+                new Formulaires.Commande().ShowDialog();
+                return true;
+        }
+
         public Boolean ModifierCommande()
         {
             if (SelectedCommande != null)
             {
-                new Fenetres.Commande(SelectedCommande).ShowDialog();
+                new Formulaires.Commande(SelectedCommande).ShowDialog();
                 return true;
             }
             else

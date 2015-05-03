@@ -99,7 +99,8 @@ namespace Sucradom.LIB
            {
                 // sommes des ventes jusqu'a aujourdh'hui (lignesCommandes)
                 int sumVentes = lignecommandes.Where(lc => lc.tetecommande.Date.CompareTo(DateTime.Now) <= 0 
-											            && lc.tetecommande.etatcommande.ID != 0 )
+											            && lc.tetecommande.etatcommande.ID > 1 
+                                                        && lc.tetecommande.etatcommande.ID < 5)
 										      .Sum(lc => lc.Quantite) ;
                // sommes des achats jusqu'a aujourd'hui (provisions)
 		        int sumAchats = provisions.Where(p => p.Date.CompareTo(DateTime.Now) <= 0)
@@ -200,7 +201,7 @@ namespace Sucradom.LIB
        {
            get
            {
-               return (float)(Quantite * PrixUnitaire * ValeurTaxe);
+               return (float)( Quantite * PrixUnitaire * ( (100+ValeurTaxe)/100 ) );
 
            }
 
@@ -212,10 +213,48 @@ namespace Sucradom.LIB
        {
            get
            {
-               return ("" + ID + "-" + client.ID + "-" + Date.DayOfYear );
+               String nom = ""+ID;
+               
+               String clientID = "" + client.ID;
+               for (int i = clientID.Length; i < 3; i++)
+               {
+                   nom += '0';               
+               }
+               nom += clientID;
+               String dayOfYear = "" + Date.DayOfYear;
+               for (int i = dayOfYear.Length; i < 3; i++)
+               {
+                   nom += '0'; 
+               }
+               nom += dayOfYear;
+               return (nom);
 
            }
 
+       }
+       public string DateString
+       {
+           get
+           {
+               return (Date.Day + "/" + Date.Month + "/" + Date.Year);
+
+           }
+
+       }
+
+       public float PrixHT
+       {
+           get 
+           {
+               return lignecommandes.Sum(lc => lc.PrixHT);
+           }
+       }
+       public float PrixTTC
+       {
+           get
+           {
+               return lignecommandes.Sum(lc => lc.PrixTTC);
+           }
        }
    }
 }

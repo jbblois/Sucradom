@@ -37,5 +37,10 @@ namespace Sucradom.WPF.Onglets
             _ViewModel.SupprimerCommande();
         }
 
+        private void Button_Insert_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.AjouterCommande();
+        }
+
     }
 }

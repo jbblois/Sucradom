@@ -22,10 +22,29 @@ namespace Sucradom.WPF.Formulaires
     {
         private Commande_ViewModel _ViewModel;
 
+        public Commande()
+        {
+            DataContext = _ViewModel = new Commande_ViewModel();
+            NewCommande();
+            
+        }
+        private void NewCommande()
+        {
+            InitializeComponent();
+            Button_Sauvegarder.Content = "Enregistrer la commande";
+            Button_Sauvegarder.Background = Brushes.DarkGreen;
+        }
+        public Commande(client SelectedClient)
+        {
+            DataContext = _ViewModel = new Commande_ViewModel(SelectedClient);
+            NewCommande();
+        }
 		public Commande(tetecommande SelectedCommande)
 		{
             DataContext = _ViewModel = new Commande_ViewModel(SelectedCommande);
 			InitializeComponent();
+            Button_Sauvegarder.Content = "Enregistrer les modifications";
+            Button_Sauvegarder.Background = Brushes.DarkGoldenrod;
 		}
 
 
@@ -35,6 +54,21 @@ namespace Sucradom.WPF.Formulaires
             {
                 this.Close();
             }
+        }
+
+        private void Button_Insert_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.AjouterLigne();
+        }
+
+        private void Button_Update_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.ModifierLigne();
+        }
+
+        private void Button_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.SupprimerLigne();
         }
     }
 }

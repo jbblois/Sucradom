@@ -5,16 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c09916d6f30b4355a9e17972183213e0" Name="Diagram1">
-        <EntityTypeShape EntityType="sucradomModel.adresse" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sucradomModel.adresse" Width="1.5" PointX="3.625" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="sucradomModel.categorie" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="sucradomModel.client" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="sucradomModel.etatcommande" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sucradomModel.client" Width="1.5" PointX="1" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sucradomModel.etatcommande" Width="1.5" PointX="11.125" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="sucradomModel.image" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="sucradomModel.lignecommande" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="sucradomModel.produit" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="sucradomModel.provision" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="sucradomModel.taxe" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="sucradomModel.tetecommande" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sucradomModel.tetecommande" Width="1.5" PointX="11.25" PointY="5" IsExpanded="true" />
         <AssociationConnector Association="sucradomModel.adresse_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="sucradomModel.tetecommande_ibfk_3" ManuallyRouted="false" />
         <AssociationConnector Association="sucradomModel.categorie_ibfk_1" ManuallyRouted="false" />

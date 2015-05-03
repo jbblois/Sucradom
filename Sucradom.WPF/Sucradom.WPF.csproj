@@ -95,6 +95,10 @@
     </Compile>
     <Compile Include="Formulaires\Client_ViewModel.cs" />
     <Compile Include="Formulaires\Commande_ViewModel.cs" />
+    <Compile Include="Formulaires\Ligne.xaml.cs">
+      <DependentUpon>Ligne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaires\Ligne_ViewModel.cs" />
     <Compile Include="Formulaires\Produit.xaml.cs">
       <DependentUpon>Produit.xaml</DependentUpon>
     </Compile>
@@ -195,6 +199,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Formulaires\Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formulaires\Ligne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -30,10 +30,10 @@
                 <RowDefinition Height="95*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Style="{StaticResource Label}" Text="Liste des commandes"/>
-            <ListBox x:Name="ListBox_Commandes" Grid.Row="2" ItemsSource="{Binding commandes}" SelectedItem="{Binding SelectedCommande}">
+            <ListBox x:Name="ListBox_Commandes" Grid.Row="2" ItemsSource="{Binding tetecommandes}" SelectedItem="{Binding SelectedCommande}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Commande}"/>
+                        <TextBlock Text="{Binding Nom, Mode=OneTime}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -77,35 +77,30 @@
                         <RowDefinition Height="20*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Label}" Text="Numéro de Commande"/>
-                    <TextBox   Grid.Row="0" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding tetecommande.ID}"/>
+                    <TextBox   Grid.Row="0" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding ID, Mode=OneTime}"/>
                     
                     <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Label}" Text="Nom"/>
-                    <TextBox   Grid.Row="2" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding Nom}"/>
+                    <TextBox   Grid.Row="2" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding client.Nom, Mode=OneTime}"/>
                     
                     <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource Label}" Text="Prénom"/>
-                    <TextBox   Grid.Row="4" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding Prenom}"/>
+                    <TextBox   Grid.Row="4" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding client.Prenom, Mode=OneTime}"/>
                     
                     <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource Label}" Text="Email"/>
-                    <TextBox   Grid.Row="6" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding Email}"/>
+                    <TextBox   Grid.Row="6" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding client.Email, Mode=OneTime}"/>
                     
                     <TextBlock Grid.Row="8" Grid.Column="0" Style="{StaticResource Label}" Text="Telephone"/>
-                    <TextBox   Grid.Row="8" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding Telephone}"/>
+                    <TextBox   Grid.Row="8" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding client.Telephone, Mode=OneTime}"/>
                     
                     <TextBlock Grid.Row="10" Grid.Column="0" Style="{StaticResource Label}" Text="Adresse de livraison"/>
-                    <TextBox   Grid.Row="10" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding adresse.Nom}"/>
+                    <TextBox   Grid.Row="10" Grid.Column="2" Style="{StaticResource Standard_RO}" Text="{Binding adresse.Nom, Mode=OneTime}"/>
 
 
                     <TextBlock Grid.Row="0" Grid.Column="4" Style="{StaticResource Label}" Text="Etat commande"/>
-                    <TextBox   Grid.Row="0" Grid.Column="6" Style="{StaticResource Standard_RO}" Text="{Binding etatcommande.Nom}"/>
+                    <TextBox   Grid.Row="0" Grid.Column="6" Style="{StaticResource Standard_RO}" Text="{Binding etatcommande.Nom, Mode=OneTime}"/>
 
 
                     <TextBlock Grid.Row="2" Grid.Column="4" Style="{StaticResource Label}" Text="Date commande"/>
-                    <TextBox   Grid.Row="2" Grid.Column="6" Style="{StaticResource Standard_RO}" Text="{Binding Date}"/>
-
-
-
-
-
+                    <TextBox   Grid.Row="2" Grid.Column="6" Style="{StaticResource Standard_RO}" Text="{Binding DateString, Mode=OneTime}"/>
                 </Grid>
             </Grid>
 
@@ -115,7 +110,7 @@
             <DataGrid Grid.Column="0" Grid.Row="2" AutoGenerateColumns="False" AllowDrop="False" IsReadOnly="True" 
                       ItemsSource="{Binding lignecommandes}" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="30*" Binding="{Binding produit.Nom}"  Header="Produit"/>
+                    <DataGridTextColumn Width="30*" Binding="{Binding produit.Libelle}"  Header="Produit"/>
                     <DataGridTextColumn Width="20*" Binding="{Binding Quantite}"     Header="Quantite"/>
                     <DataGridTextColumn Width="15*" Binding="{Binding PrixUnitaire}" Header="Prix unitaire" />
                     <DataGridTextColumn Width="15*" Binding="{Binding ValeurTaxe}"   Header="Taxe" />
@@ -128,7 +123,7 @@
             <Grid Grid.Column="0" Grid.Row="4">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="05*"/>
                         <ColumnDefinition Width="20*"/>
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="20*"/>
@@ -137,25 +132,25 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20*"/>
-                        <RowDefinition Height="05*"/>
+                        <RowDefinition Height="01*"/>
+                        <RowDefinition Height="20*"/>
+                        <RowDefinition Height="01*"/>
                         <RowDefinition Height="20*"/>
                     </Grid.RowDefinitions>
 
 
-                    <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonUpdate}" Content="Modifier la commande" Click="Button_Update_Click" />
-                    <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource ButtonDelete}" Content="Supprimer la commande" Click="Button_Delete_Click" />
-
-                    <TextBlock Grid.Row="0" Grid.Column="3" Style="{StaticResource Label}" Text="Prix total"/>
-                    <TextBox   Grid.Row="0" Grid.Column="5" Style="{StaticResource Standard_RO}" Text="{Binding PrixTotal}"/>
+                    <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource ButtonInsert}" Content="Ajouter une commande" Click="Button_Insert_Click" />
+                    <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource ButtonUpdate}" Content="Modifier la commande" Click="Button_Update_Click" />
+                    <Button Grid.Row="4" Grid.Column="1" Style="{StaticResource ButtonDelete}" Content="Supprimer la commande" Click="Button_Delete_Click" />
+                    
+                    <TextBlock Grid.Row="0" Grid.Column="3" Style="{StaticResource Label}" Text="Prix HT"/>
+                    <TextBox   Grid.Row="0" Grid.Column="5" Style="{StaticResource Standard_RO}" Text="{Binding PrixHT, Mode=OneWay}"/>
                     <TextBlock Grid.Row="2" Grid.Column="3" Style="{StaticResource Label}" Text="Prix TTC"/>
-                    <TextBox   Grid.Row="2" Grid.Column="5" Style="{StaticResource Standard_RO}" Text="{Binding PrixTTC}"/>
+                    <TextBox   Grid.Row="2" Grid.Column="5" Style="{StaticResource Standard_RO}" Text="{Binding PrixTTC, Mode=OneWay}"/>
                     
 
                 </Grid>
             </Grid>
-
-
-
         </Grid>
         <!--Fin grille Pannel Droite-->
     </Grid>

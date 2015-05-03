@@ -77,7 +77,7 @@ namespace Sucradom.WPF.Onglets
 		{
 			if(SelectedClient != null)
 			{
-				//new Fenetres.Commandes(SelectedClient).ShowDialog();
+				new Fenetres.Commandes(SelectedClient).ShowDialog();
 				return true;
 			}
 			else

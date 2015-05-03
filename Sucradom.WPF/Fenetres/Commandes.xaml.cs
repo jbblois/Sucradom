@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Sucradom.LIB;
 
 namespace Sucradom.WPF.Fenetres
 {
@@ -19,9 +20,27 @@ namespace Sucradom.WPF.Fenetres
     /// </summary>
     public partial class Commandes : Window
     {
-        public Commandes()
+        private Commandes_ViewModel _ViewModel;
+        public Commandes(client SelectedClient)
         {
+            DataContext = _ViewModel = new Commandes_ViewModel(SelectedClient);
             InitializeComponent();
+            Title = "Commandes de " + SelectedClient.NomComplet;
+        }
+
+        private void Button_Insert_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.AjouterCommande();
+        }
+
+        private void Button_Update_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.ModifierCommande();
+        }
+
+        private void Button_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            _ViewModel.SupprimerCommande();
         }
     }
 }
