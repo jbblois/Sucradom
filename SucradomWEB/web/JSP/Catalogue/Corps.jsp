@@ -10,35 +10,44 @@
         ArrayList<Produit> listeProduits = SelectedCategorie.GetProduits();
         if(listeProduits != null)
         {
-            for (Produit produit : listeProduits) 
+            if(listeProduits.size() > 0)
             {
-                if (produit.IsDisponible.equals("OUI")) 
+                for (Produit produit : listeProduits) 
                 {
-                    String produitLien_Href = Base.CONTEXT_PATH+"/Index?JSPfolder=Produit&IDproduit="+ produit.ID;
-                    String produitLien_Nom = produit.Libelle;
-                    String pathNoSpaces = produit.Image.Path.replace(' ', '_');
-                    String produitImage_Path = Base.CONTEXT_PATH+"/RESSOURCES/"+pathNoSpaces+".png";
-                    String produitImage_Alt = produit.Image.Alt;
+                    if (produit.IsDisponible.equals("OUI")) 
+                    {
+                        String produitLien_Href = Base.CONTEXT_PATH+"/Index?JSPfolder=Produit&IDproduit="+ produit.ID;
+                        String produitLien_Nom = produit.Libelle;
+                        String pathNoSpaces = produit.Image.Path.replace(' ', '_');
+                        String produitImage_Path = Base.CONTEXT_PATH+"/RESSOURCES/"+pathNoSpaces+".png";
+                        String produitImage_Alt = produit.Image.Alt;
 %>
-                    <div class="col-lg-4">
-                        <img src="<%= produitImage_Path %>" alt="<%= produitImage_Alt %>" height="100" width="100">
-                        <a href="<%= produitLien_Href %>">  <%= produitLien_Nom %> </a>
-                    </div>
+                        <div class="col-lg-4">
+                            <img src="<%= produitImage_Path %>" alt="<%= produitImage_Alt %>" height="100" width="100">
+                            <a href="<%= produitLien_Href %>">  <%= produitLien_Nom %> </a>
+                        </div>
 <%  
+                    }
                 }
+            }
+            else
+            {
+%>
+                <div class="col-lg-12">PAS DE PRODUITS DISPONIBLES</div>
+<%  
             }
         }
         else
         {
 %>
-        <div>PAS DE PRODUITS DISPONIBLES</div>
+        <div class="col-lg-12">PAS DE PRODUITS DISPONIBLES</div>
 <%  
         }
     }
     else
     {
 %>
-        <div>PAS DE CATEGORIE SELECTIONNEE</div>
+        <div class="col-lg-12">PAS DE CATEGORIE SELECTIONNEE</div>
 <%  
     }
 %>

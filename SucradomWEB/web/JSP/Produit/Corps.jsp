@@ -10,6 +10,7 @@
         String produitCategorie = SelectedProduit.Categorie.Libelle;
         String produitTaxe = ""+SelectedProduit.Taxe.Valeur+" %";
         String produitPrix = ""+SelectedProduit.Prix+" euros";
+        String produitQuantite = ""+SelectedProduit.Quantite();
         String pathNoSpaces = SelectedProduit.Image.Path.replace(' ', '_');
         String produitImage_Path = Base.CONTEXT_PATH+"/RESSOURCES/"+pathNoSpaces+".png";
         String produitImage_Alt = SelectedProduit.Image.Alt;
@@ -25,6 +26,7 @@
         <div >Categorie : <%= produitCategorie %> </div> 
         <div >Taxe : <%= produitTaxe %> </div> 
         <div >Prix : <%= produitPrix %> </div>
+        <div >Quantité disponible : <%= produitQuantite %> </div>
     </div>
 </div>
         

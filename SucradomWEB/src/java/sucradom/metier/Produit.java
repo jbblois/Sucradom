@@ -5,6 +5,8 @@
  */
 package sucradom.metier;
 
+import sucradom.dao.RequetesSQL;
+
 /**
  *
  * @author user
@@ -31,5 +33,8 @@ public class Produit
         this.Image = Image;
         this.Taxe = Taxe;
     }
-
+    public int Quantite()
+    {
+        return RequetesSQL.QuantiteDisponible(ID);
+    }
 }
