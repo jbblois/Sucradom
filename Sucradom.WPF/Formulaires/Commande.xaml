@@ -6,7 +6,7 @@
         <ResourceDictionary Source="../Ressources/DictionnaireStyles.xaml"/>
     </Window.Resources>
 
-    <Grid>
+    <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="100*"/>

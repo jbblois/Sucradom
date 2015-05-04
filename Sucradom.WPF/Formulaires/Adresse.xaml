@@ -5,7 +5,7 @@
     <Window.Resources>
         <ResourceDictionary Source="../Ressources/DictionnaireStyles.xaml"/>
     </Window.Resources>
-    <Grid DataContext="{Binding AdresseOfVM}">
+    <Grid Background="WhiteSmoke" DataContext="{Binding AdresseOfVM}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="40*"/>

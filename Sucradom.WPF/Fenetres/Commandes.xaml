@@ -5,7 +5,7 @@
     <Window.Resources>
         <ResourceDictionary Source="../Ressources/DictionnaireStyles.xaml"/>
     </Window.Resources>
-    <Grid>
+    <Grid Background="WhiteSmoke">
         <!-- Définition grille principale-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -52,7 +52,7 @@
 
             <!--Pannel de droite Fraction Entete-->
             <Grid Grid.Column="0" Grid.Row="0">
-                <Grid>
+                <Grid Background="WhiteSmoke">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20*"/>
                         <ColumnDefinition Width="01*"/>
@@ -118,7 +118,7 @@
 
             <!--Pannel de droite Fraction PiedPage-->
             <Grid Grid.Column="0" Grid.Row="4">
-                <Grid>
+                <Grid Background="WhiteSmoke">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="05*"/>
                         <ColumnDefinition Width="20*"/>

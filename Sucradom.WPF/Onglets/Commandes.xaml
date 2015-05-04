@@ -8,7 +8,7 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../Ressources/DictionnaireStyles.xaml"/>
     </UserControl.Resources>
-    <Grid>
+    <Grid Background="WhiteSmoke">
         <!-- Définition grille principale-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

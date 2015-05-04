@@ -7,7 +7,7 @@
         <ResourceDictionary Source="../Ressources/DictionnaireStyles.xaml"/>
     </Window.Resources>
 
-    <Grid DataContext="{Binding TaxeOfVM}">
+    <Grid Background="WhiteSmoke" DataContext="{Binding TaxeOfVM}">
         <Grid Grid.Column="3" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>

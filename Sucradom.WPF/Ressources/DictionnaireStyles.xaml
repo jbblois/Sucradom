@@ -73,9 +73,13 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
+    <!--DATEPICKER-->
     <Style TargetType="DatePicker" >
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
-
+    <!--GRID-->
+    <Style TargetType="Grid" >
+        <Setter Property="Background" Value="White"/>
+    </Style>
 </ResourceDictionary>
