@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package sucradom.utile;
+
+import sucradom.metier.Client;
+
 /**
  *
  * @author user
  */
 public abstract class Session
 {
-    public static String Page = "";
-    public static Object Object = null;
+    public static Client Client; 
 }

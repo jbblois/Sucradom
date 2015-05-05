@@ -11,7 +11,7 @@
             </FORM>
         </DIV>
 <%
-        String erreur = (String) request.getSession(true).getAttribute("Erreur");
+        String erreur = (String) request.getAttribute("Erreur");
         if (erreur != null) 
         {
 %>

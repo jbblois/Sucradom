@@ -20,15 +20,15 @@ import sucradom.utile.Base;
  */
 public abstract class ClientDAO 
 {
-    private static String _Properties = "[Client].ID,[Client].Nom,[Client].Prenom,[Client].Telephone,[Client].Email,[Client].MotDePasse,[Client].IsActif";
+    private static String _Properties = "Client.ID,Client.Nom,Client.Prenom,Client.Telephone,Client.Email,Client.MotDePasse,Client.IsActif";
     
     public static Client Select(int ID)
     {
         Client client = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM [Client] "
-                     + " WHERE [Client].ID = ? ;";
+                     + " FROM Client "
+                     + " WHERE Client.ID = ? ;";
         
         PreparedStatement ps = null;
         
@@ -62,9 +62,9 @@ public abstract class ClientDAO
         Client client = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM [Client] "
-                     + " WHERE [Client].Email = ? ;"
-                     + " AND [Client].MotDePasse = ? ;";
+                     + " FROM client"
+                     + " WHERE client.Email = ?"
+                     + " AND client.MotDePasse = ?;";
         
         PreparedStatement ps = null;
         
@@ -99,7 +99,7 @@ public abstract class ClientDAO
         ArrayList<Client> listClients = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM [Client] ;";
+                     + " FROM Client ;";
         
         PreparedStatement ps = null;
         

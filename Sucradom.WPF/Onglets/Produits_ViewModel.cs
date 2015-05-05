@@ -66,12 +66,12 @@ namespace Sucradom.WPF.Onglets
                     }
                     else
                     {
-                        Outils.Alerte("Vous ne pouvez supprimer un produit dont il vous reste du stock");
+                        Outils.Alerte("Vous ne pouvez pas supprimer un produit dont le stock actuel est différent de 0");
                     }
                 }
                 else
                 {
-                    Outils.Alerte("Vous ne pouvez supprimer un produit lié à une ou plusieurs commandes");
+                    Outils.Alerte("Vous ne pouvez pas supprimer un produit lié à une ou plusieurs commandes");
                 }
             }
             else
