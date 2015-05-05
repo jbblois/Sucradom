@@ -12,17 +12,7 @@ namespace Sucradom.WPF.Fenetres
     {
         public client ClientOfVM { get; set; }
 
-        private adresse _SelectedAdresse;
-        public adresse SelectedAdresse
-        {
-            get { return _SelectedAdresse; }
-            set
-            {
-                _SelectedAdresse = value;
-                NotifyPropertyChanged();
-            }
-        }
-
+        //Liste des adresses liées au client (VDI) sélectionné
         private ObservableCollection<adresse> _AdressesOfClient;
         public ObservableCollection<adresse> AdressesOfClient
         {
@@ -38,6 +28,17 @@ namespace Sucradom.WPF.Fenetres
             AdressesOfClient = new ObservableCollection<adresse>(ViewModel.adresses.Where(a => a.FID_Client == ClientOfVM.ID));
         }
 
+        private adresse _SelectedAdresse;
+        public adresse SelectedAdresse
+        {
+            get { return _SelectedAdresse; }
+            set
+            {
+                _SelectedAdresse = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public Adresses_ViewModel(client SelectedClient)
         {
             this.ClientOfVM = SelectedClient;
@@ -49,7 +50,6 @@ namespace Sucradom.WPF.Fenetres
             new Formulaires.Adresse(ClientOfVM).ShowDialog();
             RefreshAdresses();
         }
-
         public Boolean ModifierAdresse()
         {
             if (SelectedAdresse != null)
@@ -64,15 +64,17 @@ namespace Sucradom.WPF.Fenetres
             }
             return false;
         }
-
         public Boolean SupprimerAdresse()
         {
             if (SelectedAdresse != null)
             {
-                Context.adresses.Remove(SelectedAdresse);
-                ViewModel.adresses.Remove(SelectedAdresse);
-                AdressesOfClient.Remove(SelectedAdresse);
-                return true;
+                if (Outils.Choix("Voulez-vous supprimer l'adresse selectionnée", "Suppression"))
+                { 
+                    Context.adresses.Remove(SelectedAdresse);
+                    ViewModel.adresses.Remove(SelectedAdresse);
+                    AdressesOfClient.Remove(SelectedAdresse);
+                    return true;
+                }
             }
             else
             {

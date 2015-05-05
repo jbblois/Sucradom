@@ -13,6 +13,7 @@ namespace Sucradom.WPF.Fenetres
 
         private client _ClientOfVM;
 
+        //Liste des commandes (tetecommande) liées au client (VDI) sélectionné
         private ObservableCollection<tetecommande> _CommandesOfClient;
         public ObservableCollection<tetecommande> CommandesOfClient
         {
@@ -51,7 +52,6 @@ namespace Sucradom.WPF.Fenetres
             RefreshCommandes();
             return true;
         }
-
         public Boolean ModifierCommande()
         {
             if (SelectedCommande != null)
@@ -66,11 +66,6 @@ namespace Sucradom.WPF.Fenetres
                 return false;
             }
         }
-
-        /// <summary>
-        /// PENSER A FAIRE LES ETAPES DE SUPRESSION
-        /// </summary>
-        /// <returns></returns>
         public Boolean SupprimerCommande()
         {
             if (SelectedCommande != null)

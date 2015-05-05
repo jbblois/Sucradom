@@ -48,16 +48,30 @@ namespace Sucradom.WPF.Onglets
         {
             if (SelectedProduit != null)
             {
-                if (Outils.Choix("Voulez-vous supprimer le produit selectionné", "Suppression"))
+                if (SelectedProduit.lignecommandes.Count == 0)
                 {
-                    foreach (provision provision in SelectedProduit.provisions)
+                    if (SelectedProduit.Quantite == 0)
                     {
-                        Context.provisions.Remove(provision);
-                        ViewModel.provisions.Remove(provision);
+                        if (Outils.Choix("Voulez-vous supprimer le produit selectionné", "Suppression"))
+                        {
+                            foreach (provision provision in SelectedProduit.provisions)
+                            {
+                                Context.provisions.Remove(provision);
+                                ViewModel.provisions.Remove(provision);
+                            }
+                            Context.produits.Remove(SelectedProduit);
+                            ViewModel.produits.Remove(SelectedProduit);
+                            return true;
+                        }
                     }
-                    Context.produits.Remove(SelectedProduit);
-                    ViewModel.produits.Remove(SelectedProduit);
-                    return true;
+                    else
+                    {
+                        Outils.Alerte("Vous ne pouvez supprimer un produit dont il vous reste du stock");
+                    }
+                }
+                else
+                {
+                    Outils.Alerte("Vous ne pouvez supprimer un produit lié à une ou plusieurs commandes");
                 }
             }
             else

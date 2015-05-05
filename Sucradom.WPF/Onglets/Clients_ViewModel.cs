@@ -49,9 +49,19 @@ namespace Sucradom.WPF.Onglets
         {
             if (SelectedClient != null)
             {
-				Context.clients.Remove(SelectedClient);
-				ViewModel.clients.Remove(SelectedClient);
-                return true;
+                if (SelectedClient.tetecommandes.Count == 0)
+                {
+                    if (Outils.Choix("Voulez-vous supprimer le client selectionné", "Suppression"))
+                    {
+                        Context.clients.Remove(SelectedClient);
+                        ViewModel.clients.Remove(SelectedClient);
+                        return true;
+                    }
+                }
+                else
+                {
+                    Outils.Alerte("Vous ne pouvez supprimer un client qui a passé au moins une commande !");
+                }
             }
 			else
 			{

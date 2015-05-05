@@ -20,7 +20,6 @@ namespace Sucradom.WPF.Fenetres
             }
         }
 
-
         public Categories_ViewModel()
         {
 
@@ -30,7 +29,6 @@ namespace Sucradom.WPF.Fenetres
         {   
             new Formulaires.Categorie().ShowDialog();
         }
-
         public Boolean ModifierCategorie()
         {
             if (SelectedCategorie != null)
@@ -44,17 +42,19 @@ namespace Sucradom.WPF.Fenetres
             }
             return false;
         }
-
         public Boolean SupprimerCategorie()
         {
             if (SelectedCategorie != null)
             {
                 if (SelectedCategorie.NbProduits == 0)
                 {
-                    Context.categories.Remove(SelectedCategorie);
-                    ViewModel.categories.Remove(SelectedCategorie);
-                    
-                    return true;                    
+                    if (Outils.Choix("Voulez-vous supprimer la catégorie selectionnée", "Suppression"))
+                    { 
+                        Context.categories.Remove(SelectedCategorie);
+                        ViewModel.categories.Remove(SelectedCategorie);
+                        return true;   
+                    }
+                                     
                 }
                 else
                 {

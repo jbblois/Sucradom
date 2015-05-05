@@ -12,17 +12,7 @@ namespace Sucradom.WPF.Fenetres
     {
         public produit ProduitOfVM { get; set; }
 
-        private provision _SelectedProvision;
-        public provision SelectedProvision
-        {
-            get { return _SelectedProvision; }
-            set
-            {
-                _SelectedProvision = value;
-                NotifyPropertyChanged();
-            }
-        }
-
+        //Liste des provisions liées au produit sélectionné
         private ObservableCollection<provision> _ProvisionsOfProduit ;
         public ObservableCollection<provision> ProvisionsOfProduit
         {
@@ -30,6 +20,17 @@ namespace Sucradom.WPF.Fenetres
             set 
             { 
                 _ProvisionsOfProduit = value; 
+                NotifyPropertyChanged();
+            }
+        }
+
+        private provision _SelectedProvision;
+        public provision SelectedProvision
+        {
+            get { return _SelectedProvision; }
+            set
+            {
+                _SelectedProvision = value;
                 NotifyPropertyChanged();
             }
         }
@@ -50,7 +51,6 @@ namespace Sucradom.WPF.Fenetres
             new Formulaires.Provision(ProduitOfVM).ShowDialog();
             RefreshProvisions();
         }
-
         public Boolean ModifierProvision()
         {
             if (SelectedProvision != null)
@@ -65,15 +65,17 @@ namespace Sucradom.WPF.Fenetres
             }
             return false;
         }
-
         public Boolean SupprimerProvision()
         {
             if (SelectedProvision != null)
             {
-                Context.provisions.Remove(SelectedProvision);
-                ViewModel.provisions.Remove(SelectedProvision);
-                ProvisionsOfProduit.Remove(SelectedProvision);
-                return true;
+                if (Outils.Choix("Voulez-vous supprimer l'approvisionnement selectionné", "Suppression"))
+                {
+                    Context.provisions.Remove(SelectedProvision);
+                    ViewModel.provisions.Remove(SelectedProvision);
+                    ProvisionsOfProduit.Remove(SelectedProvision);
+                    return true;
+                }
             }
             else
             {

@@ -57,6 +57,43 @@ public abstract class ClientDAO
         
         return client;
     }
+    public static Client Select(String Email, String MotDePasse)
+    {
+        Client client = null;
+        
+        String query = " SELECT " + _Properties
+                     + " FROM [Client] "
+                     + " WHERE [Client].Email = ? ;"
+                     + " AND [Client].MotDePasse = ? ;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setString(1, Email);
+            ps.setString(2, MotDePasse);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) 
+            {
+                client = GetClient(rs);
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return client;
+    }
     public static ArrayList<Client> List()
     {
         ArrayList<Client> listClients = null;

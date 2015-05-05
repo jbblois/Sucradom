@@ -10,8 +10,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import sucradom.dao.CategorieDAO;
+import sucradom.dao.ClientDAO;
 import sucradom.dao.ProduitDAO;
+import sucradom.metier.Client;
 
 /**
  *
@@ -52,6 +55,9 @@ public class Index extends HttpServlet {
                 case "Connexion":
                     GoConnexion(request, response);
                     break;
+                case "TryConnexion":
+                    TryConnexion(request, response);
+                    break;
                 case "Panier":
                     GoPanier(request, response);
                     break;
@@ -70,13 +76,6 @@ public class Index extends HttpServlet {
     {
         this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Accueil" ).forward( request, response );
     }
-    
-    protected void GoCompte(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
-        this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Compte" ).forward( request, response );
-    }
-    
     protected void GoCatalogue(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
@@ -107,12 +106,65 @@ public class Index extends HttpServlet {
         }
         this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Produit" ).forward( request, response );
     }
+    
     protected void GoConnexion(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Connexion" ).forward( request, response );
+        HttpSession session = request.getSession(true);
+        Client client = (Client) session.getAttribute("Client");
+        if (client != null) 
+        {
+            //Client est déjà connecté redirection sur page compte
+            session.setAttribute("Erreur", null);
+            this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Compte" ).forward( request, response );
+        }
+        else
+        {
+            //Client est pas connecté et peut se connecter
+            session.setAttribute("Erreur", "Veuillez vous connecter");
+            this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Connexion" ).forward( request, response );
+        }
+    }
+    protected void TryConnexion(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        HttpSession session = request.getSession(true);
+        String email = (String) request.getAttribute("Email");
+        String motDePasse = (String) request.getAttribute("MotDePasse");
+        Client client = ClientDAO.Select(email, motDePasse);
+        if (client != null) 
+        {
+            //Client à réussit à se connecter
+            session.setAttribute("Client", client);
+            session.setAttribute("Erreur", null);
+            this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Compte" ).forward( request, response );
+        }
+        else
+        {
+            //Client n'a pas réussit à se connecter
+            session.setAttribute("Erreur", "Veuillez vérifier l'email ou le mot de passe saisi");
+            this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Connexion" ).forward( request, response );
+        }
     }
     
+    protected void GoCompte(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        HttpSession session = request.getSession(true);
+        Client client = (Client) session.getAttribute("Client");
+        if (client != null) 
+        {
+            //Client est connecté
+            session.setAttribute("Erreur", null);
+            this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Compte" ).forward( request, response );
+        }
+        else
+        {
+            //Client est pas connecté redirection sur page connexion
+            session.setAttribute("Erreur", "Veuillez vous connecter");
+            this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Connexion" ).forward( request, response );
+        }
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
