@@ -6,17 +6,20 @@
 package sucradom.controle;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sucradom.metier.Client;
+import sucradom.utile.Session;
 
 /**
  *
  * @author user
  */
-public class Index extends HttpServlet {
-
+public class Compte extends HttpServlet 
+{
     private String _Module = "Accueil";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,10 +33,22 @@ public class Index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
+        Client client = Session.GetClient(request);
+        if (client != null) 
+        {
+            //Client est connecté
+            request.setAttribute("Erreur", null);
+            _Module = "Compte";
+        }
+        else
+        {
+            //Client est pas connecté redirection sur page connexion
+            request.setAttribute("Erreur", "Veuillez vous connecter");
+            _Module = "Connexion";
+        }
         this.getServletContext().getRequestDispatcher("/JSP/Index.jsp?Module="+_Module ).forward( request, response );
     }
 
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -72,5 +87,5 @@ public class Index extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }

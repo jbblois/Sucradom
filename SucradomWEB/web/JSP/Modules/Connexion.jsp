@@ -3,7 +3,7 @@
 
 <div class="row">
 <%
-    String formAction = Base.CONTEXT_PATH+"/Index?JSPfolder=TryConnexion";
+    String formAction = Base.CONTEXT_PATH+"/Connexion?Methode=Try";
 %>
     <FORM class="col-lg-12" Method="POST" Action="<%= formAction %>">
         <div class ="row" >

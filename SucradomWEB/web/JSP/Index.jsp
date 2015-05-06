@@ -6,15 +6,15 @@
 
 <%@page import="sucradom.utile.Base"%>
 <%
-    String JSPfolder =(String) request.getParameter("JSPfolder");
-    if (JSPfolder == null) 
+    String module =(String) request.getParameter("Module");
+    if (module == null) 
     {
-        JSPfolder = "Accueil";
+        module = "Accueil";
     }
     request.getRequestDispatcher( "./Blocs/Tete.jsp" ).include(request, response );
     try
     {
-        request.getRequestDispatcher( "./Modules/"+JSPfolder+".jsp" ).include(request, response );
+        request.getRequestDispatcher( "./Modules/"+module+".jsp" ).include(request, response );
     }
     catch(Exception e)
     {
