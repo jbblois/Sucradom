@@ -14,7 +14,6 @@ import sucradom.dao.CategorieDAO;
 import sucradom.dao.ClientDAO;
 import sucradom.dao.ProduitDAO;
 import sucradom.metier.Client;
-import sucradom.utile.Session;
 
 /**
  *
@@ -54,6 +53,9 @@ public class Index extends HttpServlet {
                     break;
                 case "ModifierMDP":
                     ModifierMDP(request, response);
+                    break;
+                case "TryModifierMDP":
+                    TryModifierMDP(request, response);
                     break;
                 case "Connexion":
                     GoConnexion(request, response);
@@ -98,11 +100,6 @@ public class Index extends HttpServlet {
         }
         this.getServletContext().getRequestDispatcher("/JSP/Index.jsp?JSPfolder=Catalogue" ).forward( request, response );
     }
-    protected void GoPanier(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
-        this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Panier" ).forward( request, response );
-    }
     protected void GoProduit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
@@ -115,16 +112,17 @@ public class Index extends HttpServlet {
         }
         this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Produit" ).forward( request, response );
     }
-    protected void GoCommandes(HttpServletRequest request, HttpServletResponse response)
+    protected void GoPanier(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        
+        this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Panier" ).forward( request, response );
     }
     
-    protected void GoConnexion(HttpServletRequest request, HttpServletResponse response)
+    //<editor-fold desc="Redirection liées à la page Connexion">
+        protected void GoConnexion(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        Client client = Session.Client;
+        Client client = (Client)request.getSession(true).getAttribute("Client");
         if (client != null) 
         {
             //Client est déjà connecté redirection sur page compte
@@ -138,37 +136,48 @@ public class Index extends HttpServlet {
             this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Connexion" ).forward( request, response );
         }
     }
+        
     protected void Deconnexion(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        Session.Client = null;
+        request.getSession(true).setAttribute("Client",null);
         GoAccueil(request, response);
     }
+    
     protected void TryConnexion(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        String email = (String) request.getParameter("Email");
-        String motDePasse = (String) request.getParameter("MotDePasse");
-        Client client = ClientDAO.Select(email, motDePasse);
-        if (client != null) 
+        if(request.getSession(true).getAttribute("Client") == null)
         {
-            //Client à réussit à se connecter
-            Session.Client = client;
-            request.setAttribute("Erreur", null);
-            this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Compte" ).forward( request, response );
+            String email = (String) request.getParameter("Email");
+            String motDePasse = (String) request.getParameter("MotDePasse");
+            Client client = ClientDAO.Select(email, motDePasse);
+            if (client != null) 
+            {
+                //Client à réussit à se connecter
+                request.getSession(true).setAttribute("Client",client);
+                request.setAttribute("Erreur", null);
+                this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Compte" ).forward( request, response );
+            }
+            else
+            {
+                //Client n'a pas réussit à se connecter
+                request.setAttribute("Erreur", "Veuillez vérifier l'email ou le mot de passe saisi");
+                this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Connexion" ).forward( request, response );
+            }
         }
         else
         {
-            //Client n'a pas réussit à se connecter
-            request.setAttribute("Erreur", "Veuillez vérifier l'email ou le mot de passe saisi");
-            this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Connexion" ).forward( request, response );
+            GoCompte(request, response);
         }
     }
-    
+    //</editor-fold>
+
+    //<editor-fold desc="Redirection liées à la page Compte">
     protected void GoCompte(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        Client client = Session.Client;
+        Client client = (Client)request.getSession(true).getAttribute("Client");
         if (client != null) 
         {
             //Client est connecté
@@ -185,9 +194,72 @@ public class Index extends HttpServlet {
     protected void ModifierMDP(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-
+        request.setAttribute("Erreur", null);
+        this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=ModifierMDP" ).forward( request, response );
+            
     }
-    
+    protected void TryModifierMDP(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        String oldMDP = (String) request.getParameter("OldMDP");
+        String newMDP = (String) request.getParameter("NewMDP");
+        String repMDP = (String) request.getParameter("RepMDP");
+        Client client =  (Client) request.getSession(true).getAttribute("Client");
+        String erreur = "";
+        if (client != null) 
+        {
+            if(client.MotDePasse.equals(oldMDP))
+            {
+                if(!oldMDP.equals(newMDP))
+                {
+                    if(!newMDP.equals(repMDP))
+                    {
+                        erreur = "Veuillez la confirmaion n'est pas identique au nouveau mot de passe";
+                    }
+                }
+                else
+                {
+                    erreur = "Veuillez saisir un mot de passe différent de l'actuel";
+                }
+            }
+            else
+            {
+                erreur = "Veuillez saisir votre mot de passe";
+            }
+            
+            if(erreur.equals(""))
+            {
+                //On UPDATE le client
+                request.setAttribute("Erreur", null);
+                client.MotDePasse = newMDP;
+                if(ClientDAO.Update(client) == 1)
+                {
+                    this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Compte" ).forward( request, response );
+                }
+                else
+                {
+                    request.setAttribute("Erreur", "Erreur : la modification n'a pas pu être sauvegardée !");
+                    this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=ModifierMDP" ).forward( request, response );
+                }
+            }
+            else
+            {
+                //On redirige sur le formulaire de modification.
+                request.setAttribute("Erreur", erreur);
+                this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=TryModifierMDP" ).forward( request, response );
+            }
+        }
+        else
+        {
+            GoCompte(request, response);
+        }
+    }
+    protected void GoCommandes(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        this.getServletContext().getRequestDispatcher( "/JSP/Index.jsp?JSPfolder=Commandes" ).forward( request, response );
+    }
+    //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -1,7 +1,7 @@
 <%@page import="sucradom.utile.Session"%>
 <%@page import="sucradom.metier.Client"%>
 <%
-    Client client = Session.Client;
+    Client client = (Client) request.getSession(true).getAttribute("Client");
     String clientNom = client.Nom;
     String clientPrenom = client.Prenom;
     String clientEmail = client.Email;

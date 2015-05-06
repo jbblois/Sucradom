@@ -131,6 +131,42 @@ public abstract class ClientDAO
         return listClients;
     }
     
+    public static int Update(Client Client)
+    {
+        int rowUpdated = 0;
+        String query = " UPDATE client SET Client.Nom = ?,Client.Prenom = ?,Client.Telephone = ?,Client.Email = ?,Client.MotDePasse = ?"
+                     + " WHERE Client.ID = ?;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setString(1, Client.Nom);
+            ps.setString(2, Client.Prenom);
+            ps.setString(3, Client.Telephone);
+            ps.setString(4, Client.Email);
+            ps.setString(5, Client.MotDePasse);
+            ps.setInt(6, Client.ID);
+            
+            rowUpdated = ps.executeUpdate();
+            ps.close();
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return rowUpdated;
+    }
+    
     public static Client GetClient(ResultSet RS)
     {
         try 
