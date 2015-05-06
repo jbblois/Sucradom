@@ -16,7 +16,7 @@
                 {
                     if (produit.IsDisponible.equals("OUI")) 
                     {
-                        String produitLien_Href = Base.CONTEXT_PATH+"/Index?JSPfolder=Produit&IDproduit="+ produit.ID;
+                        String produitLien_Href = Base.CONTEXT_PATH+"/Produit?Methode=Go&IDproduit="+ produit.ID;
                         String produitLien_Nom = produit.Libelle;
                         String pathNoSpaces = produit.Image.Path.replace(' ', '_');
                         String produitImage_Path = Base.CONTEXT_PATH+"/RESSOURCES/"+pathNoSpaces+".png";

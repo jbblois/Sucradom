@@ -1,20 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>sucradom.controle.Index</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Accueil</servlet-name>
         <servlet-class>sucradom.controle.Accueil</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Index</servlet-name>
-        <servlet-class>sucradom.controle.Index</servlet-class>
+        <servlet-name>Catalogue</servlet-name>
+        <servlet-class>sucradom.controle.Catalogue</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Compte</servlet-name>
+        <servlet-class>sucradom.controle.Compte</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Panier</servlet-name>
+        <servlet-class>sucradom.controle.Panier</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Connexion</servlet-name>
+        <servlet-class>sucradom.controle.Connexion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ModifierMDP</servlet-name>
+        <servlet-class>sucradom.controle.ModifierMDP</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Commandes</servlet-name>
+        <servlet-class>sucradom.controle.Commandes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Produit</servlet-name>
+        <servlet-class>sucradom.controle.Produit</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/Index</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Accueil</servlet-name>
         <url-pattern>/Accueil</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Index</servlet-name>
-        <url-pattern>/Index</url-pattern>
+        <servlet-name>Catalogue</servlet-name>
+        <url-pattern>/Catalogue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Compte</servlet-name>
+        <url-pattern>/Compte</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Panier</servlet-name>
+        <url-pattern>/Panier</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Connexion</servlet-name>
+        <url-pattern>/Connexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModifierMDP</servlet-name>
+        <url-pattern>/ModifierMDP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Commandes</servlet-name>
+        <url-pattern>/Commandes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Produit</servlet-name>
+        <url-pattern>/Produit</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

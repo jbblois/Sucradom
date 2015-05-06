@@ -6,16 +6,20 @@
 package sucradom.controle;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sucradom.dao.ProduitDAO;
+import sucradom.metier.Client;
+import sucradom.utile.Session;
 
 /**
  *
  * @author user
  */
-public class Index extends HttpServlet {
+public class Produit extends HttpServlet {
 
     private String _Module = "Accueil";
     /**
@@ -30,9 +34,31 @@ public class Index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
+        String methode = (String) request.getParameter("Methode");
+        switch(methode) 
+        {
+            case "Go":
+                Go(request, response);
+            break;
+            default:
+                _Module = "Accueil";
+            break;
+        }
         this.getServletContext().getRequestDispatcher("/JSP/Index.jsp?Module="+_Module ).forward( request, response );
     }
-
+    
+    protected void Go(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        if (request.getParameter("IDproduit") != null) 
+        {
+            String stringID = (String)request.getParameter("IDproduit");
+            int IDproduit =  Integer.parseInt(stringID);
+            request.setAttribute("SelectedProduit", ProduitDAO.Select(IDproduit));
+        }
+        _Module = "Produit";
+    }
+    
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -72,5 +98,5 @@ public class Index extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }

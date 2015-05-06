@@ -5,7 +5,9 @@
  */
 package sucradom.utile;
 
+import javax.servlet.http.HttpServletRequest;
 import sucradom.metier.Client;
+import sucradom.metier.TeteCommande;
 
 /**
  *
@@ -13,5 +15,21 @@ import sucradom.metier.Client;
  */
 public abstract class Session
 {
-    public static Client Client; 
+    public static Client GetClient(HttpServletRequest request)
+    {
+        return (Client)request.getSession(true).getAttribute("Client");
+    }
+    public static void SetClient(HttpServletRequest request, Client client)
+    {
+       request.getSession(true).setAttribute("Client",client);
+    }
+    
+    public static TeteCommande GetPanier(HttpServletRequest request)
+    {
+        return (TeteCommande)request.getSession(true).getAttribute("Panier");
+    }
+    public static void SetPanier(HttpServletRequest request, TeteCommande panier)
+    {
+       request.getSession(true).setAttribute("Panier",panier);
+    }
 }
