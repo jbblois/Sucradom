@@ -1,8 +1,10 @@
-<div class="row"> 
-    <div class="col-lg-2">
-        <%@include file="../Panier/Navigation.jsp" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <%@include file="../Blocs/Head.jsp" %>
+    <%@include file="../Blocs/Tete.jsp" %>
+    <div class="container"> 
+        <div class="col-lg-12">PANIER</div>
     </div>
-    <div class="col-lg-10">
-        <%@include file="../Panier/Corps.jsp" %>
-    </div>
-</div>
+    <%@include file="../Blocs/Pieds.jsp" %>
+</html>

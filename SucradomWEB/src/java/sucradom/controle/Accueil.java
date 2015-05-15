@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author user
  */
 public class Accueil extends HttpServlet {
-
+    private String _Module = "Accueil";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,8 +30,7 @@ public class Accueil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        String module = "Accueil";
-        this.getServletContext().getRequestDispatcher("/JSP/Index.jsp?Module="+module ).forward( request, response );
+        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -44,7 +44,7 @@ public class Produit extends HttpServlet {
                 _Module = "Accueil";
             break;
         }
-        this.getServletContext().getRequestDispatcher("/JSP/Index.jsp?Module="+_Module ).forward( request, response );
+        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
     
     protected void Go(HttpServletRequest request, HttpServletResponse response)
