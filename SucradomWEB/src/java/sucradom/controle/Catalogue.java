@@ -42,7 +42,7 @@ public class Catalogue extends HttpServlet {
         }
          _Module = "Catalogue";
         
-        this.getServletContext().getRequestDispatcher("/JSP/Index.jsp?Module="+_Module ).forward( request, response );
+        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

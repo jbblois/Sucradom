@@ -29,9 +29,12 @@ public abstract class Base
     private static final String DATABASE_LOGIN = "SucradomUSER";
     private static final String DATABASE_PASSWORD = "Candy53";
     
-    public static final String IMAGES_PATH = "./Ressources";
-    public static final String CONTEXT_PATH = "http://localhost:8084/SucradomWEB";
+    private static final String SERVER_IP = "localhost";
+    private static final String SERVER_CONTEXT = "SucradomWEB";
     
+    public static final String IMAGES_PATH = "./Ressources";
+    public static final String CONTEXT_PATH = "http://"+SERVER_IP+":8084/"+SERVER_CONTEXT;
+    public static final String DESIGN_PATH = CONTEXT_PATH+"/DESIGN/css";
     public static Connection GetConnection() 
     {
         

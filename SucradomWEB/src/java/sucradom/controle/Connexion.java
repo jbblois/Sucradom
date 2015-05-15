@@ -38,9 +38,6 @@ public class Connexion extends HttpServlet {
         {
             switch(methode) 
             {
-                case "Go":
-                    Go(request, response);
-                break;
                 case "Try":
                     Try(request, response);
                 break;
@@ -48,15 +45,15 @@ public class Connexion extends HttpServlet {
                     Deconnexion(request, response);
                 break;
                 default:
-                    _Module = "Accueil";
+                    Go(request, response);
                 break;
             }
         }
         else
         {
-            _Module = "Accueil";
+            Go(request, response);
         }
-        this.getServletContext().getRequestDispatcher("/JSP/Index.jsp?Module="+_Module ).forward( request, response );
+        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
     
     protected void Go(HttpServletRequest request, HttpServletResponse response)

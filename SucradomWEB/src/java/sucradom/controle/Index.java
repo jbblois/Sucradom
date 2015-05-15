@@ -30,7 +30,7 @@ public class Index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        this.getServletContext().getRequestDispatcher("/JSP/Index.jsp?Module="+_Module ).forward( request, response );
+        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
 
     
