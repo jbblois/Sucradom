@@ -1,10 +1,26 @@
 body {
-  padding-top: 10px;
+  padding-top: 50px;
 }
+
+/*
 [class*="col-"], footer {
   background-color: lightblue;
   border: 2px solid black;
   border-radius: 6px;
   line-height: 40px;
   text-align: center;
+}
+*/
+
+#principal-content{
+    border:solid 2px;
+    border-color:#ad6704;
+    background-color: #FFD093;
+}
+
+#content-produit{
+    border:solid 2px;
+    border-color:#ad6704;
+   
+    
 }

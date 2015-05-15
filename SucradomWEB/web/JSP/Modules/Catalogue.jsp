@@ -11,7 +11,7 @@
     <%@include file="../Blocs/Tete.jsp" %>
     <div class="container"> 
         <%@include file="../Blocs/Navigation.jsp" %>
-        <div class="col-lg-9"><!--Corps-->
+        <div class="col-lg-9" id="principal-content"><!--Corps-->
 <%  
     Categorie SelectedCategorie = (Categorie) request.getAttribute("SelectedCategorie");
     if ( SelectedCategorie != null) 

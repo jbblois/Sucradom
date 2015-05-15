@@ -1,6 +1,6 @@
 <%@page import="sucradom.utile.Base"%>
 <%@page import="sucradom.metier.Categorie"%>
-<div class="col-lg-3"><!--Colonne-->
+<div class="col-lg-3" id="principal-content"><!--Colonne-->
 <% 
     for (Categorie categorie : Base.GetCategories()) 
     {
