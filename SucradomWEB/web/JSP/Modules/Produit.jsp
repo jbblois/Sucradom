@@ -6,6 +6,7 @@
 <html>
     <%@include file="../Blocs/Head.jsp" %>
     <%@include file="../Blocs/Tete.jsp" %>
+    
     <div class="container"> 
         <%@include file="../Blocs/Navigation.jsp" %>
         <div class="col-lg-9">

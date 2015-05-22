@@ -37,4 +37,10 @@ public class Produit
     {
         return RequetesSQL.QuantiteDisponible(ID);
     }
+    
+    public float PrixTTC()
+    {
+        float taxe = (Taxe.Valeur/100) + 1;
+        return Prix*taxe;
+    }
 }

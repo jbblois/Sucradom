@@ -9,58 +9,62 @@
 <html>
     <%@include file="../Blocs/Head.jsp" %>
     <%@include file="../Blocs/Tete.jsp" %>
-    <div class="container"> 
-        <%@include file="../Blocs/Navigation.jsp" %>
-        <div class="col-lg-9" id="principal-content"><!--Corps-->
-<%  
-    Categorie SelectedCategorie = (Categorie) request.getAttribute("SelectedCategorie");
-    if ( SelectedCategorie != null) 
-    {
-        ArrayList<Produit> listeProduits = SelectedCategorie.GetProduits();
-        if(listeProduits != null)
-        {
-            if(listeProduits.size() > 0)
-            {
-                for (Produit produit : listeProduits) 
-                {
-                    if (produit.IsDisponible.equals("OUI")) 
-                    {
-                        String produitLien_Href = Base.CONTEXT_PATH+"/Produit?Methode=Go&IDproduit="+ produit.ID;
-                        String produitLien_Nom = produit.Libelle;
-                        String pathNoSpaces = produit.Image.Path.replace(' ', '_');
-                        String produitImage_Path = Base.CONTEXT_PATH+"/RESSOURCES/"+pathNoSpaces+".png";
-                        String produitImage_Alt = produit.Image.Alt;
-%>
-            <div class="col-lg-4">
-                <img src="<%= produitImage_Path %>" alt="<%= produitImage_Alt %>" height="100" width="100">
-                <a href="<%= produitLien_Href %>">  <%= produitLien_Nom %> </a>
-            </div>
-<%  
+    <div class="container">
+        <div class="row">
+            <%@include file="../Blocs/Navigation.jsp" %>
+            <div class="span9" ><!--Corps-->
+                <ul class="thumbnails">
+                <%    Categorie SelectedCategorie = (Categorie) request.getAttribute("SelectedCategorie");
+                    if (SelectedCategorie != null) {
+                        ArrayList<Produit> listeProduits = SelectedCategorie.GetProduits();
+                        if (listeProduits != null) {
+                            if (listeProduits.size() > 0) {
+                                for (Produit produit : listeProduits) {
+                                    if (produit.IsDisponible.equals("OUI")) {
+                                        String produitLien_Href = Base.CONTEXT_PATH + "/Produit?Methode=Go&IDproduit=" + produit.ID;
+                                        String produit_Nom = produit.Libelle;
+                                        String produit_Prix = produit.Prix + " €";
+                                        
+                                        String pathNoSpaces = produit.Image.Path.replace(' ', '_');
+                                        String produitImage_Path = Base.CONTEXT_PATH + "/RESSOURCES/" + pathNoSpaces + ".png";
+                                        String produitImage_Alt = produit.Image.Alt;
+                %>
+                
+                <li class="span3" >
+                    <div class="thumbnail" id="produit-affichage">
+                        <img src="http://dummyimage.com/200x200/878787/fff.png&text=Image+Produit" alt="Sucradom" width="300" height="300">
+                        <div class="caption">
+                            <h4><%= produit_Nom%></h4>
+                            <p><%= produit_Prix %></p>
+                            <a class="btn btn-primary" href="<%= produitLien_Href%>"> Plus d'infos</a>
+                            <a class="btn btn-success" href="#">Ajouter au panier</a>
+                        </div>
+                    </div>
+                </li>    
+                <%
+                        }
                     }
-                }
-            }
-            else
-            {
-%>
-            <div class="row">PAS DE PRODUITS DISPONIBLES</div>
-<%  
-            }
-        }
-        else
-        {
-%>
-            <div class="row">PAS DE PRODUITS DISPONIBLES</div>
-<%  
-        }
-    }
-    else
-    {
-%>
-            <div class="row">PAS DE CATEGORIE SELECTIONNEE</div>
-<%  
-    }
-%>
+                } else {
+                %>
+                <li class="span9" id="principal-content">PAS DE PRODUITS DISPONIBLES</li>
+                <%
+                    }
+                } else {
+                %>
+                <li class="span9" id="principal-content">PAS DE PRODUITS DISPONIBLES</li>
+                <%
+                    }
+                } else {
+                %>
+                <li class="span9" id="principal-content">PAS DE CATEGORIE SELECTIONNEE</li>
+                <%
+                    }
+                %>
+                </ul>
+                
+            </div>
         </div>
-    </div>
+            </div>
     <%@include file="../Blocs/Pieds.jsp" %>
+    
 </html>

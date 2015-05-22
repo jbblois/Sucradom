@@ -5,6 +5,7 @@
     String designbase = Base.DESIGN_PATH+"/base.css";
     String designCustom = Base.DESIGN_PATH+"/custom.css";
     String designBootstrapMin = Base.DESIGN_PATH+"/bootstrap.min.css";
+    String designResponsive = Base.DESIGN_PATH+"/bootstrap-responsive.css";
    
 %>
 <head>
@@ -13,12 +14,8 @@
         <link href="<%= designCustom%>" rel="stylesheet"/>
         <link href="<%= designBootstrap%>" rel="stylesheet">
         <link href="<%= designbase%>" rel="stylesheet">
-    
+        <link href="<%= designResponsive%>" rel="stylesheet" type="text/css"/>
         
-        
-        
-        
-       
-        
+
         <title>Sucradom</title>
 </head>

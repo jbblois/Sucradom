@@ -3,7 +3,7 @@
 <html>
     <%@include file="../Blocs/Head.jsp" %>
     <%@include file="../Blocs/Tete.jsp" %>
-    <div class="container"> 
+    <div class="container-fluid"> 
         <div class="col-lg-12">COMMANDES</div>
     </div>
     <%@include file="../Blocs/Pieds.jsp" %>

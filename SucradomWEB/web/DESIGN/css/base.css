@@ -12,15 +12,40 @@ body {
 }
 */
 
-#principal-content{
-    border:solid 2px;
+#nav-content{
+
+    border: 2px;
+    border : solid;
     border-color:#ad6704;
+    border-radius: 15px;
     background-color: #FFD093;
 }
+
+#principal-content{
+
+    border: 2px;
+    border : solid;
+    border-color:#ad6704;
+    border-radius: 15px;
+    background-color: #d4d4d4;
+}
+
 
 #content-produit{
     border:solid 2px;
     border-color:#ad6704;
    
     
+}
+
+#footer{
+    border-radius: 15px;
+}
+
+#produit-affichage{
+    border: 2px;
+    border : solid;
+    border-color:#ad6704;
+    border-radius: 15px;
+    background-color: #FFD093;
 }
