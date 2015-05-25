@@ -28,6 +28,7 @@
         String nombreDeProduits = ""+navPanier.GetLigneCommandes().size();
         String prixCommande = navPanier.GetPrixTTC()+" ?";
 %>
+<br>
     <div id="nav-content">
         <center><h5>Votre Panier</h5></center>
         <div >
