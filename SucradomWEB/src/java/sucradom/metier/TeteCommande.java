@@ -8,7 +8,6 @@ package sucradom.metier;
 import java.sql.Date;
 import java.util.ArrayList;
 import sucradom.dao.LigneCommandeDAO;
-import sucradom.dao.TeteCommandeDAO;
 
 /**
  *
@@ -39,5 +38,15 @@ public class TeteCommande
             _LigneCommandes = LigneCommandeDAO.LignesOfCommande(ID);
         }
         return _LigneCommandes;
+    }
+    
+    public float GetPrixTTC()
+    {
+        int prixTTC = 0;
+        for (LigneCommande ligne : _LigneCommandes) 
+        {
+            prixTTC += ligne.GetPrixTTC();
+        }
+        return prixTTC;
     }
 }
