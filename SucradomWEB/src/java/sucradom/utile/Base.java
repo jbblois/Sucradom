@@ -11,7 +11,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import sucradom.dao.CategorieDAO;
+import sucradom.dao.ProduitDAO;
 import sucradom.metier.Categorie;
+import sucradom.metier.LigneCommande;
+import sucradom.metier.Produit;
+import sucradom.metier.TeteCommande;
 
 /**
  *
@@ -99,5 +103,16 @@ public abstract class Base
             _Categories = CategorieDAO.List();
         }
         return _Categories;
+    }
+    
+    public static TeteCommande FakeCommande()
+    {
+        ArrayList<LigneCommande> lignes = new ArrayList<LigneCommande>();
+        for (Produit produit : ProduitDAO.List()) 
+        {
+            lignes.add(new LigneCommande(null, produit, 1, produit.Prix, produit.Taxe.Valeur));
+        }
+        
+        return new TeteCommande(lignes);
     }
 }

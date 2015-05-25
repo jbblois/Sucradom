@@ -28,6 +28,6 @@ public class LigneCommande
     
     public float GetPrixTTC()
     {
-        return Quantite * PrixUnitaire * ((ValeurTaxe/100)+1);
+        return Quantite * PrixUnitaire * (1+(ValeurTaxe/100));
     }
 }

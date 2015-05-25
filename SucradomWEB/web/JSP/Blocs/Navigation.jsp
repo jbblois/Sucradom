@@ -1,3 +1,5 @@
+<%@page import="sucradom.metier.LigneCommande"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="sucradom.utile.Session"%>
 <%@page import="sucradom.metier.TeteCommande"%>
 <%@page import="sucradom.utile.Base"%>
@@ -19,7 +21,6 @@
 %>
         <br>
     </ul>
-    <div class="">
 <%
     TeteCommande panier = Session.GetPanier(request);
     if(panier != null)
@@ -27,14 +28,38 @@
         String nombreDeProduits = ""+panier.GetLigneCommandes().size();
         String prixCommande = panier.GetPrixTTC()+" ?";
 %>
-        <div class="col-lg-12">
+    <div id="nav-content">
+        <center><h5>Votre Panier</h5></center>
+        <div >
             Produit: <%= nombreDeProduits %>         
         </div>
-        <div class="col-lg-12">
+        <div >
             Prix total : <%= prixCommande %>            
-        </div>           
+        </div>  
+    </div>  
 <%
     }
 %>
-    </div>   
+
+<%
+    TeteCommande fakePanier = Base.FakeCommande();
+    
+    if(fakePanier != null)
+    {
+        String nombreDeProduits = ""+fakePanier.GetLigneCommandes().size();
+        String prixCommande = fakePanier.GetPrixTTC()+" euros";
+%>
+    <div id="nav-content">
+        <center><h5>Votre Panier</h5></center>
+        <div >
+            Produit: <%= nombreDeProduits %>         
+        </div>
+        <div >
+            Prix total : <%= prixCommande %>            
+        </div>  
+    </div>  
+<%
+    }
+%>
+     
 </div>
