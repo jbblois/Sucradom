@@ -13,7 +13,7 @@
                     <li><a class="brand" href='http://localhost:8084/SucradomWEB/JSP/Pages/Contact.jsp'>Contact</a>  
                 </ul>
 
-                <center>&copy; Copyright 2015 - EURL Sucradom <br> powered by SARL FuturAPPS</center>
+                
                 
             </div> 
             
@@ -34,9 +34,13 @@
                 
             </div>
         </div>
+        <div class="container"><center>&copy; Copyright 2015 - EURL Sucradom - powered by SARL FuturAPPS</center></div>
 
         
     </div>
 </div>	
-<script src="../js/jquery-1.10.0.min.js"></script>
-<script src="../js/bootstrap.js"></script>
+
+<script src="/DESIGN/js/bootstrap.js" type="text/javascript"></script>
+<script src="/DESIGN/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/DESIGN/js/jquery.min.js" type="text/javascript"></script>
+<script src="/DESIGN/js/npm.js" type="text/javascript"></script>
