@@ -1,3 +1,5 @@
+<hr />
+
 <div id="footer" class="footer-fixed-bottom">
     <div class="" style="background-color: #FFD093">
         <div class="container">
