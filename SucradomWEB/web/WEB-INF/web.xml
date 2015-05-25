@@ -36,6 +36,10 @@
         <servlet-name>Produit</servlet-name>
         <servlet-class>sucradom.controle.Produit</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Facture</servlet-name>
+        <servlet-class>sucradom.controle.Facture</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/Index</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>Produit</servlet-name>
         <url-pattern>/Produit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Facture</servlet-name>
+        <url-pattern>/Facture</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sucradom.dao.ClientDAO;
 import sucradom.metier.Client;
+import sucradom.metier.TeteCommande;
 import sucradom.utile.Session;
 
 /**
@@ -78,6 +79,7 @@ public class Connexion extends HttpServlet {
             throws ServletException, IOException 
     {
             Session.SetClient(request, null);
+            Session.SetPanier(request, null);
             _Module = "Accueil";
     }
     

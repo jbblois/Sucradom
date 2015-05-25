@@ -10,13 +10,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sucradom.dao.ProduitDAO;
+import sucradom.dao.TeteCommandeDAO;
+import sucradom.metier.TeteCommande;
 
 /**
  *
  * @author user
  */
-public class Produit extends HttpServlet {
+public class Facture extends HttpServlet {
 
     private String _Module = "Accueil";
     /**
@@ -29,7 +30,7 @@ public class Produit extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+        throws ServletException, IOException 
     {
         String methode = (String) request.getParameter("Methode");
         switch(methode) 
@@ -45,18 +46,19 @@ public class Produit extends HttpServlet {
     }
     
     protected void Go(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+        throws ServletException, IOException 
     {
-        if (request.getParameter("IDproduit") != null) 
+        if (request.getParameter("IDcommande") != null) 
         {
-            String stringID = (String)request.getParameter("IDproduit");
-            int IDproduit =  Integer.parseInt(stringID);
-            request.setAttribute("SelectedProduit", ProduitDAO.Select(IDproduit));
+            String stringID = (String)request.getParameter("IDcommande");
+            int IDcommande =  Integer.parseInt(stringID);
+            TeteCommande commande = TeteCommandeDAO.Select(IDcommande);
+            request.setAttribute("SelectedCommande", commande);
+            _Module = "Facture";
         }
-        _Module = "Produit";
+        
     }
-    
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

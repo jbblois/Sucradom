@@ -6,11 +6,15 @@
 package sucradom.controle;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sucradom.dao.ProduitDAO;
+import sucradom.metier.LigneCommande;
+import sucradom.metier.TeteCommande;
+import sucradom.metier.Produit;
+import sucradom.metier.Taxe;
 import sucradom.utile.Session;
 
 /**
@@ -34,13 +38,22 @@ public class Panier extends HttpServlet {
     {
         if(Session.GetClient(request) != null)
         {
-            if(Session.GetPanier(request) != null)
+            String methode = (String) request.getParameter("Methode");
+            if (methode != null) 
             {
-                _Module = "Panier";
+                switch(methode) 
+                {
+                    case "AddOne":
+                        AddOne(request, response);
+                    break;
+                    default:
+                        Go(request, response);
+                    break;
+                }
             }
             else
             {
-                _Module = "Catalogue";
+                Go(request, response);
             }
         }
         else
@@ -48,6 +61,37 @@ public class Panier extends HttpServlet {
             _Module = "Connexion";
         }
         this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
+    }
+    protected void Go(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        
+        _Module = "Panier";
+    }
+    protected void AddOne(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        if (request.getParameter("IDproduit") != null) 
+        {
+            String stringID = (String)request.getParameter("IDproduit");
+            int IDproduit =  Integer.parseInt(stringID);
+            Produit produit = ProduitDAO.Select(IDproduit);
+            if(produit != null)
+            {
+                
+                TeteCommande panier = Session.GetPanier(request);
+                if(panier == null)
+                {
+                    Session.SetPanier(request);
+                    panier = Session.GetPanier(request);
+                }
+                Taxe taxe = produit.Taxe;
+                LigneCommande ligne = new LigneCommande(panier, produit, 1, produit.Prix, taxe.Valeur);
+                //Verifier les doublons
+                panier.GetLigneCommandes().add(ligne);
+            }
+        }
+        _Module = "Panier";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

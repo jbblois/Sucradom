@@ -32,4 +32,9 @@ public abstract class Session
     {
        request.getSession(true).setAttribute("Panier",panier);
     }
+    public static void SetPanier(HttpServletRequest request)
+    {
+        TeteCommande panier = new TeteCommande(0, null, GetClient(request), null, null, true);
+        request.getSession(true).setAttribute("Panier",panier);
+    }
 }
