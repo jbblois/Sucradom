@@ -1,3 +1,4 @@
+<%@page import="java.sql.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="sucradom.utile.Base"%>
 <%@page import="java.util.ArrayList"%>
@@ -12,14 +13,20 @@
         <%@include file="../Blocs/Navigation.jsp" %>
         <div class="col-lg-9">
 <%  
-    TeteCommande Panier = Session.GetPanier(request);
-    if ( Panier != null) 
+    TeteCommande SelectedCommande = (TeteCommande) request.getAttribute("SelectedCommande");
+    if ( SelectedCommande != null) 
     {
+        String etatCommande = SelectedCommande.EtatCommande.Nom;
+        Date date = SelectedCommande.Date;
+        String dateCommande = ""+date.getDay()+"/"+date.getMonth()+"/"+date.getYear();
 %>
             <div class="col-lg-12">
-                Le contenu de la commande
+                <%=etatCommande%> : <%=dateCommande%>
+            </div>
+            <div class="col-lg-12">
+                La ligne de commande
 <%        
-        ArrayList<LigneCommande> lignes = Panier.GetLigneCommandes();
+        ArrayList<LigneCommande> lignes = SelectedCommande.GetLigneCommandes();
         for(LigneCommande ligne : lignes)
         {
             Produit produit = ligne.Produit;
@@ -30,25 +37,17 @@
             String totalLigneTTC = ""+ligne.GetPrixTTC();
 %>
                 <div class="row">
-                    ligne : <%=libelleProduit%>
+                    <%=libelleProduit%> : <%=quantite%>
                 </div>
 <%        
         }
-        String prixCommande = Panier.GetPrixTTC()+" euros";
+        String prixCommande = SelectedCommande.GetPrixTTC()+" euros";
 %>
             </div>
             <div class="col-lg-12">
                 Le prix total de la commande
             </div>
 <% 
-    }
-    else
-    {
-%>
-    <div class="col-lg-12">
-        Le panier est vide
-    </div>
-<%         
     }
 %>
         </div>

@@ -19,14 +19,14 @@
 <%
     }
 %>
-        <br>
+        </li>
     </ul>
 <%
-    TeteCommande panier = Session.GetPanier(request);
-    if(panier != null)
+    TeteCommande navPanier = Session.GetPanier(request);
+    if(navPanier != null)
     {
-        String nombreDeProduits = ""+panier.GetLigneCommandes().size();
-        String prixCommande = panier.GetPrixTTC()+" ?";
+        String nombreDeProduits = ""+navPanier.GetLigneCommandes().size();
+        String prixCommande = navPanier.GetPrixTTC()+" ?";
 %>
 <br>
     <div id="nav-content">

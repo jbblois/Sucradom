@@ -27,13 +27,17 @@ public class TeteCommande
     }
 
     
-    public TeteCommande(int ID, Date Date, Client Client, EtatCommande EtatCommande, Adresse Adresse) 
+    public TeteCommande(int ID, Date Date, Client Client, EtatCommande EtatCommande, Adresse Adresse, boolean InitLignesCommandes) 
     {
         this.ID = ID;
         this.Date = Date;
         this.Client = Client;
         this.EtatCommande = EtatCommande;
         this.Adresse = Adresse;
+        if(InitLignesCommandes)
+        {
+            this._LigneCommandes = new ArrayList<>();
+        }
     }
     
     private ArrayList<LigneCommande> _LigneCommandes;

@@ -94,7 +94,6 @@ public abstract class Base
         date.setYear(Integer.parseInt(split[0]));
         return date;
     }
-    
     private static ArrayList<Categorie> _Categories;
     public static ArrayList<Categorie> GetCategories()
     {

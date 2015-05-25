@@ -93,7 +93,7 @@ public abstract class LigneCommandeDAO
     }
     public static ArrayList<LigneCommande> LignesOfCommande(int FID_Commande)
     {
-        ArrayList<LigneCommande> listLigneCommandes = null;
+        ArrayList<LigneCommande> listLigneCommandes = new ArrayList<>();
         
         String query = " SELECT " + _Properties
                      + " FROM LigneCommande"

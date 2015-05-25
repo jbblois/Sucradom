@@ -140,7 +140,8 @@ public abstract class TeteCommandeDAO
                     RS.getDate("Date"),
                     ClientDAO.Select(RS.getInt("FID_Client")),
                     EtatCommandeDAO.Select(RS.getInt("FID_Etat")),
-                    AdresseDAO.Select(RS.getInt("FID_Adresse"))
+                    AdresseDAO.Select(RS.getInt("FID_Adresse")),
+                    false
                 );
             return teteCommande;
         } 

@@ -13,11 +13,11 @@
             ArrayList<TeteCommande> commandes = Session.GetClient(request).GetCommandes();
             for (TeteCommande commande : commandes) 
             {
-                String commande_href = Base.CONTEXT_PATH + "/Commande?IDcommande=" + commande.ID;
+                String commande_href = Base.CONTEXT_PATH + "/Facture?Methode=Go&IDcommande=" + commande.ID;
                 Date dateCommande = commande.Date;
                 String command_date = ""+dateCommande.getDay()+"/"+dateCommande.getMonth()+"/"+dateCommande.getYear();
         %>
-                    <li class="">
+                    <li>
                         <a class="" href="<%= commande_href%>">  <%= dateCommande%> </a>
                     </li>
         <%
