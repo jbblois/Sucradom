@@ -21,6 +21,12 @@ public class TeteCommande
     public EtatCommande EtatCommande;
     public Adresse Adresse;
 
+    public TeteCommande(ArrayList<LigneCommande> Lignes) 
+    {
+        _LigneCommandes = Lignes;
+    }
+
+    
     public TeteCommande(int ID, Date Date, Client Client, EtatCommande EtatCommande, Adresse Adresse) 
     {
         this.ID = ID;

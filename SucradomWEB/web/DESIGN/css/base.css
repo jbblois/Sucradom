@@ -1,3 +1,8 @@
+
+html, body {
+    height: 100%;
+ }
+
 body {
   padding-top: 50px;
 }
@@ -38,11 +43,26 @@ body {
     
 }
 
+.wrapper {
+     height:auto !important;
+     min-height:100%;
+}
+
+
 #footer{
+
     border-radius: 15px;
 }
 
 #produit-affichage{
+    border: 2px;
+    border : solid;
+    border-color:#ad6704;
+    border-radius: 15px;
+    background-color: #FFD093;
+}
+
+#compte-affichage{
     border: 2px;
     border : solid;
     border-color:#ad6704;

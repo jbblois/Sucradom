@@ -1,4 +1,4 @@
-<footer id="footer" class="vspace5">
+<div id="footer" class="footer-fixed-bottom">
     <div class="" style="background-color: #FFD093">
         <div class="container">
             <div class="offset2 span3">
@@ -35,6 +35,6 @@
 
         
     </div>
-</footer>	
+</div>	
 <script src="../js/jquery-1.10.0.min.js"></script>
 <script src="../js/bootstrap.js"></script>
