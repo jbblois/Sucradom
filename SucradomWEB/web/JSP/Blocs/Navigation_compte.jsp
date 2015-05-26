@@ -11,13 +11,14 @@
                 <a class="row" href="<%= href + "/Connexion?Methode=Deconnexion"%>">  Se déconnecter </a>
             </li>
             <li class="">
-                <a class="row" href="<%= href + "/ModifierMDP?Methode=Go"%>">  Changer le <br> mot de passe </a>
+                <a class="row" href="<%= href + "/ModifierMDP?Methode=Go"%>">  Changer le mot de passe </a>
             </li>
             <li class="">
                 <a class="row" href="<%= href + "/Commandes"%>">  Mes commandes </a>
             </li>
-
-        <br>
+            <li class="">
+                <a class="row" href="<%= href + "/Adresses"%>">  Mes adresses </a>
+            </li>
     </ul>
       
 </div>

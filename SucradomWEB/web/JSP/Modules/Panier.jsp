@@ -11,44 +11,43 @@
     <div class="container"> 
         <%@include file="../Blocs/Navigation.jsp" %>
         <div class="col-lg-9">
-<%  
+<%
     TeteCommande Panier = Session.GetPanier(request);
+    String prixCommande = Panier.GetPrixTTC()+" euros";
+    String formAction = Base.CONTEXT_PATH + "/Panier?Methode=Valider";
     if ( Panier != null) 
     {
 %>
-            <div class="col-lg-12">
-                Le contenu de la commande
+            <FORM class="col-lg-12" Method="POST" Action="<%= formAction %>">
+                <div class="col-lg-12">
 <%        
         ArrayList<LigneCommande> lignes = Panier.GetLigneCommandes();
         for(LigneCommande ligne : lignes)
         {
             Produit produit = ligne.Produit;
             String libelleProduit = produit.Libelle;
-            String quantite = ""+ligne.Quantite;
+            String quantiteProduit = ""+ligne.Quantite;
             float UTTC = ligne.PrixUnitaire * (1+(ligne.ValeurTaxe/100));
-            String prixUnitaireTTC = ""+UTTC;
+            String prixUnitaireTTC = ""+UTTC+" euros";
             String totalLigneTTC = ""+ligne.GetPrixTTC();
 %>
-                <div class="row">
-                    ligne : <%=libelleProduit%>
-                </div>
+                    <div class="col-lg-12">
+                    <%=libelleProduit%> x <%=quantiteProduit%> à <%=prixUnitaireTTC%> = <%=totalLigneTTC%>
+                    </div>
 <%        
         }
-        String prixCommande = Panier.GetPrixTTC()+" euros";
 %>
-            </div>
-            <div class="col-lg-12">
-                Le prix total de la commande
-            </div>
-<% 
+                </div>
+                <input class="row" type=submit value=Valider>
+            </FORM>
+<%  
     }
-    else
-    {
-%>
-    <div class="col-lg-12">
-        Le panier est vide
-    </div>
-<%         
+    String Erreur = (String) request.getAttribute("Erreur");
+    if (Erreur != null) 
+    {   
+%>     
+           <div class="col-lg-12" id="principal-content"><%=Erreur%></div>    
+<%
     }
 %>
         </div>

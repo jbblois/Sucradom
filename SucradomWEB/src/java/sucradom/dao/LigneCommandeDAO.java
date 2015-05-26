@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import sucradom.metier.LigneCommande;
+import sucradom.metier.TeteCommande;
 import sucradom.utile.Base;
 
 /**
@@ -127,7 +128,6 @@ public abstract class LigneCommandeDAO
         
         return listLigneCommandes;
     }
-    
     public static LigneCommande GetLigneCommande(ResultSet RS)
     {
         try 
@@ -146,5 +146,42 @@ public abstract class LigneCommandeDAO
         {
             return null;
         }
+    }
+    public static boolean Insert(LigneCommande Ligne)
+    {
+        TeteCommande teteCommande = null;
+        
+        String query = "INSERT INTO LigneCommande "
+                     + "("+_Properties+")"
+                     + "(?,?,?,?,?)";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setInt(1, Ligne.Commande.ID);
+            ps.setInt(2, Ligne.Produit.ID);
+            ps.setInt(3, Ligne.Quantite);
+            ps.setFloat(4, Ligne.PrixUnitaire);
+            ps.setFloat(5, Ligne.ValeurTaxe);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) 
+            {
+                return true;
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return false;
     }
 }

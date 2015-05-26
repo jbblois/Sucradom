@@ -17,9 +17,9 @@
                 Date dateCommande = commande.Date;
                 String command_date = ""+dateCommande.getDay()+"/"+dateCommande.getMonth()+"/"+dateCommande.getYear();
         %>
-                    <li>
+                    <div class="col-lg-12">
                         <a class="" href="<%= commande_href%>">  <%= dateCommande%> </a>
-                    </li>
+                    </div>
         <%
             }
         %>

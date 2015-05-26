@@ -55,6 +55,45 @@ public abstract class TeteCommandeDAO
         
         return teteCommande;
     }
+    public static TeteCommande SelectLast()
+    {
+        TeteCommande teteCommande = null;
+        
+        String query = " SELECT " + _Properties
+                     + " FROM TeteCommande"
+                     + " WHERE TeteCommande.ID = "
+                     + " (" 
+                     + "    SELECT MAX(TeteCommande.ID)" 
+                     + "    FROM TeteCommande" 
+                     + " );";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) 
+            {
+                teteCommande = GetTeteCommande(rs);
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return teteCommande;
+    }
+    
     public static ArrayList<TeteCommande> List()
     {
         ArrayList<TeteCommande> listTeteCommandes = null;
@@ -149,5 +188,42 @@ public abstract class TeteCommandeDAO
         {
             return null;
         }
+    }
+    
+    public static boolean Insert(TeteCommande Panier)
+    {
+        TeteCommande teteCommande = null;
+        
+        String query = " INSERT INTO TeteCommande("+_Properties+")"
+                     + " VALUES(?,?,?,?,?);";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setInt(1, Panier.ID);
+            ps.setDate(2, Panier.Date);
+            ps.setInt(3, Panier.Client.ID);
+            ps.setInt(4, Panier.EtatCommande.ID);
+            ps.setInt(5, Panier.Adresse.ID);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) 
+            {
+                return true;
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return false;
     }
 }

@@ -26,7 +26,7 @@
     if(navPanier != null)
     {
         String nombreDeProduits = ""+navPanier.GetLigneCommandes().size();
-        String prixCommande = navPanier.GetPrixTTC()+" ?";
+        String prixCommande = navPanier.GetPrixTTC()+" euros";
 %>
 <br>
     <div id="nav-content">
@@ -40,27 +40,5 @@
     </div>  
 <%
     }
-%>
-
-<%
-    TeteCommande fakePanier = Base.FakeCommande();
-    
-    if(fakePanier != null)
-    {
-        String nombreDeProduits = ""+fakePanier.GetLigneCommandes().size();
-        String prixCommande = fakePanier.GetPrixTTC()+" euros";
-%>
-    <div id="nav-content">
-        <center><h5>Votre Panier</h5></center>
-        <div >
-            Produit: <%= nombreDeProduits %>         
-        </div>
-        <div >
-            Prix total : <%= prixCommande %>            
-        </div>  
-    </div>  
-<%
-    }
-%>
-     
+%> 
 </div>
