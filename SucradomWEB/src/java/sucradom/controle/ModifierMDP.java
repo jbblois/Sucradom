@@ -19,8 +19,6 @@ import sucradom.utile.Session;
  * @author user
  */
 public class ModifierMDP extends HttpServlet {
-
-    private String _Module = "Accueil";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,7 +48,7 @@ public class ModifierMDP extends HttpServlet {
         {
             Go(request, response);
         }
-        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
+        
     }
     
     protected void Go(HttpServletRequest request, HttpServletResponse response)
@@ -60,14 +58,13 @@ public class ModifierMDP extends HttpServlet {
         if (client != null) 
         {
             //Client est déjà connecté redirection sur page compte
-            request.setAttribute("Erreur", null);
-            _Module = "ModifierMDP";
+            Index.RequestDispatcher(request, response, this, "/JSP/Modules/ModifierMDP.jsp");
         }
         else
         {
             //Client est pas connecté et doit se connecter
             request.setAttribute("Erreur", "Veuillez vous connecter !");
-            _Module = "Connexion";
+            Index.RequestDispatcher(request, response, this, "/Connexion");
         }
     }
     
@@ -112,7 +109,7 @@ public class ModifierMDP extends HttpServlet {
             client.MotDePasse = newMDP;
             if(ClientDAO.Update(client) == 1)
             {
-                _Module = "Compte";
+                Index.RequestDispatcher(request, response, this, "/Compte");
             }
             else
             {
@@ -124,7 +121,7 @@ public class ModifierMDP extends HttpServlet {
         if(!erreur.equals(""))
         {
             request.setAttribute("Erreur", erreur);
-            _Module = "ModifierMDP";
+            Index.RequestDispatcher(request, response, this, "/ModfierMDP");
         }
     }
     

@@ -6,10 +6,15 @@
 package sucradom.controle;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static sucradom.controle.Index.RequestDispatcher;
+import sucradom.dao.AdresseDAO;
+import sucradom.dao.TeteCommandeDAO;
+import sucradom.metier.TeteCommande;
 import sucradom.utile.Session;
 
 /**
@@ -17,7 +22,6 @@ import sucradom.utile.Session;
  * @author user
  */
 public class Adresses extends HttpServlet {
-    private String _Module = "Accueil";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,17 +34,63 @@ public class Adresses extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        if(Session.GetClient(request) != null)
+        String methode = (String) request.getParameter("Methode");
+        if(methode != null)
         {
-            _Module = "Adresses";
+            switch(methode) 
+            {
+                case "Delete":
+                    Delete(request, response);
+                break;
+                default:
+                    Go(request, response);
+                break;
+            }
         }
-        else 
+        else
         {
-            request.setAttribute("Erreur", "Veuillez vous connecter !");
-            _Module = "Connexion";
+            Go(request, response);
         }
-        
-        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
+ 
+    }
+    
+    private void Go(HttpServletRequest request, HttpServletResponse response)
+    {
+        String module = "";
+        if(Session.GetClient(request) == null)
+        {
+            module ="Connexion";
+        }
+        else
+        {
+            module ="Adresses";
+        }
+        Index.RequestDispatcher(request, response, this, "/JSP/Modules/"+module+".jsp");
+    }
+    
+    private void Delete(HttpServletRequest request, HttpServletResponse response)
+    {
+        String stringID = (String)request.getParameter("IDadresse");
+        if (stringID != null) 
+        {
+            int IDadresse =  Integer.parseInt(stringID);
+            ArrayList<TeteCommande> commandes = TeteCommandeDAO.CommandesOfAdresse(IDadresse);
+            if(commandes != null)
+            {
+                if(commandes.size() == 0)
+                {
+                    if(AdresseDAO.Delete(IDadresse) != 1)
+                    {
+                        request.setAttribute("Erreur", "Problème survenu lors de la suppresion !");
+                    }
+                }
+                else
+                {
+                    request.setAttribute("Erreur", "Cette adresse est utilisée pour une commande !");
+                }
+            }
+        }
+        Index.RequestDispatcher(request, response, this, "/Adresses");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

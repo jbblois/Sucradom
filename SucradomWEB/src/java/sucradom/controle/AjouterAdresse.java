@@ -11,7 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sucradom.dao.AdresseDAO;
 import sucradom.dao.ClientDAO;
+import sucradom.metier.Adresse;
 import sucradom.metier.Client;
 import sucradom.utile.Session;
 
@@ -20,7 +22,6 @@ import sucradom.utile.Session;
  * @author user
  */
 public class AjouterAdresse extends HttpServlet {
-    private String _Module = "Adresses";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,82 +51,58 @@ public class AjouterAdresse extends HttpServlet {
         {
             Go(request, response);
         }
-        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
     
     protected void Go(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
         Client client = Session.GetClient(request);
+        String module = "";
         if (client != null) 
         {
             //Client est déjà connecté redirection sur page compte
             request.setAttribute("Erreur", null);
-            _Module = "ModifierMDP";
+            module = "AjouterAdresse";
         }
         else
         {
             //Client est pas connecté et doit se connecter
             request.setAttribute("Erreur", "Veuillez vous connecter !");
-            _Module = "Connexion";
+            module = "Connexion";
         }
+        Index.RequestDispatcher(request, response, this, "/JSP/Modules/"+module+".jsp");
     }
     
     protected void Try(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
         Client client = Session.GetClient(request);
-        String oldMDP = (String) request.getParameter("OldMDP");
-        String newMDP = (String) request.getParameter("NewMDP");
-        String repMDP = (String) request.getParameter("RepMDP");
+        String stringPays = (String) request.getParameter("Pays");
+        String stringCP = (String) request.getParameter("CP");
+        String stringVille = (String) request.getParameter("Ville");
+        String stringRue = (String) request.getParameter("Rue");
+        String stringNumero = (String) request.getParameter("Numero");
         
-        String erreur = "";
-        if(client.MotDePasse.equals(oldMDP))
-        {
-            if(!newMDP.equals(""))
+        String servlet = "";
+        if(stringPays != null 
+        && stringCP != null 
+        && stringVille != null 
+        && stringRue != null 
+        && stringNumero != null)
+        { 
+            Adresse adresse = new Adresse(0, stringNumero, stringRue, stringCP, stringVille, stringPays, client);
+            if(AdresseDAO.Insert(adresse) != 1)
             {
-                if(!newMDP.equals(oldMDP))
-                {
-                    if(!newMDP.equals(repMDP))
-                    {
-                        erreur = "La confirmation du mot de passe n'est pas identique au nouveau mot de passe !";
-                    }
-                }
-                else
-                {
-                    erreur = "Veuillez saisir un nouveau mot de passe différent de l'ancien !";
-                }
+                request.setAttribute("Erreur", "Problème survenu lors de l'enregistrement de l'adresse !");
             }
-            else
-            {
-                erreur = "Veuillez saisir votre ancien mot de passe !";
-            }
+            servlet = "Adresses";
         }
         else
         {
-            erreur = "Veuillez saisir votre ancien mot de passe !";
+            request.setAttribute("Erreur", "Veuillez remplir tous les champs !");
+            servlet = "AjouterAdresses";
         }
-        
-
-        if(erreur.equals(""))
-        {
-            client.MotDePasse = newMDP;
-            if(ClientDAO.Update(client) == 1)
-            {
-                _Module = "Compte";
-            }
-            else
-            {
-                erreur = "Erreur lors de la sauvegarde du nouveau mot de passe";
-            }
-            
-        }
-        
-        if(!erreur.equals(""))
-        {
-            request.setAttribute("Erreur", erreur);
-            _Module = "ModifierMDP";
-        }
+        Index.RequestDispatcher(request, response, this, "/"+servlet);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

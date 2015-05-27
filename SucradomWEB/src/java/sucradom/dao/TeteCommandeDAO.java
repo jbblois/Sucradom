@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import sucradom.metier.TeteCommande;
-import sucradom.metier.TeteCommande;
 import sucradom.utile.Base;
 /**
  *
@@ -169,6 +168,46 @@ public abstract class TeteCommandeDAO
         
         return listTeteCommandes;
     }
+    
+    public static ArrayList<TeteCommande> CommandesOfAdresse(int FID_Adresse)
+    {
+        ArrayList<TeteCommande> listTeteCommandes = null;
+        
+        String query = " SELECT " + _Properties
+                     + " FROM TeteCommande "
+                     + " WHERE TeteCommande.FID_Adresse=?;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setInt(1, FID_Adresse);
+            ResultSet rs = ps.executeQuery();
+            listTeteCommandes = new ArrayList<TeteCommande>();
+            while(rs.next()) {
+                TeteCommande teteCommande = GetTeteCommande(rs);
+                if (teteCommande != null) 
+                {
+                    listTeteCommandes.add(teteCommande);
+                }
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return listTeteCommandes;
+    }
+    
     public static TeteCommande GetTeteCommande(ResultSet RS)
     {
         try 
@@ -190,27 +229,21 @@ public abstract class TeteCommandeDAO
         }
     }
     
-    public static boolean Insert(TeteCommande Panier)
-    {
-        TeteCommande teteCommande = null;
-        
-        String query = " INSERT INTO TeteCommande("+_Properties+")"
-                     + " VALUES(?,?,?,?,?);";
+    public static int Insert(TeteCommande Panier)
+    {   
+        String query = " INSERT INTO TeteCommande(TeteCommande.Date,TeteCommande.FID_Client,TeteCommande.FID_Etat,TeteCommande.FID_Adresse)"
+                     + " VALUES(?,?,?,?);";
         
         PreparedStatement ps = null;
         
         try {
             ps = Base.GetConnection().prepareStatement(query);
-            ps.setInt(1, Panier.ID);
-            ps.setDate(2, Panier.Date);
-            ps.setInt(3, Panier.Client.ID);
-            ps.setInt(4, Panier.EtatCommande.ID);
-            ps.setInt(5, Panier.Adresse.ID);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()) 
-            {
-                return true;
-            }
+            ps.setDate(1, Panier.Date);
+            ps.setInt(2, Panier.Client.ID);
+            ps.setInt(3, Panier.EtatCommande.ID);
+            ps.setInt(4, Panier.Adresse.ID);
+            
+            return ps.executeUpdate();
         }
         catch(Exception exc) {
             exc.printStackTrace();
@@ -224,6 +257,6 @@ public abstract class TeteCommandeDAO
                 }
             }
         }
-        return false;
+        return 0;
     }
 }

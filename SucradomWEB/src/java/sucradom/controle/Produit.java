@@ -17,8 +17,6 @@ import sucradom.dao.ProduitDAO;
  * @author user
  */
 public class Produit extends HttpServlet {
-
-    private String _Module = "Accueil";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,10 +36,9 @@ public class Produit extends HttpServlet {
                 Go(request, response);
             break;
             default:
-                _Module = "Accueil";
+                Index.RequestDispatcher(request, response, this, "/Catalogue");
             break;
         }
-        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
     
     protected void Go(HttpServletRequest request, HttpServletResponse response)
@@ -51,9 +48,21 @@ public class Produit extends HttpServlet {
         {
             String stringID = (String)request.getParameter("IDproduit");
             int IDproduit =  Integer.parseInt(stringID);
-            request.setAttribute("SelectedProduit", ProduitDAO.Select(IDproduit));
+            sucradom.metier.Produit produitSelected = ProduitDAO.Select(IDproduit);
+            if( produitSelected != null)
+            {
+                request.setAttribute("SelectedProduit", produitSelected);
+                Index.RequestDispatcher(request, response, this, "/JSP/Modules/Produit.jsp");
+            }
+            else 
+            {
+                Index.RequestDispatcher(request, response, this, "/Catalogue");
+            }
         }
-        _Module = "Produit";
+        else
+        {
+            Index.RequestDispatcher(request, response, this, "/Catalogue");
+        }
     }
     
     

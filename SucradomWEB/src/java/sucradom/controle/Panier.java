@@ -12,14 +12,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sucradom.dao.AdresseDAO;
 import sucradom.dao.EtatCommandeDAO;
 import sucradom.dao.LigneCommandeDAO;
 import sucradom.dao.ProduitDAO;
 import sucradom.dao.TeteCommandeDAO;
+import sucradom.metier.Adresse;
 import sucradom.metier.LigneCommande;
 import sucradom.metier.TeteCommande;
 import sucradom.metier.Produit;
 import sucradom.metier.Taxe;
+import sucradom.utile.Base;
 import sucradom.utile.Session;
 
 /**
@@ -27,8 +30,6 @@ import sucradom.utile.Session;
  * @author user
  */
 public class Panier extends HttpServlet {
-
-    private String _Module = "Accueil";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -57,6 +58,9 @@ public class Panier extends HttpServlet {
                     case "Valider":
                         Valider(request, response);
                     break;
+                    case "Delete":
+                        Delete(request, response);
+                    break;
                     default:
                         Go(request, response);
                     break;
@@ -69,9 +73,8 @@ public class Panier extends HttpServlet {
         }
         else
         {
-            _Module = "Connexion";
+            Index.RequestDispatcher(request, response, this, "/Connexion");
         }
-        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
     
     protected void Go(HttpServletRequest request, HttpServletResponse response)
@@ -80,11 +83,11 @@ public class Panier extends HttpServlet {
         TeteCommande panier = Session.GetPanier(request);
         if(panier != null)
         {
-            _Module = "Panier";
+            Index.RequestDispatcher(request, response, this, "/JSP/Modules/Panier.jsp");
         }
         else
         {
-            _Module = "Catalogue";
+            Index.RequestDispatcher(request, response, this, "/Catalogue");
             request.setAttribute("Erreur", "Votre panier est vide");
         }
     }
@@ -99,8 +102,7 @@ public class Panier extends HttpServlet {
             Produit produitSelectionne = ProduitDAO.Select(IDproduit);
             if(produitSelectionne != null)
             {
-                AddLigne(request, produitSelectionne, 1);
-                _Module = "Panier";
+                AddLigne(request, response, produitSelectionne, 1);
             }
         }
         
@@ -122,7 +124,7 @@ public class Panier extends HttpServlet {
                 
                 if(Quantite > 0)
                 {
-                    AddLigne(request, produitSelectionne, Quantite);
+                    AddLigne(request, response, produitSelectionne, Quantite);
                 }
                 else
                 {
@@ -137,7 +139,7 @@ public class Panier extends HttpServlet {
         }
     }
     
-    private void AddLigne(HttpServletRequest request, Produit ProduitSelectionne, int Quantite)
+    private void AddLigne(HttpServletRequest request, HttpServletResponse response, Produit ProduitSelectionne, int Quantite)
     {
         TeteCommande panier = Session.GetPanier(request);
         if(panier == null)
@@ -153,10 +155,13 @@ public class Panier extends HttpServlet {
                 Taxe taxe = ProduitSelectionne.Taxe;
                 LigneCommande ligne = new LigneCommande(panier, ProduitSelectionne, Quantite, ProduitSelectionne.Prix, taxe.Valeur);
                 panier.GetLigneCommandes().add(ligne);
+                request.setAttribute("Erreur", null);
+                Index.RequestDispatcher(request, response, this, "/Panier?Methode=Go");
             }
             else
             {
                 request.setAttribute("Erreur", "Pas assez de quantité en stock !");
+                Index.RequestDispatcher(request, response, this, "/Produit?Methode=Go&IDproduit="+ProduitSelectionne.ID);
             }
         }
         else
@@ -189,42 +194,89 @@ public class Panier extends HttpServlet {
     protected boolean Valider(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
+        boolean check = true;
         TeteCommande panier = Session.GetPanier(request);
         if( panier != null)
         {
-            ArrayList<LigneCommande> lignes = panier.GetLigneCommandes();
-            if(!lignes.isEmpty())
+            String stringID = request.getParameter("IDadresse");
+            int IDadresse = Integer.parseInt(stringID);
+            Adresse adresse = AdresseDAO.Select(IDadresse);
+            if(adresse != null)
             {
-                //1 - INSERT TeteCommande WITH Date = Now() AND EtatCommande = NonPayée
-                java.util.Date utilDate = new Date();
-                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-                panier.Date = sqlDate;
-                panier.EtatCommande = EtatCommandeDAO.Select(1);
-                if(TeteCommandeDAO.Insert(panier))
+                ArrayList<LigneCommande> lignes = panier.GetLigneCommandes();
+                if(!lignes.isEmpty())
                 {
-                    //2 - SELECT Last TeteCommande
-                    panier = TeteCommandeDAO.SelectLast();
-                    if(panier != null && panier.Date.equals(sqlDate))
+                    //1 - INSERT TeteCommande WITH Date = Now() AND EtatCommande = NonPayée
+                    java.util.Date utilDate = new Date();
+                    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                    
+                    panier.Adresse = adresse;
+                    panier.Date = sqlDate;
+                    panier.EtatCommande = EtatCommandeDAO.Select(1);
+                    
+                    if(TeteCommandeDAO.Insert(panier) == 1)
                     {
-                        //3 - INSERT each LigneCommande 
-                        for (LigneCommande ligne : lignes) 
+                        //2 - SELECT Last TeteCommande
+                        panier = TeteCommandeDAO.SelectLast();
+                        if(panier != null)
                         {
-                            ligne.Commande = panier;
-                            if(!LigneCommandeDAO.Insert(ligne))
+                            //3 - INSERT each LigneCommande 
+                            for (LigneCommande ligne : lignes) 
                             {
-                                request.setAttribute("Erreur", "Erreur lors de l'enregistrement de la commande !");
-                                return false;
+                                ligne.Commande = panier;
+                                if(LigneCommandeDAO.Insert(ligne) != 1)
+                                {
+                                    request.setAttribute("Erreur", "Erreur lors de l'enregistrement de la commande !");
+                                    check = false;
+                                }
                             }
+                            
                         }
-                        //4 - Vider le panier
-                        Session.SetPanier(request, null);
-                         _Module = "Compte";
-                         return true;
+                        else{check = false;}
                     }
+                    else{check = false;}
+                }
+                else{check = false;}
+            }
+            else{check = false;}
+        }
+        else{check = false;}
+        
+        if(check)
+        {
+            //4 - Vider le panier
+            Session.SetPanier(request, null);
+            Index.RequestDispatcher(request, response, this, "/Commandes");
+            check = true;
+        }
+        else
+        {
+            Index.RequestDispatcher(request, response, this, "/Panier?Methode=GO");
+        }
+        return check;
+    }
+    
+    protected void Delete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        if (request.getParameter("IDproduit") != null) 
+        {
+            String stringID = (String)request.getParameter("IDproduit");
+            int IDproduit =  Integer.parseInt(stringID);
+            int i = 0;
+            LigneCommande DeletedLine = null;
+            for (LigneCommande ligne : Session.GetPanier(request).GetLigneCommandes()) 
+            {
+                if(ligne.Produit.ID == IDproduit)
+                {
+                    DeletedLine = ligne;
+                    break;
                 }
             }
+            Session.GetPanier(request).GetLigneCommandes().remove(DeletedLine);
+            Index.RequestDispatcher(request, response, this, "/Panier");
         }
-        return false;
+        
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -34,23 +34,13 @@ public class Client
         this.IsActif = IsActif;
     }
     
-    private ArrayList<TeteCommande> _Commandes;
     public ArrayList<TeteCommande> GetCommandes()
     {
-        if (_Commandes == null) 
-        {
-            _Commandes = TeteCommandeDAO.CommandesOfClient(ID);
-        }
-        return _Commandes;
+        return TeteCommandeDAO.CommandesOfClient(ID);
     }
     
-    private ArrayList<Adresse> _Adresses;
     public ArrayList<Adresse> GetAdresses()
     {
-        if (_Adresses == null) 
-        {
-            _Adresses = AdresseDAO.AdressesOfClient(ID);
-        }
-        return _Adresses;
+        return AdresseDAO.AdressesOfClient(ID);
     }
 }

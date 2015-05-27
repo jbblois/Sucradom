@@ -147,13 +147,10 @@ public abstract class LigneCommandeDAO
             return null;
         }
     }
-    public static boolean Insert(LigneCommande Ligne)
+    public static int Insert(LigneCommande Ligne)
     {
-        TeteCommande teteCommande = null;
-        
-        String query = "INSERT INTO LigneCommande "
-                     + "("+_Properties+")"
-                     + "(?,?,?,?,?)";
+        String query = " INSERT INTO LigneCommande("+_Properties+")"
+                     + " VALUES(?,?,?,?,?)";
         
         PreparedStatement ps = null;
         
@@ -164,11 +161,8 @@ public abstract class LigneCommandeDAO
             ps.setInt(3, Ligne.Quantite);
             ps.setFloat(4, Ligne.PrixUnitaire);
             ps.setFloat(5, Ligne.ValeurTaxe);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()) 
-            {
-                return true;
-            }
+            
+            return ps.executeUpdate();
         }
         catch(Exception exc) {
             exc.printStackTrace();
@@ -182,6 +176,6 @@ public abstract class LigneCommandeDAO
                 }
             }
         }
-        return false;
+        return 0;
     }
 }

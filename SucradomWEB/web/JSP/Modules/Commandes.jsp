@@ -8,21 +8,23 @@
     <%@include file="../Blocs/Head.jsp" %>
     <%@include file="../Blocs/Tete.jsp" %>
     <div class="container"> 
-        <div class="col-lg-12">COMMANDES</div>
+        <%@include file="../Blocs/Navigation_compte.jsp" %>
+        <div class="span8">
         <%
             ArrayList<TeteCommande> commandes = Session.GetClient(request).GetCommandes();
             for (TeteCommande commande : commandes) 
             {
-                String commande_href = Base.CONTEXT_PATH + "/Facture?Methode=Go&IDcommande=" + commande.ID;
+                String commandeHref= Base.CONTEXT_PATH + "/Facture?Methode=Go&IDcommande=" + commande.ID;
                 Date dateCommande = commande.Date;
-                String command_date = ""+dateCommande.getDay()+"/"+dateCommande.getMonth()+"/"+dateCommande.getYear();
+                String commandeText = commande.ID+" "+Base.DateToString(dateCommande);
         %>
-                    <div class="col-lg-12">
-                        <a class="" href="<%= commande_href%>">  <%= dateCommande%> </a>
-                    </div>
+            <div class="col-lg-12">
+                <a class="" href="<%= commandeHref%>">  <%= commandeText%> </a>
+            </div>
         <%
             }
         %>
+        </div>
     </div>
     <%@include file="../Blocs/Pieds.jsp" %>
 </html>

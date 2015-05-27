@@ -29,6 +29,13 @@ public class Adresse
         this.Pays = Pays;
         this.Client = Client;
     }
+
+    @Override
+    public String toString() 
+    {
+        return this.Numero+" rue "+this.Rue+", "+this.Cp+" "+this.Ville+" "+this.Pays.toUpperCase();
+    }
+    
     
     
 }
