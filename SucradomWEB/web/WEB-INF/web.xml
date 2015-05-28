@@ -40,6 +40,14 @@
         <servlet-name>Facture</servlet-name>
         <servlet-class>sucradom.controle.Facture</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Adresses</servlet-name>
+        <servlet-class>sucradom.controle.Adresses</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AjouterAdresse</servlet-name>
+        <servlet-class>sucradom.controle.AjouterAdresse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/Index</url-pattern>
@@ -79,6 +87,14 @@
     <servlet-mapping>
         <servlet-name>Facture</servlet-name>
         <url-pattern>/Facture</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Adresses</servlet-name>
+        <url-pattern>/Adresses</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AjouterAdresse</servlet-name>
+        <url-pattern>/AjouterAdresse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -85,14 +85,10 @@ public abstract class Base
         }
     }
 
-    public static Date StringToDate(String DateTime)
+    public static String DateToString(java.sql.Date date)
     {
-        Date date = new Date();
-        String[] split = DateTime.split(" ")[0].split("-");
-        date.setDate(Integer.parseInt(split[2]));
-        date.setMonth(Integer.parseInt(split[1]));
-        date.setYear(Integer.parseInt(split[0]));
-        return date;
+        int year = date.getYear()+1900;
+        return ""+date.getDay()+"/"+date.getMonth()+"/"+year;
     }
     private static ArrayList<Categorie> _Categories;
     public static ArrayList<Categorie> GetCategories()

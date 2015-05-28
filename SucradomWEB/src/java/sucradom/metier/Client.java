@@ -6,6 +6,7 @@
 package sucradom.metier;
 
 import java.util.ArrayList;
+import sucradom.dao.AdresseDAO;
 import sucradom.dao.TeteCommandeDAO;
 
 /**
@@ -33,14 +34,13 @@ public class Client
         this.IsActif = IsActif;
     }
     
-    private ArrayList<TeteCommande> _Commandes;
     public ArrayList<TeteCommande> GetCommandes()
     {
-        if (_Commandes == null) 
-        {
-            _Commandes = TeteCommandeDAO.CommandesOfClient(ID);
-        }
-        return _Commandes;
+        return TeteCommandeDAO.CommandesOfClient(ID);
     }
     
+    public ArrayList<Adresse> GetAdresses()
+    {
+        return AdresseDAO.AdressesOfClient(ID);
+    }
 }

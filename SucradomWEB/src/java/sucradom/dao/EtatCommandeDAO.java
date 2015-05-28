@@ -56,6 +56,41 @@ public abstract class EtatCommandeDAO
         
         return etatCommande;
     }
+    public static EtatCommande Select(String Nom)
+    {
+        EtatCommande etatCommande = null;
+        
+        String query = " SELECT " + _Properties
+                     + " FROM EtatCommande "
+                     + " WHERE EtatCommande.Nom = ? ;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setString(1, Nom);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) 
+            {
+                etatCommande = GetEtatCommande(rs);
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return etatCommande;
+    }
     public static ArrayList<EtatCommande> List()
     {
         ArrayList<EtatCommande> listEtatCommandes = null;

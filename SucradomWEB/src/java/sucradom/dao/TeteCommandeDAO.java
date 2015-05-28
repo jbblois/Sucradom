@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import sucradom.metier.TeteCommande;
-import sucradom.metier.TeteCommande;
 import sucradom.utile.Base;
 /**
  *
@@ -55,6 +54,45 @@ public abstract class TeteCommandeDAO
         
         return teteCommande;
     }
+    public static TeteCommande SelectLast()
+    {
+        TeteCommande teteCommande = null;
+        
+        String query = " SELECT " + _Properties
+                     + " FROM TeteCommande"
+                     + " WHERE TeteCommande.ID = "
+                     + " (" 
+                     + "    SELECT MAX(TeteCommande.ID)" 
+                     + "    FROM TeteCommande" 
+                     + " );";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) 
+            {
+                teteCommande = GetTeteCommande(rs);
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return teteCommande;
+    }
+    
     public static ArrayList<TeteCommande> List()
     {
         ArrayList<TeteCommande> listTeteCommandes = null;
@@ -130,6 +168,46 @@ public abstract class TeteCommandeDAO
         
         return listTeteCommandes;
     }
+    
+    public static ArrayList<TeteCommande> CommandesOfAdresse(int FID_Adresse)
+    {
+        ArrayList<TeteCommande> listTeteCommandes = null;
+        
+        String query = " SELECT " + _Properties
+                     + " FROM TeteCommande "
+                     + " WHERE TeteCommande.FID_Adresse=?;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setInt(1, FID_Adresse);
+            ResultSet rs = ps.executeQuery();
+            listTeteCommandes = new ArrayList<TeteCommande>();
+            while(rs.next()) {
+                TeteCommande teteCommande = GetTeteCommande(rs);
+                if (teteCommande != null) 
+                {
+                    listTeteCommandes.add(teteCommande);
+                }
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return listTeteCommandes;
+    }
+    
     public static TeteCommande GetTeteCommande(ResultSet RS)
     {
         try 
@@ -149,5 +227,36 @@ public abstract class TeteCommandeDAO
         {
             return null;
         }
+    }
+    
+    public static int Insert(TeteCommande Panier)
+    {   
+        String query = " INSERT INTO TeteCommande(TeteCommande.Date,TeteCommande.FID_Client,TeteCommande.FID_Etat,TeteCommande.FID_Adresse)"
+                     + " VALUES(?,?,?,?);";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setDate(1, Panier.Date);
+            ps.setInt(2, Panier.Client.ID);
+            ps.setInt(3, Panier.EtatCommande.ID);
+            ps.setInt(4, Panier.Adresse.ID);
+            
+            return ps.executeUpdate();
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return 0;
     }
 }

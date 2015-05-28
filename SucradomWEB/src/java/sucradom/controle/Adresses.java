@@ -6,19 +6,22 @@
 package sucradom.controle;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sucradom.dao.ClientDAO;
-import sucradom.metier.Client;
+import static sucradom.controle.Index.RequestDispatcher;
+import sucradom.dao.AdresseDAO;
+import sucradom.dao.TeteCommandeDAO;
+import sucradom.metier.TeteCommande;
 import sucradom.utile.Session;
 
 /**
  *
  * @author user
  */
-public class ModifierMDP extends HttpServlet {
+public class Adresses extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,8 +39,8 @@ public class ModifierMDP extends HttpServlet {
         {
             switch(methode) 
             {
-                case "Try":
-                    Try(request, response);
+                case "Delete":
+                    Delete(request, response);
                 break;
                 default:
                     Go(request, response);
@@ -48,83 +51,48 @@ public class ModifierMDP extends HttpServlet {
         {
             Go(request, response);
         }
-        
+ 
     }
     
-    protected void Go(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+    private void Go(HttpServletRequest request, HttpServletResponse response)
     {
-        Client client = Session.GetClient(request);
-        if (client != null) 
+        String module = "";
+        if(Session.GetClient(request) == null)
         {
-            //Client est déjà connecté redirection sur page compte
-            Index.RequestDispatcher(request, response, this, "/JSP/Modules/ModifierMDP.jsp");
+            module ="Connexion";
         }
         else
         {
-            //Client est pas connecté et doit se connecter
-            request.setAttribute("Erreur", "Veuillez vous connecter !");
-            Index.RequestDispatcher(request, response, this, "/Connexion");
+            module ="Adresses";
         }
+        Index.RequestDispatcher(request, response, this, "/JSP/Modules/"+module+".jsp");
     }
     
-    protected void Try(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+    private void Delete(HttpServletRequest request, HttpServletResponse response)
     {
-        Client client = Session.GetClient(request);
-        String oldMDP = (String) request.getParameter("OldMDP");
-        String newMDP = (String) request.getParameter("NewMDP");
-        String repMDP = (String) request.getParameter("RepMDP");
-        
-        String erreur = "";
-        if(client.MotDePasse.equals(oldMDP))
+        String stringID = (String)request.getParameter("IDadresse");
+        if (stringID != null) 
         {
-            if(!newMDP.equals(""))
+            int IDadresse =  Integer.parseInt(stringID);
+            ArrayList<TeteCommande> commandes = TeteCommandeDAO.CommandesOfAdresse(IDadresse);
+            if(commandes != null)
             {
-                if(!newMDP.equals(oldMDP))
+                if(commandes.size() == 0)
                 {
-                    if(!newMDP.equals(repMDP))
+                    if(AdresseDAO.Delete(IDadresse) != 1)
                     {
-                        erreur = "La confirmation du mot de passe n'est pas identique au nouveau mot de passe !";
+                        request.setAttribute("Erreur", "Problème survenu lors de la suppresion !");
                     }
                 }
                 else
                 {
-                    erreur = "Veuillez saisir un nouveau mot de passe différent de l'ancien !";
+                    request.setAttribute("Erreur", "Cette adresse est utilisée pour une commande !");
                 }
             }
-            else
-            {
-                erreur = "Veuillez saisir votre ancien mot de passe !";
-            }
         }
-        else
-        {
-            erreur = "Veuillez saisir votre ancien mot de passe !";
-        }
-        
-
-        if(erreur.equals(""))
-        {
-            client.MotDePasse = newMDP;
-            if(ClientDAO.Update(client) == 1)
-            {
-                Index.RequestDispatcher(request, response, this, "/Compte");
-            }
-            else
-            {
-                erreur = "Erreur lors de la sauvegarde du nouveau mot de passe";
-            }
-            
-        }
-        
-        if(!erreur.equals(""))
-        {
-            request.setAttribute("Erreur", erreur);
-            Index.RequestDispatcher(request, response, this, "/ModfierMDP");
-        }
+        Index.RequestDispatcher(request, response, this, "/Adresses");
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
