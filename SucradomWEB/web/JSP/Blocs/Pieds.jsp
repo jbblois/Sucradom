@@ -1,5 +1,8 @@
-<hr />
-
+<br/>
+<%@page import="sucradom.utile.Base"%>
+<%
+    String piedsHref = Base.CONTEXT_PATH+"/JSP/Pages";
+%>
 <div id="footer" class="footer-fixed-bottom">
     <div class="" style="background-color: #FFD093">
         <div class="container">
@@ -8,9 +11,9 @@
                 <h4>Informations</h4>
                 </center>
                 <ul class="nav nav-stacked">
-                    <li><a class="brand" href='http://localhost:8084/SucradomWEB/JSP/Pages/CGV.jsp'>CGV</a>
-                    <li><a class="brand" href='http://localhost:8084/SucradomWEB/JSP/Pages/Mentions.jsp'>Mentions légales</a>
-                    <li><a class="brand" href='http://localhost:8084/SucradomWEB/JSP/Pages/Contact.jsp'>Contact</a>  
+                    <li><a class="brand" href='<%=piedsHref%>/CGV.jsp'>CGV</a>
+                    <li><a class="brand" href='<%=piedsHref%>/Mentions.jsp'>Mentions légales</a>
+                    <li><a class="brand" href='<%=piedsHref%>/Contact.jsp'>Contact</a>  
                 </ul>
 
                 

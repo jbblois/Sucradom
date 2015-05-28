@@ -17,15 +17,15 @@ import sucradom.utile.Base;
  */
 public abstract class TeteCommandeDAO 
 {
-    private static String _Properties = "TeteCommande.ID,TeteCommande.Date,TeteCommande.FID_Client,TeteCommande.FID_Etat,TeteCommande.FID_Adresse";
+    private static String _Properties = "tetecommande.ID,tetecommande.Date,tetecommande.FID_Client,tetecommande.FID_Etat,tetecommande.FID_Adresse";
     
     public static TeteCommande Select(int ID)
     {
         TeteCommande teteCommande = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM TeteCommande "
-                     + " WHERE TeteCommande.ID = ? ;";
+                     + " FROM tetecommande "
+                     + " WHERE tetecommande.ID = ? ;";
         
         PreparedStatement ps = null;
         
@@ -59,11 +59,11 @@ public abstract class TeteCommandeDAO
         TeteCommande teteCommande = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM TeteCommande"
-                     + " WHERE TeteCommande.ID = "
+                     + " FROM tetecommande"
+                     + " WHERE tetecommande.ID = "
                      + " (" 
-                     + "    SELECT MAX(TeteCommande.ID)" 
-                     + "    FROM TeteCommande" 
+                     + "    SELECT MAX(tetecommande.ID)" 
+                     + "    FROM tetecommande" 
                      + " );";
         
         PreparedStatement ps = null;
@@ -98,7 +98,7 @@ public abstract class TeteCommandeDAO
         ArrayList<TeteCommande> listTeteCommandes = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM TeteCommande ;";
+                     + " FROM tetecommande ;";
         
         PreparedStatement ps = null;
         
@@ -135,8 +135,8 @@ public abstract class TeteCommandeDAO
         ArrayList<TeteCommande> listTeteCommandes = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM TeteCommande "
-                     + " WHERE TeteCommande.FID_Client=?;";
+                     + " FROM tetecommande "
+                     + " WHERE tetecommande.FID_Client=?;";
         
         PreparedStatement ps = null;
         
@@ -174,8 +174,8 @@ public abstract class TeteCommandeDAO
         ArrayList<TeteCommande> listTeteCommandes = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM TeteCommande "
-                     + " WHERE TeteCommande.FID_Adresse=?;";
+                     + " FROM tetecommande "
+                     + " WHERE tetecommande.FID_Adresse=?;";
         
         PreparedStatement ps = null;
         
@@ -231,7 +231,7 @@ public abstract class TeteCommandeDAO
     
     public static int Insert(TeteCommande Panier)
     {   
-        String query = " INSERT INTO TeteCommande(TeteCommande.Date,TeteCommande.FID_Client,TeteCommande.FID_Etat,TeteCommande.FID_Adresse)"
+        String query = " INSERT INTO tetecommande(tetecommande.Date,tetecommande.FID_Client,tetecommande.FID_Etat,tetecommande.FID_Adresse)"
                      + " VALUES(?,?,?,?);";
         
         PreparedStatement ps = null;

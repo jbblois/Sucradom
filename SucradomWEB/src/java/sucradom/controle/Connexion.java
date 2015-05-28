@@ -99,7 +99,7 @@ public class Connexion extends HttpServlet {
             {
                 //Client n'a pas réussit à se connecter
                 request.setAttribute("Erreur", "Veuillez vérifier l'email ou le mot de passe saisi");
-                Index.RequestDispatcher(request, response, this, "/Connexion");
+                Index.RequestDispatcher(request, response, this, "/JSP/Modules/Connexion.jsp");
             }
         }
         else
