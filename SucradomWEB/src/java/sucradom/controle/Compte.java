@@ -6,7 +6,6 @@
 package sucradom.controle;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +17,7 @@ import sucradom.utile.Session;
  *
  * @author user
  */
-public class Compte extends HttpServlet 
-{
-    private String _Module = "Accueil";
+public class Compte extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,15 +35,14 @@ public class Compte extends HttpServlet
         {
             //Client est connecté
             request.setAttribute("Erreur", null);
-            _Module = "Compte";
+            Index.RequestDispatcher(request, response, this, "/JSP/Modules/Compte.jsp");
         }
         else
         {
             //Client est pas connecté redirection sur page connexion
             request.setAttribute("Erreur", "Veuillez vous connecter");
-            _Module = "Connexion";
+            Index.RequestDispatcher(request, response, this, "/Connexion");
         }
-        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

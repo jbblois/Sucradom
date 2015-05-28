@@ -18,8 +18,6 @@ import sucradom.metier.TeteCommande;
  * @author user
  */
 public class Facture extends HttpServlet {
-
-    private String _Module = "Accueil";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,10 +37,9 @@ public class Facture extends HttpServlet {
                 Go(request, response);
             break;
             default:
-                _Module = "Accueil";
+                Index.RequestDispatcher(request, response, this, "/Accueil");
             break;
         }
-        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
     
     protected void Go(HttpServletRequest request, HttpServletResponse response)
@@ -54,7 +51,7 @@ public class Facture extends HttpServlet {
             int IDcommande =  Integer.parseInt(stringID);
             TeteCommande commande = TeteCommandeDAO.Select(IDcommande);
             request.setAttribute("SelectedCommande", commande);
-            _Module = "Facture";
+            Index.RequestDispatcher(request, response, this, "/JSP/Modules/Facture.jsp");
         }
         
     }

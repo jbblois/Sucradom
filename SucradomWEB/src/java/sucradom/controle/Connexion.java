@@ -20,8 +20,6 @@ import sucradom.utile.Session;
  * @author user
  */
 public class Connexion extends HttpServlet {
-
-    private String _Module = "Acceuil";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -54,7 +52,6 @@ public class Connexion extends HttpServlet {
         {
             Go(request, response);
         }
-        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
     
     protected void Go(HttpServletRequest request, HttpServletResponse response)
@@ -65,13 +62,13 @@ public class Connexion extends HttpServlet {
         {
             //Client est déjà connecté redirection sur page compte
             request.setAttribute("Erreur", null);
-            _Module = "Compte";
+            Index.RequestDispatcher(request, response, this, "/Compte");
         }
         else
         {
             //Client est pas connecté et peut se connecter
             request.setAttribute("Erreur", null);
-            _Module = "Connexion";
+            Index.RequestDispatcher(request, response, this, "/JSP/Modules/Connexion.jsp");
         }
     }
     
@@ -80,7 +77,7 @@ public class Connexion extends HttpServlet {
     {
             Session.SetClient(request, null);
             Session.SetPanier(request, null);
-            _Module = "Accueil";
+            Index.RequestDispatcher(request, response, this, "/Accueil");
     }
     
     protected void Try(HttpServletRequest request, HttpServletResponse response)
@@ -96,18 +93,18 @@ public class Connexion extends HttpServlet {
                 //Client à réussit à se connecter
                 Session.SetClient(request, client);
                 request.setAttribute("Erreur", null);
-                _Module = "Compte";
+                Index.RequestDispatcher(request, response, this, "/Compte");
             }
             else
             {
                 //Client n'a pas réussit à se connecter
                 request.setAttribute("Erreur", "Veuillez vérifier l'email ou le mot de passe saisi");
-                _Module = "Connexion";
+                Index.RequestDispatcher(request, response, this, "/Connexion");
             }
         }
         else
         {
-            _Module = "Compte";
+            Index.RequestDispatcher(request, response, this, "/Compte");
         }
     }
 

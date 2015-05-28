@@ -155,4 +155,68 @@ public abstract class AdresseDAO
             return null;
         }
     }
+    
+    public static int Insert(Adresse Adresse)
+    {
+        
+        String query = " INSERT INTO Adresse (Adresse.Numero,Adresse.Rue,Adresse.Cp,Adresse.Ville,Adresse.Pays,Adresse.FID_Client)"
+                     + " VALUES(?,?,?,?,?,?)";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setString(1, Adresse.Numero);
+            ps.setString(2, Adresse.Rue);
+            ps.setString(3, Adresse.Cp);
+            ps.setString(4, Adresse.Ville);
+            ps.setString(5, Adresse.Pays);
+            ps.setInt(6, Adresse.Client.ID);
+
+            return ps.executeUpdate();
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
+    
+    public static int Delete(int IDadresse)
+    {
+        
+        String query = " DELETE FROM Adresse"
+                     + " WHERE Adresse.ID = ?;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setInt(1, IDadresse);
+
+            return ps.executeUpdate();
+
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return 0;
+    }
 }

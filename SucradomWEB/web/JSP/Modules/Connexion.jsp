@@ -20,11 +20,11 @@
             </div>         
             <input class="row" type=submit value=Connexion>
 <%
-        String erreur = (String) request.getAttribute("Erreur");
-        if (erreur != null) 
+        String Erreur = (String) request.getAttribute("Erreur");
+        if (Erreur != null) 
         {
 %>
-            <div class="row" style="color: #ac2925"><%=erreur%></div>
+            <div class="row" style="color: #ac2925"><%=Erreur%></div>
 <%     
         }
 %>

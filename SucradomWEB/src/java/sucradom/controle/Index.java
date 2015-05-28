@@ -6,18 +6,19 @@
 package sucradom.controle;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sucradom.utile.Base;
 
 /**
  *
  * @author user
  */
 public class Index extends HttpServlet {
-
-    private String _Module = "Accueil";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,9 +31,25 @@ public class Index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
+        RequestDispatcher(request, response, this, "/JSP/Modules/Accueil.jsp");
     }
-
+    public static void RequestDispatcher(HttpServletRequest request, HttpServletResponse response, HttpServlet servlet, String link)
+    {
+        try 
+        {
+            servlet.getServletContext().getRequestDispatcher(link).forward( request, response );
+        } 
+        catch (Exception e) 
+        {
+            try 
+            {
+                response.sendRedirect(Base.CONTEXT_PATH+"/"+link);
+            } 
+            catch (IOException ex) 
+            {
+            }
+        }
+    }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

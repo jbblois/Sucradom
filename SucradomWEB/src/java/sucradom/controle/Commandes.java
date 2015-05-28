@@ -18,7 +18,6 @@ import sucradom.utile.Session;
  * @author user
  */
 public class Commandes extends HttpServlet {
-    private String _Module = "Accueil";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,15 +32,13 @@ public class Commandes extends HttpServlet {
     {
         if(Session.GetClient(request) != null)
         {
-            _Module = "Commandes";
+            Index.RequestDispatcher(request, response, this, "/JSP/Modules/Commandes.jsp");
         }
         else 
         {
             request.setAttribute("Erreur", "Veuillez vous connecter !");
-            _Module = "Connexion";
+            Index.RequestDispatcher(request, response, this, "/Connexion");
         }
-        
-        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

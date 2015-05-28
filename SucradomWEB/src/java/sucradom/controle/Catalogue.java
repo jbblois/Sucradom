@@ -20,8 +20,6 @@ import sucradom.utile.Session;
  * @author user
  */
 public class Catalogue extends HttpServlet {
-
-    private String _Module = "Acceuil";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,9 +38,7 @@ public class Catalogue extends HttpServlet {
             int IDcategorie =  Integer.parseInt(stringID);
             request.setAttribute("SelectedCategorie", CategorieDAO.Select(IDcategorie));
         }
-         _Module = "Catalogue";
-        
-        this.getServletContext().getRequestDispatcher("/JSP/Modules/"+_Module+".jsp" ).forward( request, response );
+        Index.RequestDispatcher(request, response, this, "/JSP/Modules/Catalogue.jsp");
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
