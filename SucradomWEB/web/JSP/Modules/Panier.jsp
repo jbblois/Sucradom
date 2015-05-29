@@ -15,7 +15,7 @@
         <div class="row">
             <%@include file="../Blocs/Navigation.jsp" %>
             <div class="span9">
-                <h2>Votre parnier</h2>
+                <h2>Votre panier</h2>
                 <%                    TeteCommande Panier = Session.GetPanier(request);
                     String prixCommande = Panier.GetPrixTTC() + " euros";
                     String formAction = Base.CONTEXT_PATH + "/Panier?Methode=Valider";
@@ -50,10 +50,11 @@
                                 <td>
                                     <%=quantiteProduit%>
                                     <a href="#"><i class="icon-refresh"></i></a>
+                                    
                                     <a href="<%=supprimerLigne%>"><i class="icon-trash"></i></a>
                                 </td>
                                 <td><%=prixUnitaireTTC%></td>
-                                <td><%=totalLigneTTC%></td>
+                                <td><%=totalLigneTTC%><a href="<%=supprimerLigne%>"><button class="btn-danger">X</button></a></td>
                             </tr>
 
                             <%
@@ -64,7 +65,7 @@
                     <dl class="dl-horizontal pull-right">
 
                         <dt>Total:</dt>
-                        <!--<dd><%=prixTotal%></dd>-->
+                        <dd>5euros</dd>
                     </dl>
 
                         
@@ -103,5 +104,6 @@
             %>
         </div>
     </div>
+        <%@include file="../Blocs/Pieds.jsp" %>
 
 </html>

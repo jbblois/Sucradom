@@ -6,6 +6,7 @@
     String designCustom = Base.DESIGN_PATH+"/custom.css";
     String designBootstrapMin = Base.DESIGN_PATH+"/bootstrap.min.css";
     String designResponsive = Base.DESIGN_PATH+"/bootstrap-responsive.css";
+    String designFontAwersome = Base.DESIGN_PATH+"/font-awesome.css";
    
 %>
 <head>
@@ -15,7 +16,7 @@
         <link href="<%= designBootstrap%>" rel="stylesheet">
         <link href="<%= designbase%>" rel="stylesheet">
         <link href="<%= designResponsive%>" rel="stylesheet" type="text/css"/>
-        
+        <link href="<%= designFontAwersome%>" rel="stylesheet" type="text/css"/>
 
         <title>Sucradom</title>
 </head>
