@@ -43,7 +43,7 @@ public class Index extends HttpServlet {
         {
             try 
             {
-                response.sendRedirect(Base.CONTEXT_PATH+"/"+link);
+                response.sendRedirect(Base.CONTEXT_PATH+link);
             } 
             catch (IOException ex) 
             {

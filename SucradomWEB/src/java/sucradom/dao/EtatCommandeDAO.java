@@ -20,14 +20,14 @@ import sucradom.utile.Base;
  */
 public abstract class EtatCommandeDAO 
 {
-    private static String _Properties = "EtatCommande.ID,EtatCommande.Nom";
+    private static String _Properties = "etatcommande.ID,etatcommande.Nom";
     public static EtatCommande Select(int ID)
     {
         EtatCommande etatCommande = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM EtatCommande "
-                     + " WHERE EtatCommande.ID = ? ;";
+                     + " FROM etatcommande "
+                     + " WHERE etatcommande.ID = ? ;";
         
         PreparedStatement ps = null;
         
@@ -61,8 +61,8 @@ public abstract class EtatCommandeDAO
         EtatCommande etatCommande = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM EtatCommande "
-                     + " WHERE EtatCommande.Nom = ? ;";
+                     + " FROM etatcommande "
+                     + " WHERE etatcommande.Nom = ? ;";
         
         PreparedStatement ps = null;
         
@@ -96,7 +96,7 @@ public abstract class EtatCommandeDAO
         ArrayList<EtatCommande> listEtatCommandes = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM EtatCommande ;";
+                     + " FROM etatcommande ;";
         
         PreparedStatement ps = null;
         

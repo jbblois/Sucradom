@@ -19,15 +19,15 @@ import sucradom.utile.Base;
  */
 public abstract class LigneCommandeDAO 
 {
-    private static String _Properties = "LigneCommande.FID_Commande,LigneCommande.FID_Produit,LigneCommande.Quantite,LigneCommande.PrixUnitaire,LigneCommande.ValeurTaxe";
+    private static String _Properties = "lignecommande.FID_Commande,lignecommande.FID_Produit,lignecommande.Quantite,lignecommande.PrixUnitaire,lignecommande.ValeurTaxe";
     
     public static LigneCommande Select(int FID_Commande, int FID_Produit)
     {
         LigneCommande ligneCommande = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM LigneCommande "
-                     + " WHERE LigneCommande.FID_Commande = ? AND LigneCommande.FID_Produit = ?;";
+                     + " FROM lignecommande "
+                     + " WHERE lignecommande.FID_Commande = ? AND lignecommande.FID_Produit = ?;";
         
         PreparedStatement ps = null;
         
@@ -61,7 +61,7 @@ public abstract class LigneCommandeDAO
         ArrayList<LigneCommande> listLigneCommandes = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM LigneCommande ;";
+                     + " FROM lignecommande ;";
         
         PreparedStatement ps = null;
         
@@ -97,7 +97,7 @@ public abstract class LigneCommandeDAO
         ArrayList<LigneCommande> listLigneCommandes = new ArrayList<>();
         
         String query = " SELECT " + _Properties
-                     + " FROM LigneCommande"
+                     + " FROM lignecommande"
                      + " WHERE FID_Commande = ?";
         
         PreparedStatement ps = null;
@@ -149,7 +149,7 @@ public abstract class LigneCommandeDAO
     }
     public static int Insert(LigneCommande Ligne)
     {
-        String query = " INSERT INTO LigneCommande("+_Properties+")"
+        String query = " INSERT INTO lignecommande("+_Properties+")"
                      + " VALUES(?,?,?,?,?)";
         
         PreparedStatement ps = null;

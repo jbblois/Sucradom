@@ -18,15 +18,15 @@ import sucradom.utile.Base;
  */
 public abstract class ProvisionDAO 
 {
-    private static String _Properties = "Provision.ID,Provision.Date,Provision.FID_Produit";
+    private static String _Properties = "provision.ID,provision.Date,provision.FID_Produit";
     
     public static Provision Select(int ID)
     {
         Provision provision = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Provision "
-                     + " WHERE Provision.ID = ? ;";
+                     + " FROM provision "
+                     + " WHERE provision.ID = ? ;";
         
         PreparedStatement ps = null;
         
@@ -60,7 +60,7 @@ public abstract class ProvisionDAO
         ArrayList<Provision> listProvisions = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Provision ;";
+                     + " FROM provision ;";
         
         PreparedStatement ps = null;
         

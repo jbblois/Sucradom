@@ -1,0 +1,5 @@
+#TomCat Startup
+/bin/su - tomcat -c /usr/share/tomcat/bin/startup.sh
+
+#TomCat Shutdown
+/bin/su - tomcat -c /usr/share/tomcat/bin/shutdown.sh

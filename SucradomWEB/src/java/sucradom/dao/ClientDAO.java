@@ -20,15 +20,15 @@ import sucradom.utile.Base;
  */
 public abstract class ClientDAO 
 {
-    private static String _Properties = "Client.ID,Client.Nom,Client.Prenom,Client.Telephone,Client.Email,Client.MotDePasse,Client.IsActif";
+    private static String _Properties = "client.ID,client.Nom,client.Prenom,client.Telephone,client.Email,client.MotDePasse,client.IsActif";
     
     public static Client Select(int ID)
     {
         Client client = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Client "
-                     + " WHERE Client.ID = ? ;";
+                     + " FROM client "
+                     + " WHERE client.ID = ? ;";
         
         PreparedStatement ps = null;
         
@@ -96,22 +96,22 @@ public abstract class ClientDAO
     }
     public static ArrayList<Client> List()
     {
-        ArrayList<Client> listClients = null;
+        ArrayList<Client> listclients = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Client ;";
+                     + " FROM client ;";
         
         PreparedStatement ps = null;
         
         try {
             ps = Base.GetConnection().prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            listClients = new ArrayList<Client>();
+            listclients = new ArrayList<Client>();
             while(rs.next()) {
                 Client client = GetClient(rs);
                 if (client != null) 
                 {
-                    listClients.add(client);
+                    listclients.add(client);
                 }
             }
         }
@@ -128,25 +128,25 @@ public abstract class ClientDAO
             }
         }
         
-        return listClients;
+        return listclients;
     }
     
-    public static int Update(Client Client)
+    public static int Update(Client client)
     {
         int rowUpdated = 0;
-        String query = " UPDATE client SET Client.Nom = ?,Client.Prenom = ?,Client.Telephone = ?,Client.Email = ?,Client.MotDePasse = ?"
-                     + " WHERE Client.ID = ?;";
+        String query = " UPDATE client SET client.Nom = ?,client.Prenom = ?,client.Telephone = ?,client.Email = ?,client.MotDePasse = ?"
+                     + " WHERE client.ID = ?;";
         
         PreparedStatement ps = null;
         
         try {
             ps = Base.GetConnection().prepareStatement(query);
-            ps.setString(1, Client.Nom);
-            ps.setString(2, Client.Prenom);
-            ps.setString(3, Client.Telephone);
-            ps.setString(4, Client.Email);
-            ps.setString(5, Client.MotDePasse);
-            ps.setInt(6, Client.ID);
+            ps.setString(1, client.Nom);
+            ps.setString(2, client.Prenom);
+            ps.setString(3, client.Telephone);
+            ps.setString(4, client.Email);
+            ps.setString(5, client.MotDePasse);
+            ps.setInt(6, client.ID);
             
             rowUpdated = ps.executeUpdate();
             ps.close();

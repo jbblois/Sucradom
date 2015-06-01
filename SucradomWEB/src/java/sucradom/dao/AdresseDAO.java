@@ -20,15 +20,15 @@ import sucradom.utile.Base;
  */
 public abstract class AdresseDAO 
 {
-    private static String _Properties = "Adresse.ID,Adresse.Numero,Adresse.Rue,Adresse.Cp,Adresse.Ville,Adresse.Pays,Adresse.FID_Client";
+    private static String _Properties = "adresse.ID,adresse.Numero,adresse.Rue,adresse.Cp,adresse.Ville,adresse.Pays,adresse.FID_Client";
     
     public static Adresse Select(int ID)
     {
         Adresse adresse = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Adresse "
-                     + " WHERE Adresse.ID = ? ;";
+                     + " FROM adresse "
+                     + " WHERE adresse.ID = ? ;";
         
         PreparedStatement ps = null;
         
@@ -62,7 +62,7 @@ public abstract class AdresseDAO
         ArrayList<Adresse> listAdresses = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Adresse ;";
+                     + " FROM adresse ;";
         
         PreparedStatement ps = null;
         
@@ -99,8 +99,8 @@ public abstract class AdresseDAO
         ArrayList<Adresse> listAdresses = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Adresse"
-                     + " WHERE Adresse.FID_Client = ?;";
+                     + " FROM adresse"
+                     + " WHERE adresse.FID_Client = ?;";
         
         PreparedStatement ps = null;
         
@@ -159,7 +159,7 @@ public abstract class AdresseDAO
     public static int Insert(Adresse Adresse)
     {
         
-        String query = " INSERT INTO Adresse (Adresse.Numero,Adresse.Rue,Adresse.Cp,Adresse.Ville,Adresse.Pays,Adresse.FID_Client)"
+        String query = " INSERT INTO adresse (adresse.Numero,adresse.Rue,adresse.Cp,adresse.Ville,adresse.Pays,adresse.FID_Client)"
                      + " VALUES(?,?,?,?,?,?)";
         
         PreparedStatement ps = null;
@@ -193,8 +193,8 @@ public abstract class AdresseDAO
     public static int Delete(int IDadresse)
     {
         
-        String query = " DELETE FROM Adresse"
-                     + " WHERE Adresse.ID = ?;";
+        String query = " DELETE FROM adresse"
+                     + " WHERE adresse.ID = ?;";
         
         PreparedStatement ps = null;
         

@@ -18,15 +18,15 @@ import sucradom.utile.Base;
  */
 public abstract class CategorieDAO 
 {
-    private static String _Properties = "Categorie.ID,Categorie.Libelle,Categorie.FID_Image";
+    private static String _Properties = "categorie.ID,categorie.Libelle,categorie.FID_Image";
     
     public static Categorie Select(int ID)
     {
         Categorie categorie = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Categorie "
-                     + " WHERE Categorie.ID = ? ;";
+                     + " FROM categorie "
+                     + " WHERE categorie.ID = ? ;";
         
         PreparedStatement ps = null;
         
@@ -60,7 +60,7 @@ public abstract class CategorieDAO
         ArrayList<Categorie> listCategories = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Categorie ;";
+                     + " FROM categorie ;";
         
         PreparedStatement ps = null;
         

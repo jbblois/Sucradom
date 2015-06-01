@@ -20,15 +20,15 @@ import sucradom.utile.Base;
  */
 public abstract class ImageDAO 
 {
-    private static String _Properties = "Image.ID,Image.Path,Image.Alt";
+    private static String _Properties = "image.ID,image.Path,image.Alt";
     
     public static Image Select(int ID)
     {
         Image image = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Image "
-                     + " WHERE Image.ID = ? ;";
+                     + " FROM image "
+                     + " WHERE image.ID = ? ;";
         
         PreparedStatement ps = null;
         
@@ -62,7 +62,7 @@ public abstract class ImageDAO
         ArrayList<Image> listImages = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Image ;";
+                     + " FROM image ;";
         
         PreparedStatement ps = null;
         

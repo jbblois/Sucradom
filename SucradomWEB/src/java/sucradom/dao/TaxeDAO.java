@@ -19,15 +19,15 @@ import sucradom.utile.Base;
  */
 public abstract class TaxeDAO 
 {
-    private static String _Properties = "Taxe.ID,Taxe.Nom,Taxe.Valeur";
+    private static String _Properties = "taxe.ID,taxe.Nom,taxe.Valeur";
     
     public static Taxe Select(int ID)
     {
         Taxe taxe = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Taxe "
-                     + " WHERE Taxe.ID = ? ;";
+                     + " FROM taxe "
+                     + " WHERE taxe.ID = ? ;";
         
         PreparedStatement ps = null;
         
@@ -61,7 +61,7 @@ public abstract class TaxeDAO
         ArrayList<Taxe> listTaxes = null;
         
         String query = " SELECT " + _Properties
-                     + " FROM Taxe ;";
+                     + " FROM taxe ;";
         
         PreparedStatement ps = null;
         
