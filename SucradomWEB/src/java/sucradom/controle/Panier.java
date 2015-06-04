@@ -105,7 +105,7 @@ public class Panier extends HttpServlet {
                 AddLigne(request, response, produitSelectionne, 1);
             }
         }
-        
+        Index.RequestDispatcher(request, response, this, "/Panier?Methode=Go");
     }
     
     protected void AddQuantite(HttpServletRequest request, HttpServletResponse response)
@@ -124,18 +124,34 @@ public class Panier extends HttpServlet {
                 
                 if(Quantite > 0)
                 {
-                    AddLigne(request, response, produitSelectionne, Quantite);
+                    if(Quantite <= produitSelectionne.Quantite())
+                    {
+                        AddLigne(request, response, produitSelectionne, Quantite);
+                        Index.RequestDispatcher(request, response, this, "/Panier?Methode=Go");
+                    
+                    }
+                    else
+                    {
+                        request.setAttribute("Erreur", "Veuillez saisir une quantité qui ne dépasse pas les stocks disponibles");
+                        Index.RequestDispatcher(request, response, this, "/Panier?Methode=GO&IDproduit="+IDproduit);
+                    }
                 }
                 else
                 {
                     request.setAttribute("Erreur", "Veuillez saisir une quantité supérieur à 0");
+                    Index.RequestDispatcher(request, response, this, "/Panier?Methode=GO&IDproduit="+IDproduit);
                 }
             } 
             catch (Exception e) 
             {
-                request.setAttribute("Erreur", "Veuillez saisir une quantité valide");
+                request.setAttribute("Erreur", "Veuillez saisir un entier");
+                Index.RequestDispatcher(request, response, this, "/Panier?Methode=GO&IDproduit="+IDproduit);
             }
             
+        }
+        else
+        {
+            Index.RequestDispatcher(request, response, this, "/Catalogue");
         }
     }
     
@@ -246,7 +262,7 @@ public class Panier extends HttpServlet {
         {
             //4 - Vider le panier
             Session.SetPanier(request, null);
-            Index.RequestDispatcher(request, response, this, "/Commandes");
+            Index.RequestDispatcher(request, response, this, "/Commandes?Methode=Go");
             check = true;
         }
         else
@@ -274,7 +290,7 @@ public class Panier extends HttpServlet {
                 }
             }
             Session.GetPanier(request).GetLigneCommandes().remove(DeletedLine);
-            Index.RequestDispatcher(request, response, this, "/Panier");
+            Index.RequestDispatcher(request, response, this, "/Panier?Methode=Go");
         }
         
     }
