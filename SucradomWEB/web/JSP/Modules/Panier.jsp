@@ -42,6 +42,7 @@
                                     String prixUnitaireTTC = "" + UTTC + " euros";
                                     String totalLigneTTC = "" + ligne.GetPrixTTC();
                                     String supprimerLigne = Base.CONTEXT_PATH + "/Panier?Methode=Delete&IDproduit=" + ligne.Produit.ID;
+                                    
                             %>
 
 
@@ -56,13 +57,14 @@
 
                             <%
                                 }
+                                
                             %>
                         </tbody>
                     </table>
                     <dl class="dl-horizontal pull-right">
 
                         <dt>Total:</dt>
-                        <dd>5euros</dd>
+                        <dd><%= prixCommande%></dd>
                     </dl>
 
                         
