@@ -104,8 +104,8 @@ public class Panier extends HttpServlet {
             {
                 AddLigne(request, response, produitSelectionne, 1);
             }
+            Index.RequestDispatcher(request, response, this, "/Panier?Methode=Go");
         }
-        Index.RequestDispatcher(request, response, this, "/Panier?Methode=Go");
     }
     
     protected void AddQuantite(HttpServletRequest request, HttpServletResponse response)
@@ -144,7 +144,7 @@ public class Panier extends HttpServlet {
             } 
             catch (Exception e) 
             {
-                request.setAttribute("Erreur", "Veuillez saisir un entier");
+                request.setAttribute("Erreur", "Votre dernier produit n'a pas été ajouté. Veuillez saisir une quantité");
                 Index.RequestDispatcher(request, response, this, "/Panier?Methode=GO&IDproduit="+IDproduit);
             }
             

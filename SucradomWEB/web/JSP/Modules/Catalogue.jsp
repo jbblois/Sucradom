@@ -24,7 +24,7 @@
                                             String produitLien_Href = Base.CONTEXT_PATH + "/Produit?Methode=Go&IDproduit=" + produit.ID;
                                             String addToPanier_Href = Base.CONTEXT_PATH + "/Panier?Methode=AddOne&IDproduit=" + produit.ID;
                                             String produit_Nom = produit.Libelle;
-                                            String produit_Prix = produit.Prix + " €";
+                                            String produit_Prix = produit.Prix + " € HT";
 
                                             String pathNoSpaces = produit.Image.Path.replace(' ', '_');
                                             String produitImage_Path = Base.CONTEXT_PATH + "/RESSOURCES/" + pathNoSpaces + ".png";
@@ -36,7 +36,7 @@
                             <div class="caption">
                                 <h4><%= produit_Nom%></h4>
                                 <p><%= produit_Prix%></p>
-                                <a class="btn btn-primary" href="<%= produitLien_Href%>"> Plus d'infos</a>
+                                <a class="btn btn-primary" href="<%= produitLien_Href%>">Plus d'infos</a>
                                 <a class="btn btn-success" href="<%= addToPanier_Href%>">Ajouter au panier</a>
                             </div>
                         </div>
