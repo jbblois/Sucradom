@@ -30,4 +30,9 @@ public class LigneCommande
     {
         return Quantite * PrixUnitaire * (1+(ValeurTaxe/100));
     }
+    
+    public float GetPrixHT()
+    {
+        return Quantite * PrixUnitaire;
+    }
 }
