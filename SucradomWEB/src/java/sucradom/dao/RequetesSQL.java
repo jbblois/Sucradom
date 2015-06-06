@@ -29,7 +29,7 @@ public abstract class RequetesSQL
         String query = " SELECT SUM(provision.Quantite) AS Achats"
                      + " FROM provision"
                      + " WHERE provision.FID_Produit = ?"
-                     + " AND provision.Date <=  NOW();";
+                     + " AND provision.Date < NOW();";
         
         PreparedStatement ps = null;
         
@@ -65,8 +65,8 @@ public abstract class RequetesSQL
         String query = " SELECT SUM(lignecommande.Quantite) AS Ventes"
                      + " FROM teteCommande"
                      + " INNER JOIN ligneCommande ON teteCommande.ID = ligneCommande.FID_Commande"
-                     + " WHERE teteCommande.Date <=  NOW()"
-                     + " AND teteCommande.FID_Etat BETWEEN 2 AND 4"
+                     + " WHERE teteCommande.Date <  NOW()"
+                     + " AND teteCommande.FID_Etat > 1 AND teteCommande.FID_Etat < 5"
                      + " AND ligneCommande.FID_Produit = ?;";
         
         PreparedStatement ps = null;
