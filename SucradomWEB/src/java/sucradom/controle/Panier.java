@@ -224,7 +224,7 @@ public class Panier extends HttpServlet {
                 {
                     //1 - INSERT TeteCommande WITH Date = Now() AND EtatCommande = NonPayée
                     java.util.Date utilDate = new Date();
-                    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                    java.sql.Date sqlDate = new java.sql.Date(utilDate.getYear(), utilDate.getMonth(), utilDate.getDate());
                     
                     panier.Adresse = adresse;
                     panier.Date = sqlDate;

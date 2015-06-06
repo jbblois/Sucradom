@@ -32,24 +32,18 @@
                         <img src="http://dummyimage.com/200x200/878787/fff.png&text=Image+Produit" alt="" width="470" height="310">
                         <!--    <img src="<%= produitImage_Path%>" alt="<%= produitImage_Alt%>" height="200" width="200">   -->
                     </div>
-
                     <div class="span4">
                         <h4><%= produitLibelle%></h4>
                         <h5>Catégorie : <%= produitCategorie%></h5>
                         <p><%= produitDescription%></p>
                         <h4>Prix : <%= produitPrix%> €   </h4><h4>Taxe : <%= produitTaxe%></h4>
-
-
                         <form Method="POST" Action="<%=addToPanier_Href%>">
-
                             <input type="text" name="Quantite">
                             <div>
                                 <div>Quantité disponible : <%= produitQuantite%> </div>
                                 <button  type="submit" class="btn btn-success">Ajouter au panier</button>
-                                <a class="btn btn-info" href="<%= retourCatalogue%>">Continuer les achats</a>
                             </div>
                         </form>
-
                     </div>
                     <%
                     } else {

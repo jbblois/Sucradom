@@ -6,7 +6,7 @@
 package sucradom.metier;
 
 /**
- *
+ * 
  * @author user
  */
 public class LigneCommande 
@@ -28,7 +28,9 @@ public class LigneCommande
     
     public float GetPrixTTC()
     {
-        return Quantite * PrixUnitaire * (1+(ValeurTaxe/100));
+        float taxe = (ValeurTaxe/100) +1;
+        float prix = PrixUnitaire * taxe;
+        return Quantite * prix;
     }
     
     public float GetPrixHT()
