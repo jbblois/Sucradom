@@ -42,32 +42,28 @@
                                     String prixUnitaireTTC = "" + UTTC + " euros";
                                     String totalLigneTTC = "" + ligne.GetPrixTTC();
                                     String supprimerLigne = Base.CONTEXT_PATH + "/Panier?Methode=Delete&IDproduit=" + ligne.Produit.ID;
-                                    
+
                             %>
-
-
                             <tr>
                                 <td><%=libelleProduit%></td>
-                                <td>
-                                    <%=quantiteProduit%> 
-                                </td>
+                                <td><%=quantiteProduit%></td>
                                 <td><%=prixUnitaireTTC%></td>
-                                <td><%=totalLigneTTC%>         <b>    </b>       <a href="<%=supprimerLigne%>"><i class="icon-trash"></i></a></td>
+                                <td><%=totalLigneTTC%>
+                                    <a href="<%=supprimerLigne%>">
+                                        <i class="icon-trash"></i>
+                                    </a>
+                                </td>
                             </tr>
-
                             <%
                                 }
-                                
                             %>
                         </tbody>
                     </table>
                     <dl class="dl-horizontal pull-right">
-
                         <dt>Total:</dt>
                         <dd><%= prixCommande%></dd>
                     </dl>
 
-                        
                     <div class="span4">
                         <p style="text-align: center">Selectionnez votre adresse de livraison :</p>
                         <select class="col-lg-12" name="IDadresse">
@@ -83,14 +79,11 @@
                         </select>
                     </div>
                     <div class="span4">
-                        <button class="btn btn-primary ">Continuer mes achats</button>
-                        <input class="btn btn-success pull-right" type=submit value="Valider mon Pannier">
+                        <input class="btn btn-success pull-right" type=submit value="Valider mon Panier">
                     </div>
-                       
+
                 </form>
                 <div class="clearfix"></div>
-
-
             </div>
             <%
                 }
@@ -103,6 +96,6 @@
             %>
         </div>
     </div>
-        <%@include file="../Blocs/Pieds.jsp" %>
+    <%@include file="../Blocs/Pieds.jsp" %>
 
 </html>

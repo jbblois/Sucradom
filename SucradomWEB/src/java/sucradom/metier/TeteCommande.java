@@ -52,7 +52,7 @@ public class TeteCommande
     
     public float GetPrixTTC()
     {
-        int prixTTC = 0;
+        float prixTTC = 0;
         for (LigneCommande ligne : _LigneCommandes) 
         {
             prixTTC += ligne.GetPrixTTC();
@@ -62,7 +62,7 @@ public class TeteCommande
     
     public float GetPrixHT()
     {
-        int prixHT = 0;
+        float prixHT = 0;
         for (LigneCommande ligne : _LigneCommandes) 
         {
             prixHT += ligne.GetPrixHT();

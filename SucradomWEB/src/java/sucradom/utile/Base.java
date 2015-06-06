@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import sucradom.dao.CategorieDAO;
 import sucradom.dao.ProduitDAO;
 import sucradom.metier.Categorie;
@@ -92,7 +91,9 @@ public abstract class Base
     public static String DateToString(java.sql.Date date)
     {
         int year = date.getYear()+1900;
-        return ""+date.getDay()+"/"+date.getMonth()+"/"+year;
+        int month = date.getMonth()+1;
+        int day = date.getDate();
+        return ""+day+"/"+month+"/"+year;
     }
     private static ArrayList<Categorie> _Categories;
     public static ArrayList<Categorie> GetCategories()
