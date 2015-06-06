@@ -59,4 +59,14 @@ public class TeteCommande
         }
         return prixTTC;
     }
+    
+    public float GetPrixHT()
+    {
+        int prixHT = 0;
+        for (LigneCommande ligne : _LigneCommandes) 
+        {
+            prixHT += ligne.GetPrixHT();
+        }
+        return prixHT;
+    }
 }

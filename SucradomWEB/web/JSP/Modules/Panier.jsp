@@ -42,30 +42,29 @@
                                     String prixUnitaireTTC = "" + UTTC + " euros";
                                     String totalLigneTTC = "" + ligne.GetPrixTTC();
                                     String supprimerLigne = Base.CONTEXT_PATH + "/Panier?Methode=Delete&IDproduit=" + ligne.Produit.ID;
+                                    
                             %>
 
 
                             <tr>
                                 <td><%=libelleProduit%></td>
                                 <td>
-                                    <%=quantiteProduit%>
-                                    <a href="#"><i class="icon-refresh"></i></a>
-                                    
-                                    <a href="<%=supprimerLigne%>"><i class="icon-trash"></i></a>
+                                    <%=quantiteProduit%> 
                                 </td>
                                 <td><%=prixUnitaireTTC%></td>
-                                <td><%=totalLigneTTC%><a href="<%=supprimerLigne%>"><button class="btn-danger">X</button></a></td>
+                                <td><%=totalLigneTTC%>         <b>    </b>       <a href="<%=supprimerLigne%>"><i class="icon-trash"></i></a></td>
                             </tr>
 
                             <%
                                 }
+                                
                             %>
                         </tbody>
                     </table>
                     <dl class="dl-horizontal pull-right">
 
                         <dt>Total:</dt>
-                        <dd>5euros</dd>
+                        <dd><%= prixCommande%></dd>
                     </dl>
 
                         
